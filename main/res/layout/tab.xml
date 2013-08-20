@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+<!--    <ImageView
+            android:id="@+id/tab_icon"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:contentDescription="@string/hello_world"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher"
+            android:layout_above="@+id/tab_text"
+            />
+-->
+    <TextView
+            android:id="@+id/tab_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:layout_margin="10dip"
+            android:text="test text of tis tab. This tab text is bigger, than it's width. So, loock like it seem"/>
+
+</RelativeLayout>
