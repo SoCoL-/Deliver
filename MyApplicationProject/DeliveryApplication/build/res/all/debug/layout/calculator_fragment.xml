@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        android:background="@color/yellow">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:background="@color/gray"
+            android:textSize="35sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="@string/Calculator_Name"
+            android:gravity="center"/>
+
+    <CheckBox
+            android:id="@+id/Calc_Check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dip"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:text="@string/Calculator_Check"
+            android:gravity="center"/>
+
+    <Spinner
+            android:id="@+id/Calc_Spin1"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingTop="10dip"/>
+
+</LinearLayout><!-- From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/layout/calculator_fragment.xml -->
