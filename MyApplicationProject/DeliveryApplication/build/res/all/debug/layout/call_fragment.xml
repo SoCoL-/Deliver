@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        android:background="@color/yellow">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:background="@color/gray"
+            android:textSize="35sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="@string/Call_Name"
+            android:gravity="center"/>
+
+    <ScrollView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+        <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/Call_Date"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:textColor="@color/black"
+                    android:hint="Дата прибытия"
+                    android:textSize="25sp"/>
+
+            <TextView
+                    android:id="@+id/Call_Time"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:textColor="@color/black"
+                    android:hint="Время прибытия"
+                    android:textSize="25sp"/>
+
+            <EditText
+                    android:id="@+id/Call_NameCompany"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Call_EditNameCompany"
+                    android:inputType="text"
+                    android:textSize="25sp"/>
+
+            <EditText
+                    android:id="@+id/Call_Adress"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Call_EditAdress"
+                    android:inputType="textPostalAddress"
+                    android:textSize="25sp"/>
+
+            <EditText
+                    android:id="@+id/Call_Person"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Call_EditPerson"
+                    android:inputType="textPersonName"
+                    android:textSize="25sp"/>
+
+            <EditText
+                    android:id="@+id/Call_Phone"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Call_EditPhone"
+                    android:inputType="phone"
+                    android:textSize="25sp"/>
+
+            <EditText
+                    android:id="@+id/Call_Email"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Call_EditEmail"
+                    android:inputType="textEmailAddress"
+                    android:textSize="25sp"/>
+
+            <CheckBox
+                    android:id="@+id/Call_Check"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:text="@string/Calculator_CheckParcel"
+                    android:gravity="center"/>
+
+            <Spinner
+                    android:id="@+id/Call_Spin1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dip"
+                    android:paddingLeft="10dip"
+                    android:paddingRight="10dip"/>
+
+            <Spinner
+                    android:id="@+id/Call_Spin2"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dip"
+                    android:paddingLeft="10dip"
+                    android:paddingRight="10dip"/>
+
+            <Spinner
+                    android:id="@+id/Call_Spin3"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dip"
+                    android:paddingLeft="10dip"
+                    android:paddingRight="10dip"/>
+
+            <EditText
+                    android:id="@+id/Call_Length"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Calculator_EditHint1"
+                    android:inputType="number"
+                    android:textSize="25sp"/>
+
+            <EditText
+                    android:id="@+id/Call_Width"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Calculator_EditHint2"
+                    android:inputType="number"
+                    android:textSize="25sp"/>
+
+            <EditText
+                    android:id="@+id/Call_Height"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Calculator_EditHint3"
+                    android:inputType="number"
+                    android:textSize="25sp"/>
+
+            <EditText
+                    android:id="@+id/Call_Comment"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Call_EditComment"
+                    android:inputType="textEmailAddress"
+                    android:textSize="25sp"/>
+
+            <Button
+                    android:id="@+id/Call_send"
+                    android:layout_height="50dip"
+                    android:layout_width="match_parent"
+                    android:background="@color/red"
+                    android:layout_marginTop="30dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginBottom="10dip"
+                    android:textSize="26sp"
+                    android:textColor="@color/white"
+                    android:text="@string/Call_Button"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout><!-- From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/layout/call_fragment.xml -->

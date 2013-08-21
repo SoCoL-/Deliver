@@ -43,34 +43,84 @@ public final class R {
     }
     public static final class id {
         public static final int Calc_Check=0x7f080000;
+        public static final int Calc_Height=0x7f080006;
+        public static final int Calc_Length=0x7f080004;
         public static final int Calc_Spin1=0x7f080001;
-        public static final int tab1_find=0x7f080003;
-        public static final int tab1_number=0x7f080002;
-        public static final int tab_icon=0x7f080004;
-        public static final int tab_text=0x7f080005;
+        public static final int Calc_Spin2=0x7f080002;
+        public static final int Calc_Spin3=0x7f080003;
+        public static final int Calc_Summa=0x7f080007;
+        public static final int Calc_Width=0x7f080005;
+        public static final int Calc_calculate=0x7f080008;
+        public static final int Call_Adress=0x7f08000c;
+        public static final int Call_Check=0x7f080010;
+        public static final int Call_Comment=0x7f080017;
+        public static final int Call_Date=0x7f080009;
+        public static final int Call_Email=0x7f08000f;
+        public static final int Call_Height=0x7f080016;
+        public static final int Call_Length=0x7f080014;
+        public static final int Call_NameCompany=0x7f08000b;
+        public static final int Call_Person=0x7f08000d;
+        public static final int Call_Phone=0x7f08000e;
+        public static final int Call_Spin1=0x7f080011;
+        public static final int Call_Spin2=0x7f080012;
+        public static final int Call_Spin3=0x7f080013;
+        public static final int Call_Time=0x7f08000a;
+        public static final int Call_Width=0x7f080015;
+        public static final int Call_send=0x7f080018;
+        public static final int DelivInfo_departure=0x7f08001b;
+        public static final int DelivInfo_to=0x7f08001d;
+        public static final int DelivInfo_where=0x7f08001c;
+        public static final int Deliver_find=0x7f08001a;
+        public static final int Deliver_number=0x7f080019;
+        public static final int tab_icon=0x7f08001e;
+        public static final int tab_text=0x7f08001f;
     }
     public static final class layout {
         public static final int calculator_fragment=0x7f030000;
-        public static final int deliver_fragment=0x7f030001;
-        public static final int main=0x7f030002;
-        public static final int tab=0x7f030003;
+        public static final int call_fragment=0x7f030001;
+        public static final int deliver_fragment=0x7f030002;
+        public static final int deliver_info_fragment=0x7f030003;
+        public static final int main=0x7f030004;
+        public static final int offices_fragment=0x7f030005;
+        public static final int tab=0x7f030006;
     }
     public static final class string {
         /**  From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/values/strings.xml 
          */
         public static final int Btn_Show=0x7f060000;
-        public static final int Calculator_Check=0x7f060001;
-        public static final int Calculator_Name=0x7f060002;
-        public static final int Calculator_Spinner1=0x7f060003;
-        public static final int Calculator_Spinner2=0x7f060004;
-        public static final int Calculator_Spinner3=0x7f060005;
-        public static final int Delivery_Name=0x7f060006;
-        public static final int Tab1_Name=0x7f060007;
-        public static final int Tab2_Name=0x7f060008;
-        public static final int Tab3_Name=0x7f060009;
-        public static final int Tab4_Name=0x7f06000a;
-        public static final int app_name=0x7f06000b;
-        public static final int hello_world=0x7f06000c;
+        public static final int Calculator_Button=0x7f060001;
+        public static final int Calculator_CheckLetter=0x7f060002;
+        public static final int Calculator_CheckParcel=0x7f060003;
+        public static final int Calculator_EditHint1=0x7f060004;
+        public static final int Calculator_EditHint2=0x7f060005;
+        public static final int Calculator_EditHint3=0x7f060006;
+        public static final int Calculator_Name=0x7f060007;
+        public static final int Calculator_Spinner1=0x7f060008;
+        public static final int Calculator_Spinner2=0x7f060009;
+        public static final int Calculator_Spinner3=0x7f06000a;
+        public static final int Call_Button=0x7f06000b;
+        public static final int Call_DatePicker=0x7f06000c;
+        public static final int Call_EditAdress=0x7f06000d;
+        public static final int Call_EditComment=0x7f06000e;
+        public static final int Call_EditEmail=0x7f06000f;
+        public static final int Call_EditNameCompany=0x7f060010;
+        public static final int Call_EditPerson=0x7f060011;
+        public static final int Call_EditPhone=0x7f060012;
+        public static final int Call_Name=0x7f060013;
+        public static final int Call_TimePicker=0x7f060014;
+        public static final int DeliveryInfo_Name=0x7f060015;
+        public static final int DeliveryInfo_Text1=0x7f060016;
+        public static final int DeliveryInfo_Text2=0x7f060017;
+        public static final int DeliveryInfo_Text3=0x7f060018;
+        public static final int Delivery_Name=0x7f060019;
+        public static final int Offices_Info=0x7f06001a;
+        public static final int Offices_Name=0x7f06001b;
+        public static final int Tab1_Name=0x7f06001c;
+        public static final int Tab2_Name=0x7f06001d;
+        public static final int Tab3_Name=0x7f06001e;
+        public static final int Tab4_Name=0x7f06001f;
+        public static final int app_name=0x7f060020;
+        public static final int hello_world=0x7f060021;
     }
     public static final class style {
         /**  From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/values/styles.xml 

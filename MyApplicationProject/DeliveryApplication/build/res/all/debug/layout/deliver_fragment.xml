@@ -19,20 +19,21 @@
 
     <RelativeLayout
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:layout_gravity="center">
 
         <ru.deliver.deliverApp.Utils.EditWithDrawable
-                android:id="@+id/tab1_number"
+                android:id="@+id/Deliver_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/tab1_find"
+                android:layout_toLeftOf="@+id/Deliver_find"
                 android:layout_margin="10dip"
                 android:drawableRight="@drawable/ic_launcher"
                 android:textSize="22sp"
                 android:inputType="number"/>
 
         <Button
-                android:id="@+id/tab1_find"
+                android:id="@+id/Deliver_find"
                 android:layout_height="50dip"
                 android:layout_width="120dip"
                 android:layout_alignParentRight="true"

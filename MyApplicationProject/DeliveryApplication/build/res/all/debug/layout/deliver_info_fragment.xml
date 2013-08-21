@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        android:background="@color/yellow">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:background="@color/gray"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:padding="5dip"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:text="@string/DeliveryInfo_Name"/>
+
+    <ScrollView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+        <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginTop="35dip"
+                        android:layout_marginLeft="10dip"
+                        android:textSize="20sp"
+                        android:textColor="@color/red"
+                        android:text="@string/DeliveryInfo_Text1"/>
+
+                <TextView
+                        android:id="@+id/DelivInfo_departure"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginTop="35dip"
+                        android:layout_marginRight="10dip"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:text="1234456"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginTop="15dip"
+                        android:layout_marginLeft="10dip"
+                        android:textSize="20sp"
+                        android:textColor="@color/red"
+                        android:text="@string/DeliveryInfo_Text2"/>
+
+                <TextView
+                        android:id="@+id/DelivInfo_where"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginTop="15dip"
+                        android:layout_marginRight="10dip"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginTop="15dip"
+                        android:layout_marginLeft="10dip"
+                        android:textSize="20sp"
+                        android:textColor="@color/red"
+                        android:text="@string/DeliveryInfo_Text3"/>
+
+                <TextView
+                        android:id="@+id/DelivInfo_to"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginTop="15dip"
+                        android:layout_marginRight="10dip"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout><!-- From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/layout/deliver_info_fragment.xml -->

@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidConfiguredLogFilters">
+    <filters>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="DeliveryApplication" />
+        <option name="name" value="Delivery" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+    </filters>
+  </component>
   <component name="AndroidLayoutPreviewToolWindow">
     <option name="state">
       <GlobalState />
@@ -9,6 +21,9 @@
     <shared>
       <config />
     </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Delivery" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90502496-b444-47fd-a7cc-0306d2a9ae16" name="Default" comment="" />
@@ -74,43 +89,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="117" column="5" selection-start="3629" selection-end="3629" vertical-scroll-proportion="0.0" vertical-offset="346" max-vertical-offset="2618">
+            <state line="14" column="0" selection-start="431" selection-end="431" vertical-scroll-proportion="0.08202654" vertical-offset="0" max-vertical-offset="2346">
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1659#1875#0" expanded="true" />
-                <element signature="e#1864#1865#0" expanded="true" />
-                <element signature="e#2073#2289#0" expanded="true" />
-                <element signature="e#2278#2279#0" expanded="true" />
-                <element signature="e#2487#2703#0" expanded="true" />
-                <element signature="e#2692#2693#0" expanded="true" />
-                <element signature="e#2746#2775#0" expanded="true" />
-                <element signature="e#2901#3117#0" expanded="true" />
-                <element signature="e#3106#3107#0" expanded="true" />
-                <element signature="e#3160#3189#0" expanded="true" />
+                <element signature="e#2072#2101#0" expanded="true" />
+                <element signature="e#2486#2515#0" expanded="true" />
+                <element signature="e#2900#2929#0" expanded="true" />
+                <element signature="e#3314#3343#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/main.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
+      <file leaf-file-name="DeliverInfoFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/DeliverInfoFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="33" selection-start="294" selection-end="294" vertical-scroll-proportion="-5.44" vertical-offset="0" max-vertical-offset="578">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CalculatorFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/CalculatorFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="65" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="935">
+            <state line="41" column="67" selection-start="962" selection-end="962" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1088">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -118,35 +114,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="calculator_fragment.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/calculator_fragment.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
+      <file leaf-file-name="DeliverFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/DeliverFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="38" selection-start="1215" selection-end="1215" vertical-scroll-proportion="0.68948036" vertical-offset="0" max-vertical-offset="789">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="42" selection-start="721" selection-end="721" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tab.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/tab.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="35" selection-start="827" selection-end="827" vertical-scroll-proportion="-14.28" vertical-offset="0" max-vertical-offset="544">
-              <folding />
+            <state line="56" column="39" selection-start="1545" selection-end="1545" vertical-scroll-proportion="0.0" vertical-offset="514" max-vertical-offset="1343">
+              <folding>
+                <element signature="e#1604#1605#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -159,6 +133,11 @@
     </FindUsagesManager>
   </component>
   <component name="GradleLocalSettings">
+    <option name="tasksExpandState">
+      <map>
+        <entry key="" value="true" />
+      </map>
+    </option>
     <option name="availableProjects">
       <map>
         <entry>
@@ -201,9 +180,12 @@
         <option value="$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/Utils/EditWithDrawable.java" />
         <option value="$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/CalculatorFragment.java" />
         <option value="$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/deliver_fragment.xml" />
-        <option value="$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/Main.java" />
-        <option value="$PROJECT_DIR$/DeliveryApplication/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/calculator_fragment.xml" />
+        <option value="$PROJECT_DIR$/DeliveryApplication/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/DeliverInfoFragment.java" />
+        <option value="$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/deliver_info_fragment.xml" />
+        <option value="$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/DeliverFragment.java" />
+        <option value="$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/Main.java" />
       </list>
     </option>
   </component>
@@ -239,6 +221,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -510,19 +493,18 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="OverrideImplement.combined" value="true" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="recentsLimit" value="5" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
@@ -661,35 +643,35 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1010" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1296" height="1010" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32901135" sideWeight="0.6705744" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24384525" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32873377" sideWeight="0.67134506" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942554" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.9144197" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942554" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.91324735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24878444" sideWeight="0.6705744" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942554" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24878444" sideWeight="0.67134506" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32865497" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24384525" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -704,20 +686,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/values-sw600dp/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="170">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/values/color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="39" selection-start="688" selection-end="688" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="22" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
@@ -735,21 +703,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/tab.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="35" selection-start="827" selection-end="827" vertical-scroll-proportion="-14.28" vertical-offset="0" max-vertical-offset="544">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar!/android/support/v4/app/FragmentManager.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="22" selection-start="174" selection-end="174" vertical-scroll-proportion="0.14938489" vertical-offset="0" max-vertical-offset="1343">
-          <folding />
-        </state>
+        <state line="6" column="22" selection-start="174" selection-end="174" vertical-scroll-proportion="0.14938489" vertical-offset="0" max-vertical-offset="1343" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/Utils/EditWithDrawable.java">
@@ -761,77 +717,125 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/deliver_fragment.xml">
+    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="33" selection-start="294" selection-end="294" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="578">
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/calculator_fragment.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="32" selection-start="602" selection-end="602" vertical-scroll-proportion="0.3231939" vertical-offset="0" max-vertical-offset="901">
+        <state line="106" column="0" selection-start="4462" selection-end="4462" vertical-scroll-proportion="-16.68" vertical-offset="1385" max-vertical-offset="2176">
           <folding>
-            <element signature="e#668#691#0" expanded="true" />
+            <element signature="e#1393#1425#0" expanded="true" />
+            <element signature="e#2840#2870#0" expanded="true" />
+            <element signature="e#3344#3374#0" expanded="true" />
+            <element signature="e#3849#3879#0" expanded="true" />
+            <element signature="e#4986#5013#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/offices_fragment.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="36" selection-start="631" selection-end="655" vertical-scroll-proportion="-10.88" vertical-offset="0" max-vertical-offset="595">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="42" selection-start="685" selection-end="685" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/deliver_info_fragment.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="0" selection-start="4595" selection-end="4595" vertical-scroll-proportion="-24.16" vertical-offset="1249" max-vertical-offset="2040">
+          <folding>
+            <element signature="e#668#695#0" expanded="true" />
+            <element signature="e#1636#1664#0" expanded="true" />
+            <element signature="e#2873#2901#0" expanded="true" />
+            <element signature="e#4059#4087#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/deliver_fragment.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="44" selection-start="1380" selection-end="1380" vertical-scroll-proportion="0.608091" vertical-offset="114" max-vertical-offset="918">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/tab.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="35" selection-start="827" selection-end="827" vertical-scroll-proportion="-14.28" vertical-offset="0" max-vertical-offset="544">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/CalculatorFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="11" selection-start="1844" selection-end="1844" vertical-scroll-proportion="0.0" vertical-offset="578" max-vertical-offset="1445">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/Setup/Logs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="63" selection-start="297" selection-end="316" vertical-scroll-proportion="0.1363088" vertical-offset="142" max-vertical-offset="1377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/DeliverInfoFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="67" selection-start="962" selection-end="962" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1088">
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/DeliverFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="38" selection-start="951" selection-end="951" vertical-scroll-proportion="0.5961306" vertical-offset="0" max-vertical-offset="935">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/main.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="33" selection-start="294" selection-end="294" vertical-scroll-proportion="-5.44" vertical-offset="0" max-vertical-offset="578">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/CalculatorFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="65" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="935">
+        <state line="56" column="39" selection-start="1545" selection-end="1545" vertical-scroll-proportion="0.0" vertical-offset="514" max-vertical-offset="1343">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1604#1605#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/java/ru/deliver/deliverApp/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="5" selection-start="3629" selection-end="3629" vertical-scroll-proportion="0.0" vertical-offset="346" max-vertical-offset="2618">
+        <state line="14" column="0" selection-start="431" selection-end="431" vertical-scroll-proportion="0.08202654" vertical-offset="0" max-vertical-offset="2346">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1659#1875#0" expanded="true" />
-            <element signature="e#1864#1865#0" expanded="true" />
-            <element signature="e#2073#2289#0" expanded="true" />
-            <element signature="e#2278#2279#0" expanded="true" />
-            <element signature="e#2487#2703#0" expanded="true" />
-            <element signature="e#2692#2693#0" expanded="true" />
-            <element signature="e#2746#2775#0" expanded="true" />
-            <element signature="e#2901#3117#0" expanded="true" />
-            <element signature="e#3106#3107#0" expanded="true" />
-            <element signature="e#3160#3189#0" expanded="true" />
+            <element signature="e#2072#2101#0" expanded="true" />
+            <element signature="e#2486#2515#0" expanded="true" />
+            <element signature="e#2900#2929#0" expanded="true" />
+            <element signature="e#3314#3343#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="42" selection-start="721" selection-end="721" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DeliveryApplication/src/main/res/layout/calculator_fragment.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="38" selection-start="1215" selection-end="1215" vertical-scroll-proportion="0.68948036" vertical-offset="0" max-vertical-offset="789">
-          <folding />
         </state>
       </provider>
     </entry>

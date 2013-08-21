@@ -49,7 +49,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
 
-        mFragment1 = new DeliverFragment();
+        mFragment1 = new DeliverFragment(this);
         mFragment2 = new CalculatorFragment();
 		mFragment3 = new CallFragment(this);
 		mFragment4 = new OfficesFragment();
@@ -140,6 +140,12 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
         FragmentTransaction ft = manager.beginTransaction();
         ft.replace(android.R.id.tabcontent, fragment);
         ft.commit();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
     }
 
     //---------------------------------

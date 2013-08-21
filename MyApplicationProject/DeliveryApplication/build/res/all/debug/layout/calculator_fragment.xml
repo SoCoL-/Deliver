@@ -16,20 +16,108 @@
             android:text="@string/Calculator_Name"
             android:gravity="center"/>
 
-    <CheckBox
-            android:id="@+id/Calc_Check"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dip"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:text="@string/Calculator_Check"
-            android:gravity="center"/>
+    <ScrollView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
 
-    <Spinner
-            android:id="@+id/Calc_Spin1"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:paddingTop="10dip"/>
+        <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/Calc_Check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:text="@string/Calculator_CheckParcel"
+                android:gravity="center"/>
+
+            <Spinner
+                    android:id="@+id/Calc_Spin1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dip"
+                    android:paddingLeft="10dip"
+                    android:paddingRight="10dip"/>
+
+            <Spinner
+                    android:id="@+id/Calc_Spin2"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dip"
+                    android:paddingLeft="10dip"
+                    android:paddingRight="10dip"/>
+
+            <Spinner
+                    android:id="@+id/Calc_Spin3"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:paddingTop="10dip"
+                    android:paddingLeft="10dip"
+                    android:paddingRight="10dip"/>
+
+            <EditText
+                    android:id="@+id/Calc_Length"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Calculator_EditHint1"
+                    android:inputType="number"
+                    android:textSize="20sp"/>
+
+            <EditText
+                    android:id="@+id/Calc_Width"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Calculator_EditHint2"
+                    android:inputType="number"
+                    android:textSize="20sp"/>
+
+            <EditText
+                    android:id="@+id/Calc_Height"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Calculator_EditHint3"
+                    android:inputType="number"
+                    android:textSize="20sp"/>
+
+            <EditText
+                    android:id="@+id/Calc_Summa"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="80dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:inputType="none"
+                    android:textSize="20sp"
+                    android:visibility="invisible"/>
+
+            <Button
+                    android:id="@+id/Calc_calculate"
+                    android:layout_height="50dip"
+                    android:layout_width="match_parent"
+                    android:background="@color/red"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:textSize="26sp"
+                    android:textColor="@color/white"
+                    android:text="@string/Calculator_Button"/>
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout><!-- From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/layout/calculator_fragment.xml -->
