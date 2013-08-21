@@ -35,6 +35,8 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 
     private DeliverFragment     mFragment1;
     private CalculatorFragment  mFragment2;
+	private CallFragment		mFragment3;
+	private OfficesFragment		mFragment4;
 
 	//---------------------------------
 	//SUPER
@@ -49,6 +51,8 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 
         mFragment1 = new DeliverFragment();
         mFragment2 = new CalculatorFragment();
+		mFragment3 = new CallFragment(this);
+		mFragment4 = new OfficesFragment();
 
         mTabHost = (TabHost)findViewById(android.R.id.tabhost);
         mTabHost.setOnTabChangedListener(this);
@@ -124,6 +128,10 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
             pushFragment(mFragment1);
         else if(tabId.equals(TAB2))
             pushFragment(mFragment2);
+		else if(tabId.equals(TAB3))
+			pushFragment(mFragment3);
+		else if(tabId.equals(TAB4))
+			pushFragment(mFragment4);
     }
 
     private void pushFragment(Fragment fragment)

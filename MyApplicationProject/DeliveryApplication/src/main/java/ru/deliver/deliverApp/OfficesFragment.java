@@ -7,14 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import ru.deliver.deliverApp.Utils.EditWithDrawable;
-
 /**
- * Created by Evgenij on 20.08.13.
+ * Created by Evgenij on 21.08.13.
  *
- * Отображение первого таба
+ * Список отделений
  */
-public class DeliverFragment extends Fragment
+public class OfficesFragment extends Fragment
 {
 	//---------------------------------
 	//CONSTANTS
@@ -27,18 +25,17 @@ public class DeliverFragment extends Fragment
 	//---------------------------------
 	//SUPER
 	//---------------------------------
+
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		if (container == null)
 			return null;
 
-		View view = inflater.inflate(R.layout.deliver_fragment, container, false);
-
-		EditWithDrawable mEdit = (EditWithDrawable)view.findViewById(R.id.Deliver_number);
-		mEdit.requestFocus();
+		View view = inflater.inflate(R.layout.offices_fragment, container, false);
 
 		return view;
 	}
+
 	//---------------------------------
 	//METHODS
 	//---------------------------------

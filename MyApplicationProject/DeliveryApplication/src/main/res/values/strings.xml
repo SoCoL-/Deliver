@@ -15,9 +15,28 @@
     <string name="Delivery_Name">Отправления</string>
 
     <string name="Calculator_Name">Калькулятор</string>
-    <string name="Calculator_Check">Письмо</string>
+    <string name="Calculator_CheckLetter">Письмо</string>
+    <string name="Calculator_CheckParcel">Посылка</string>
     <string name="Calculator_Spinner1">Откуда</string>
     <string name="Calculator_Spinner2">Куда</string>
     <string name="Calculator_Spinner3">Вес</string>
+    <string name="Calculator_EditHint1">Длина</string>
+    <string name="Calculator_EditHint2">Ширина</string>
+    <string name="Calculator_EditHint3">Высота</string>
+    <string name="Calculator_Button">Расчитать</string>
+
+    <string name="Call_Name">Вызов курьера</string>
+    <string name="Call_DatePicker">Дата прибытия</string>
+    <string name="Call_TimePicker">Время прибытия</string>
+    <string name="Call_EditNameCompany">Название организации</string>
+    <string name="Call_EditAdress">Адрес</string>
+    <string name="Call_EditPerson">Контактное лицо</string>
+    <string name="Call_EditPhone">Контактный телефон</string>
+    <string name="Call_EditEmail">E-Mail</string>
+    <string name="Call_EditComment">Комментарий</string>
+    <string name="Call_Button">Отправить</string>
+
+    <string name="Offices_Name">Отделения</string>
+    <string name="Offices_Info">Единая справочная служба 8-800-4783899</string>
 
 </resources>

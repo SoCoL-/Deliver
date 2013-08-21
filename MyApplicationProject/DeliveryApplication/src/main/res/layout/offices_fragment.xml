@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        android:background="@color/yellow">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:background="@color/gray"
+            android:textSize="35sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="@string/Offices_Name"
+            android:gravity="center"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dip"
+            android:textSize="35sp"
+            android:textColor="@color/red"
+            android:text="@string/Offices_Info"
+            android:gravity="center"/>
+
+
+
+</LinearLayout>
