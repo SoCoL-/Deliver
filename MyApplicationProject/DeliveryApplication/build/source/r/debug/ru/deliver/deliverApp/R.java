@@ -38,8 +38,10 @@ public final class R {
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int tab_style=0x7f020001;
+        public static final int gradient=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int tab_style=0x7f020002;
+        public static final int text_background=0x7f020003;
     }
     public static final class id {
         public static final int Calc_Check=0x7f080000;
@@ -67,22 +69,30 @@ public final class R {
         public static final int Call_Time=0x7f08000a;
         public static final int Call_Width=0x7f080015;
         public static final int Call_send=0x7f080018;
-        public static final int DelivInfo_departure=0x7f08001b;
-        public static final int DelivInfo_to=0x7f08001d;
-        public static final int DelivInfo_where=0x7f08001c;
+        public static final int DelivInfo_departure=0x7f08001c;
+        public static final int DelivInfo_to=0x7f08001e;
+        public static final int DelivInfo_where=0x7f08001d;
+        public static final int Deliver_List=0x7f08001b;
         public static final int Deliver_find=0x7f08001a;
         public static final int Deliver_number=0x7f080019;
-        public static final int tab_icon=0x7f08001e;
-        public static final int tab_text=0x7f08001f;
+        public static final int FavItem_Number=0x7f08001f;
+        public static final int FavItem_State=0x7f080020;
+        public static final int Offices_List=0x7f080021;
+        public static final int TPAdapter_Name=0x7f080024;
+        public static final int TPAdapter_pic=0x7f080025;
+        public static final int tab_icon=0x7f080022;
+        public static final int tab_text=0x7f080023;
     }
     public static final class layout {
         public static final int calculator_fragment=0x7f030000;
         public static final int call_fragment=0x7f030001;
         public static final int deliver_fragment=0x7f030002;
         public static final int deliver_info_fragment=0x7f030003;
-        public static final int main=0x7f030004;
-        public static final int offices_fragment=0x7f030005;
-        public static final int tab=0x7f030006;
+        public static final int fav_item=0x7f030004;
+        public static final int main=0x7f030005;
+        public static final int offices_fragment=0x7f030006;
+        public static final int tab=0x7f030007;
+        public static final int text_pic_adapter=0x7f030008;
     }
     public static final class string {
         /**  From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/values/strings.xml 
@@ -113,14 +123,17 @@ public final class R {
         public static final int DeliveryInfo_Text2=0x7f060017;
         public static final int DeliveryInfo_Text3=0x7f060018;
         public static final int Delivery_Name=0x7f060019;
-        public static final int Offices_Info=0x7f06001a;
-        public static final int Offices_Name=0x7f06001b;
-        public static final int Tab1_Name=0x7f06001c;
-        public static final int Tab2_Name=0x7f06001d;
-        public static final int Tab3_Name=0x7f06001e;
-        public static final int Tab4_Name=0x7f06001f;
-        public static final int app_name=0x7f060020;
-        public static final int hello_world=0x7f060021;
+        public static final int FavState_Cancel=0x7f06001a;
+        public static final int FavState_Done=0x7f06001b;
+        public static final int FavState_Send=0x7f06001c;
+        public static final int Offices_Info=0x7f06001d;
+        public static final int Offices_Name=0x7f06001e;
+        public static final int Tab1_Name=0x7f06001f;
+        public static final int Tab2_Name=0x7f060020;
+        public static final int Tab3_Name=0x7f060021;
+        public static final int Tab4_Name=0x7f060022;
+        public static final int app_name=0x7f060023;
+        public static final int hello_world=0x7f060024;
     }
     public static final class style {
         /**  From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/values/styles.xml 

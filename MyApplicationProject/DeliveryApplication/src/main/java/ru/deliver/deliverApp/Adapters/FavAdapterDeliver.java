@@ -103,15 +103,13 @@ public class FavAdapterDeliver extends BaseAdapter
 	@Override
 	public View getView(int position, View view, ViewGroup viewGroup)
 	{
-		View itemView = null;
+		View itemView = view;
 
 		if(view == null)
 		{
 			LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			itemView = inflater.inflate(R.layout.fav_item, null);
 		}
-		else
-			itemView = view;
 
 		((TextView)itemView.findViewById(R.id.FavItem_Number)).setText(mItems.get(position).getNumber());
 		((TextView)itemView.findViewById(R.id.FavItem_State)).setText(mItems.get(position).getState());

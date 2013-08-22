@@ -9,7 +9,7 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="50dip"
-            android:background="@color/gray"
+            android:background="@drawable/gradient"
             android:textSize="35sp"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -20,11 +20,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dip"
-            android:textSize="35sp"
+            android:textSize="25sp"
             android:textColor="@color/red"
             android:text="@string/Offices_Info"
             android:gravity="center"/>
 
-
+    <ListView
+            android:id="@+id/Offices_List"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:cacheColorHint="@color/white"
+            android:divider="@color/black"
+            android:dividerHeight="1dip"
+            android:layout_marginTop="40dip"
+            android:layout_marginRight="30dip"
+            android:layout_marginLeft="30dip"/>
 
 </LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="100dip"
+              android:background="@color/white">
+
+    <TextView
+            android:id="@+id/TPAdapter_Name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dip"
+            android:layout_toLeftOf="@+id/TPAdapter_pic"
+            android:lines="1"/>
+
+    <ImageView
+            android:id="@+id/TPAdapter_pic"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@android:drawable/ic_media_play"/>
+
+</RelativeLayout><!-- From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/layout/text_pic_adapter.xml -->

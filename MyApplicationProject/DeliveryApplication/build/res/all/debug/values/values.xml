@@ -48,7 +48,10 @@
     <string name="DeliveryInfo_Text2">Откуда</string>
     <string name="DeliveryInfo_Text3">Куда</string>
     <string name="Delivery_Name">Отправления</string>
-    <string name="Offices_Info">Единая справочная служба 8-800-4783899</string>
+    <string name="FavState_Cancel">Возврат клиенту</string>
+    <string name="FavState_Done">Доставлено</string>
+    <string name="FavState_Send">Отправлено</string>
+    <string name="Offices_Info">Единая справочная служба 8–800–4783899</string>
     <string name="Offices_Name">Отделения</string>
     <string name="Tab1_Name">Отправления</string>
     <string name="Tab2_Name">Калькулятор</string>

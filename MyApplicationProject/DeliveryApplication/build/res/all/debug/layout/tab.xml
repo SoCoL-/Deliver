@@ -12,7 +12,6 @@
             android:layout_height="0dip"
             android:layout_width="match_parent"
             android:contentDescription="@string/hello_world"
-            android:src="@drawable/ic_launcher"
             android:layout_weight="1"/>
 
     <TextView
@@ -20,8 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:gravity="center"
+            android:textColor="@drawable/text_background"
             android:textStyle="bold"
-            android:textSize="10sp"
-            android:text="Вызовы"/>
+            android:textSize="10sp"/>
 
 </LinearLayout><!-- From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/layout/tab.xml -->

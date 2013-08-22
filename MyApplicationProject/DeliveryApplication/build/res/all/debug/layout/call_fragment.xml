@@ -9,7 +9,7 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="50dip"
-            android:background="@color/gray"
+            android:background="@drawable/gradient"
             android:textSize="35sp"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -34,6 +34,7 @@
                     android:layout_marginRight="10dip"
                     android:textColor="@color/black"
                     android:hint="Дата прибытия"
+                    android:imeOptions="actionNext"
                     android:textSize="25sp"/>
 
             <TextView
@@ -45,6 +46,7 @@
                     android:layout_marginRight="10dip"
                     android:textColor="@color/black"
                     android:hint="Время прибытия"
+                    android:imeOptions="actionNext"
                     android:textSize="25sp"/>
 
             <EditText
@@ -56,6 +58,7 @@
                     android:layout_marginRight="10dip"
                     android:hint="@string/Call_EditNameCompany"
                     android:inputType="text"
+                    android:imeOptions="actionNext"
                     android:textSize="25sp"/>
 
             <EditText
@@ -67,6 +70,7 @@
                     android:layout_marginRight="10dip"
                     android:hint="@string/Call_EditAdress"
                     android:inputType="textPostalAddress"
+                    android:imeOptions="actionNext"
                     android:textSize="25sp"/>
 
             <EditText
@@ -78,6 +82,7 @@
                     android:layout_marginRight="10dip"
                     android:hint="@string/Call_EditPerson"
                     android:inputType="textPersonName"
+                    android:imeOptions="actionNext"
                     android:textSize="25sp"/>
 
             <EditText
@@ -89,6 +94,7 @@
                     android:layout_marginRight="10dip"
                     android:hint="@string/Call_EditPhone"
                     android:inputType="phone"
+                    android:imeOptions="actionNext"
                     android:textSize="25sp"/>
 
             <EditText
@@ -100,6 +106,7 @@
                     android:layout_marginRight="10dip"
                     android:hint="@string/Call_EditEmail"
                     android:inputType="textEmailAddress"
+                    android:imeOptions="actionDone"
                     android:textSize="25sp"/>
 
             <CheckBox
@@ -147,6 +154,7 @@
                     android:layout_marginRight="10dip"
                     android:hint="@string/Calculator_EditHint1"
                     android:inputType="number"
+                    android:imeOptions="actionNext"
                     android:textSize="25sp"/>
 
             <EditText
@@ -158,6 +166,7 @@
                     android:layout_marginRight="10dip"
                     android:hint="@string/Calculator_EditHint2"
                     android:inputType="number"
+                    android:imeOptions="actionNext"
                     android:textSize="25sp"/>
 
             <EditText
@@ -169,6 +178,7 @@
                     android:layout_marginRight="10dip"
                     android:hint="@string/Calculator_EditHint3"
                     android:inputType="number"
+                    android:imeOptions="actionNext"
                     android:textSize="25sp"/>
 
             <EditText
@@ -180,6 +190,7 @@
                     android:layout_marginRight="10dip"
                     android:hint="@string/Call_EditComment"
                     android:inputType="textEmailAddress"
+                    android:imeOptions="actionDone"
                     android:textSize="25sp"/>
 
             <Button

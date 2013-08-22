@@ -35,4 +35,4 @@
             android:src="@android:drawable/ic_media_play"
             android:contentDescription="@string/app_name"/>
 
-</LinearLayout>
+</LinearLayout><!-- From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/layout/fav_item.xml -->
