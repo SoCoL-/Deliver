@@ -42,6 +42,11 @@
     <string name="Call_Button">Отправить</string>
 
     <string name="Offices_Name">Отделения</string>
-    <string name="Offices_Info">Единая справочная служба 8-800-4783899</string>
+    <string name="Offices_Info">Единая справочная служба 8&#8211;800&#8211;4783899</string>
+
+
+    <string name="FavState_Cancel">Возврат клиенту</string>
+    <string name="FavState_Done">Доставлено</string>
+    <string name="FavState_Send">Отправлено</string>
 
 </resources>
