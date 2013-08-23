@@ -1,6 +1,5 @@
 package ru.deliver.deliverApp;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -51,9 +49,9 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
 
-        mFragment1 = new DeliverFragment(this);
+        mFragment1 = new DeliverFragment();
         mFragment2 = new CalculatorFragment();
-		mFragment3 = new CallFragment(this);
+		mFragment3 = new CallFragment();
 		mFragment4 = new OfficesFragment();
 
         mTabHost = (TabHost)findViewById(android.R.id.tabhost);
@@ -144,13 +142,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
         ft.commit();
     }
 
-    @Override
-    public void onBackPressed()
-    {
-        super.onBackPressed();
-    }
-
-    //---------------------------------
+	//---------------------------------
 	//METHODS
 	//---------------------------------
 

@@ -22,9 +22,26 @@
             android:layout_width="match_parent">
 
         <LinearLayout
-                android:layout_height="match_parent"
+                android:id="@+id/DelivInfo_Content"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:orientation="vertical">
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <Button
+                        android:id="@+id/DelivInfo_ToFav"
+                        android:layout_width="120dip"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="10dip"
+                        android:layout_marginRight="10dip"
+                        android:background="@color/red"
+                        android:text="@string/DeliveryInfo_Button"
+                        android:textColor="@color/black"/>
+            </RelativeLayout>
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -77,7 +94,8 @@
                         android:layout_marginTop="15dip"
                         android:layout_marginRight="10dip"
                         android:textSize="20sp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:text="Отсюда"/>
 
             </LinearLayout>
 
@@ -104,7 +122,8 @@
                         android:layout_marginTop="15dip"
                         android:layout_marginRight="10dip"
                         android:textSize="20sp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:text="Туда"/>
 
             </LinearLayout>
 

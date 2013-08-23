@@ -1,22 +1,19 @@
 package ru.deliver.deliverApp;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import ru.deliver.deliverApp.Adapters.FavAdapterDeliver;
-import ru.deliver.deliverApp.Utils.EditWithDrawable;
 import ru.deliver.deliverApp.Utils.ItemFav;
 
 /**
@@ -34,8 +31,7 @@ public class DeliverFragment extends Fragment
 	//VARIABLES
 	//---------------------------------
 
-    private FragmentActivity mActivity;
-	private FavAdapterDeliver mFavAdapter;
+	//private FavAdapterDeliver mFavAdapter;
 
 	//For test!!!!!!!!!!!
 	ArrayList<ItemFav> mFavsInfo;
@@ -45,10 +41,10 @@ public class DeliverFragment extends Fragment
 	//SUPER
 	//---------------------------------
 
-    public DeliverFragment(FragmentActivity activity)
-    {
-        this.mActivity = activity;
-    }
+	public DeliverFragment()
+	{
+		super();
+	}
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
@@ -60,7 +56,7 @@ public class DeliverFragment extends Fragment
 		//EditWithDrawable mEdit = (EditWithDrawable)view.findViewById(R.id.Deliver_number);
         Button mBtn = (Button)view.findViewById(R.id.Deliver_find);
 		ListView mListFavs = (ListView)view.findViewById(R.id.Deliver_List);
-		mFavAdapter = new FavAdapterDeliver();
+		FavAdapterDeliver mFavAdapter = new FavAdapterDeliver();
 		mListFavs.setAdapter(mFavAdapter);
 
 		//Only for test!!!!!!!!!!!!!!
@@ -77,14 +73,21 @@ public class DeliverFragment extends Fragment
 		mFavAdapter.addAllItems(mFavsInfo);
 		//End for test
 
-        mBtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                pushFragment();
-            }
-        });
+		mListFavs.setOnItemClickListener(new AdapterView.OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+			{
+				pushFragment(false);
+			}
+		});
+
+        mBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				pushFragment(true);
+			}
+		});
 
 		return view;
 	}
@@ -92,11 +95,11 @@ public class DeliverFragment extends Fragment
 	//METHODS
 	//---------------------------------
 
-    private void pushFragment()
+    private void pushFragment(boolean isnew)
     {
-        FragmentManager manager = mActivity.getSupportFragmentManager();
+        FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
-        ft.replace(android.R.id.tabcontent, new DeliverInfoFragment(true));
+        ft.replace(android.R.id.tabcontent, new DeliverInfoFragment(getActivity(), isnew));
         ft.addToBackStack(null);
         ft.commit();
     }

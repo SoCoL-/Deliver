@@ -37,29 +37,35 @@
                 android:text="@string/Calculator_CheckParcel"
                 android:gravity="center"/>
 
+            <AutoCompleteTextView
+                    android:id="@+id/Calc_Auto1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Calculator_Auto1"
+                    android:inputType="text"
+                    android:textSize="20sp"/>
+
+            <AutoCompleteTextView
+                    android:id="@+id/Calc_Auto2"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:hint="@string/Calculator_Auto2"
+                    android:inputType="text"
+                    android:textSize="20sp"/>
+
             <Spinner
                     android:id="@+id/Calc_Spin1"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:paddingTop="10dip"
-                    android:paddingLeft="10dip"
-                    android:paddingRight="10dip"/>
-
-            <Spinner
-                    android:id="@+id/Calc_Spin2"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:paddingTop="10dip"
-                    android:paddingLeft="10dip"
-                    android:paddingRight="10dip"/>
-
-            <Spinner
-                    android:id="@+id/Calc_Spin3"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:paddingTop="10dip"
-                    android:paddingLeft="10dip"
-                    android:paddingRight="10dip"/>
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"/>
 
             <EditText
                     android:id="@+id/Calc_Length"
