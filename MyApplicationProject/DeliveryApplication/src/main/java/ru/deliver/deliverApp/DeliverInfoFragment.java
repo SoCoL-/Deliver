@@ -1,6 +1,5 @@
 package ru.deliver.deliverApp;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
@@ -30,7 +29,6 @@ public class DeliverInfoFragment extends Fragment
 
 	private boolean isNew;
 	private LinearLayout mContent;
-	private Context mContext;
 
 	//---------------------------------
 	//SUPER
@@ -41,11 +39,10 @@ public class DeliverInfoFragment extends Fragment
 		super();
 	}
 
-	public DeliverInfoFragment(Context c, boolean isNew)
+	public DeliverInfoFragment(boolean isNew)
 	{
 		super();
 		this.isNew = isNew;
-		this.mContext = getActivity();
 	}
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -79,35 +76,29 @@ public class DeliverInfoFragment extends Fragment
 
 	private void addContent(String time, String State, LayoutInflater inflater, boolean isTop)
 	{
-		Logs.e("addContent Start!!!!");
+		//Logs.i("addContent Start!!!!");
 		LinearLayout mContentInfo = (LinearLayout)inflater.inflate(R.layout.deliv_info_content, null);
-		Logs.e("Inflate mContentItem");
+		//Logs.e("Inflate mContentItem");
 
 		if(mContentInfo == null)
 			return;
 
-		if(mContext == null)
-		{
-			Logs.e("Context == null !!!!!!!!!!!!!!!!");
-			mContext = getActivity();
-		}
-
-		LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, mContext.getResources().getDisplayMetrics()));
+		LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70, getActivity().getResources().getDisplayMetrics()));
 		if(isTop)
-			llp.topMargin = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, this.mContext.getResources().getDisplayMetrics());
-		llp.leftMargin = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, this.mContext.getResources().getDisplayMetrics());
-		llp.rightMargin = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, this.mContext.getResources().getDisplayMetrics());
+			llp.topMargin = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getActivity().getResources().getDisplayMetrics());
+		llp.leftMargin = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getActivity().getResources().getDisplayMetrics());
+		llp.rightMargin = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getActivity().getResources().getDisplayMetrics());
 		mContentInfo.setLayoutParams(llp);
 
-		Logs.e("Find textView");
+		//Logs.e("Find textView");
 		if(isTop)
 			(mContentInfo.findViewById(R.id.DelivContent_Devider)).setVisibility(View.GONE);
 		((TextView)mContentInfo.findViewById(R.id.DelivContent_Time)).setText(time);
 		((TextView)mContentInfo.findViewById(R.id.DelivContent_Info)).setText(State);
 
-		Logs.e("Add view to mContent");
+		//Logs.e("Add view to mContent");
 		mContent.addView(mContentInfo);
-		Logs.e("addContent Stop!!!!");
+		//Logs.i("addContent Stop!!!!");
 	}
 
 	//---------------------------------

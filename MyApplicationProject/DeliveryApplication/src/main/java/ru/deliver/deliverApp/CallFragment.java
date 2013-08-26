@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -37,6 +39,21 @@ public class CallFragment extends Fragment
 	//VARIABLES
 	//---------------------------------
 
+	private CheckBox mCheck;
+	private EditText mEditWidth;
+	private EditText mEditHeight;
+	private EditText mEditLength;
+	private EditText mCompanyName;
+	private EditText mAddress;
+	private EditText mPerson;
+	private EditText mPhone;
+	private EditText mEMail;
+	private EditText mComment;
+	private AutoCompleteTextView mFrom;
+	private AutoCompleteTextView mTo;
+	private TextView mCallDate;
+	private TextView mCallTime;
+
 	private String mDate = "";
 
 	//---------------------------------
@@ -55,22 +72,35 @@ public class CallFragment extends Fragment
 
 		View view = inflater.inflate(R.layout.call_fragment, container, false);
 
-		final TextView mCallDate 		= (TextView)view.findViewById(R.id.Call_Date);
-		final TextView mCallTime 		= (TextView)view.findViewById(R.id.Call_Time);
-		final CheckBox mCheck			= (CheckBox)view.findViewById(R.id.Call_Check);
-		final EditText mEditWidth		= (EditText)view.findViewById(R.id.Call_Width);
-		final EditText mEditHeight		= (EditText)view.findViewById(R.id.Call_Height);
-		final EditText mEditLength		= (EditText)view.findViewById(R.id.Call_Length);
-		AutoCompleteTextView mFrom 		= (AutoCompleteTextView)view.findViewById(R.id.Call_Auto1);
-		AutoCompleteTextView mTo 		= (AutoCompleteTextView)view.findViewById(R.id.Call_Auto2);
-		Spinner mWeight					= (Spinner)view.findViewById(R.id.Call_Spin1);
+		mCallDate 		= (TextView)view.findViewById(R.id.Call_DateText);
+		mCallTime 		= (TextView)view.findViewById(R.id.Call_TimeText);
+
+		mCheck			= (CheckBox)view.findViewById(R.id.Call_Check);
+
+		mEditWidth		= (EditText)view.findViewById(R.id.Call_Width);
+		mEditHeight		= (EditText)view.findViewById(R.id.Call_Height);
+		mEditLength		= (EditText)view.findViewById(R.id.Call_Length);
+		mCompanyName	= (EditText)view.findViewById(R.id.Call_NameCompany);
+		mAddress			= (EditText)view.findViewById(R.id.Call_Adress);
+		mPerson			= (EditText)view.findViewById(R.id.Call_Person);
+		mPhone			= (EditText)view.findViewById(R.id.Call_Phone);
+		mEMail			= (EditText)view.findViewById(R.id.Call_Email);
+		mComment			= (EditText)view.findViewById(R.id.Call_Comment);
+
+		mFrom 			= (AutoCompleteTextView)view.findViewById(R.id.Call_Auto1);
+		mTo 			= (AutoCompleteTextView)view.findViewById(R.id.Call_Auto2);
+		Spinner mWeight	= (Spinner)view.findViewById(R.id.Call_Spin1);
+
+		Button mSend	= (Button)view.findViewById(R.id.Call_send);
+		Button mBtnDate	= (Button)view.findViewById(R.id.Call_Date);
+		Button mBtnTime	= (Button)view.findViewById(R.id.Call_Time);
 
 		String[] towns = getActivity().getResources().getStringArray(R.array.towns);
 		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, towns);
 		mFrom.setAdapter(adapter1);
 		mTo.setAdapter(adapter1);
 		String[] weights = getActivity().getResources().getStringArray(R.array.weights);
-		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, weights);
+		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, weights);
 		mWeight.setAdapter(adapter2);
 
 		mCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
@@ -95,7 +125,7 @@ public class CallFragment extends Fragment
 			}
 		});
 
-		mCallDate.setOnClickListener(new View.OnClickListener()
+		mBtnDate.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View view)
@@ -109,15 +139,14 @@ public class CallFragment extends Fragment
 					{
 						mDate = dayOfMonth + "/" + monthOfYear + "/" + year;
 						Logs.i("setDate = " + mDate);
-						mCallDate.setText(mDate);
+						mCallDate.setText(getString(R.string.Call_DatePicker) + " \t " + mDate);
 					}
 				}, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
 				dpd.show();
-
 			}
 		});
 
-		mCallTime.setOnClickListener(new View.OnClickListener()
+		mBtnTime.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View view)
@@ -129,12 +158,30 @@ public class CallFragment extends Fragment
 					@Override
 					public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute)
 					{
-						String mTime = hourOfDay + ":" + minute;
+						String m = "" + minute;
+						if(m.length() == 1)
+							m = "0" + m;
+
+						String mTime = hourOfDay + ":" + m;
+
 						Logs.i("setTime = " + mTime);
+
 						mCallTime.setText(getString(R.string.Call_TimePicker) + " \t " + mTime);
 					}
 				}, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), DateFormat.is24HourFormat(getActivity()));
 				tpd.show();
+			}
+		});
+
+		mSend.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				if(!isFillAllFields())
+					Toast.makeText(getActivity(), R.string.Error_FillFields, Toast.LENGTH_SHORT).show();
+
+				//TODO Запрос на создание вызова курьера
 			}
 		});
 
@@ -143,6 +190,35 @@ public class CallFragment extends Fragment
 	//---------------------------------
 	//METHODS
 	//---------------------------------
+
+	/**
+	 * Заполнены ли все поля на форме окна
+	 * @return true - если заполнены, false - если нет
+	 * */
+	private boolean isFillAllFields()
+	{
+		boolean rez = true;
+		boolean isMail = mCheck.isChecked();
+
+		if(mFrom.getText().length() <= 0 || mTo.getText().length() <= 0)//Проверка полей откуда и куда
+			rez = false;
+
+		if(mCallDate.getText().length() <= 0 || mCallTime.getText().length() <= 0)//Проверка даты и времени
+			rez = false;
+
+		//Проверка основныъх данных о заказчике
+		if(mCompanyName.getText().length() <= 0 || mAddress.getText().length() <= 0 || mPerson.getText().length() <= 0 ||
+				mPhone.getText().length() <= 0 || mEMail.getText().length() <= 0 || mComment.getText().length() <= 0)
+			rez = false;
+
+		if(!isMail) //Если посылка, то проверим габариты
+		{
+			if(mEditWidth.getText().length() <= 0 || mEditHeight.getText().length() <= 0 || mEditLength.getText().length() <= 0)
+				rez = false;
+		}
+
+		return rez;
+	}
 
 	//---------------------------------
 	//GETTERS/SETTERS

@@ -29,8 +29,9 @@
                 android:layout_margin="10dip"
                 android:drawableRight="@android:drawable/ic_delete"
                 android:textSize="22sp"
+                android:lines="1"
                 android:imeOptions="actionDone"
-                android:inputType="number"/>
+                android:inputType="number|text"/>
 
         <Button
                 android:id="@+id/Deliver_find"
@@ -38,7 +39,7 @@
                 android:layout_width="120dip"
                 android:layout_alignParentRight="true"
                 android:layout_margin="10dip"
-                android:background="@color/red"
+                android:background="@drawable/red_button"
                 android:text="@string/Btn_Show"
                 android:textColor="@color/white"
                 android:textStyle="bold"

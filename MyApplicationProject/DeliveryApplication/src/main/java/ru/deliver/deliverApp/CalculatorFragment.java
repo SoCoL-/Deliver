@@ -7,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * Created by 1 on 20.08.13.
@@ -27,6 +29,13 @@ public final class CalculatorFragment extends Fragment
     //VARIABLES
     //-------------------------------
 
+	private CheckBox mCheck;
+	private EditText mEditWidth;
+	private EditText mEditHeight;
+	private EditText mEditLength;
+	private AutoCompleteTextView mFrom;
+	private AutoCompleteTextView mTo;
+
     //-------------------------------
     //CONSTRUCTORS
     //-------------------------------
@@ -41,18 +50,19 @@ public final class CalculatorFragment extends Fragment
     {
         View view = inflater.inflate(R.layout.calculator_fragment, container, false);
 
-		final EditText mEditWidth 	= (EditText)view.findViewById(R.id.Calc_Width);
-		final EditText mEditHeight 	= (EditText)view.findViewById(R.id.Calc_Height);
-		final EditText mEditLength 	= (EditText)view.findViewById(R.id.Calc_Length);
-		final CheckBox mCheck		= (CheckBox)view.findViewById(R.id.Calc_Check);
-		AutoCompleteTextView mFrom 	= (AutoCompleteTextView)view.findViewById(R.id.Calc_Auto1);
-		AutoCompleteTextView mTo 	= (AutoCompleteTextView)view.findViewById(R.id.Calc_Auto2);
-		Spinner mWeight 			= (Spinner)view.findViewById(R.id.Calc_Spin1);
+		mEditWidth 			= (EditText)view.findViewById(R.id.Calc_Width);
+		mEditHeight 		= (EditText)view.findViewById(R.id.Calc_Height);
+		mEditLength 		= (EditText)view.findViewById(R.id.Calc_Length);
+		mCheck				= (CheckBox)view.findViewById(R.id.Calc_Check);
+		mFrom 				= (AutoCompleteTextView)view.findViewById(R.id.Calc_Auto1);
+		mTo 				= (AutoCompleteTextView)view.findViewById(R.id.Calc_Auto2);
+		Spinner mWeight 	= (Spinner)view.findViewById(R.id.Calc_Spin1);
+		Button mCalculate	= (Button)view.findViewById(R.id.Calc_calculate);
 
 		String[] towns = getActivity().getResources().getStringArray(R.array.towns);
 		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, towns);
 		String[] weights = getActivity().getResources().getStringArray(R.array.weights);
-		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, weights);
+		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, weights);
 		mFrom.setAdapter(adapter1);
 		mTo.setAdapter(adapter1);
 		mWeight.setAdapter(adapter2);
@@ -79,6 +89,18 @@ public final class CalculatorFragment extends Fragment
 			}
 		});
 
+		mCalculate.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				if(!isFillAllFields())
+					Toast.makeText(getActivity(), R.string.Error_FillFields, Toast.LENGTH_SHORT).show();
+
+				//TODO запрос на расчет суммы
+			}
+		});
+
         return view;
     }
     //-------------------------------
@@ -88,6 +110,27 @@ public final class CalculatorFragment extends Fragment
     //-------------------------------
     //METHODS
     //-------------------------------
+
+	/**
+	 * Заполнены ли все поля на форме окна
+	 * @return true - если заполнены, false - если нет
+	 * */
+	private boolean isFillAllFields()
+	{
+		boolean rez = true;
+		Boolean isMail = mCheck.isChecked();
+
+		if(mFrom.getText().length() <= 0 || mTo.getText().length() <= 0)
+			rez = false;
+
+		if(!isMail) // Если посылка, то проверим габариты
+		{
+			if(mEditWidth.getText().length() <= 0 || mEditHeight.getText().length() <= 0 || mEditLength.getText().length() <= 0)
+				rez = false;
+		}
+
+		return rez;
+	}
 
     //-------------------------------
     //GETTERS/SETTERS

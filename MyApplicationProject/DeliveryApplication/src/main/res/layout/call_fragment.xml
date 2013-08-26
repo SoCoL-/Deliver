@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical">
 
-            <TextView
+            <!--<TextView
                     android:id="@+id/Call_Date"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
@@ -34,9 +34,30 @@
                     android:layout_marginRight="10dip"
                     android:textColor="@color/black"
                     android:hint="@string/Call_DatePicker"
+                    android:textSize="20sp"/>-->
+
+            <Button
+                    android:id="@+id/Call_Date"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:textColor="@color/black"
+                    android:text="@string/Call_DatePicker"
                     android:textSize="20sp"/>
 
             <TextView
+                    android:id="@+id/Call_DateText"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
+
+            <Button
                     android:id="@+id/Call_Time"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
@@ -44,7 +65,17 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:textColor="@color/black"
-                    android:hint="@string/Call_TimePicker"
+                    android:text="@string/Call_TimePicker"
+                    android:textSize="20sp"/>
+
+            <TextView
+                    android:id="@+id/Call_TimeText"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:textColor="@color/black"
                     android:textSize="20sp"/>
 
             <EditText
@@ -55,6 +86,7 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:hint="@string/Call_EditNameCompany"
+                    android:lines="1"
                     android:inputType="text"
                     android:imeOptions="actionNext"
                     android:textSize="20sp"/>
@@ -67,6 +99,7 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:hint="@string/Call_EditAdress"
+                    android:lines="1"
                     android:inputType="textPostalAddress"
                     android:imeOptions="actionNext"
                     android:textSize="20sp"/>
@@ -79,6 +112,7 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:hint="@string/Call_EditPerson"
+                    android:lines="1"
                     android:inputType="textPersonName"
                     android:imeOptions="actionNext"
                     android:textSize="20sp"/>
@@ -91,6 +125,7 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:hint="@string/Call_EditPhone"
+                    android:lines="1"
                     android:inputType="phone"
                     android:imeOptions="actionNext"
                     android:textSize="20sp"/>
@@ -103,6 +138,7 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:hint="@string/Call_EditEmail"
+                    android:lines="1"
                     android:inputType="textEmailAddress"
                     android:imeOptions="actionDone"
                     android:textSize="20sp"/>
@@ -165,6 +201,7 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:hint="@string/Calculator_EditHint1"
+                    android:lines="1"
                     android:inputType="number"
                     android:imeOptions="actionNext"
                     android:textSize="20sp"/>
@@ -177,6 +214,7 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:hint="@string/Calculator_EditHint2"
+                    android:lines="1"
                     android:inputType="number"
                     android:imeOptions="actionNext"
                     android:textSize="20sp"/>
@@ -189,6 +227,7 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:hint="@string/Calculator_EditHint3"
+                    android:lines="1"
                     android:inputType="number"
                     android:imeOptions="actionNext"
                     android:textSize="20sp"/>
@@ -209,7 +248,7 @@
                     android:id="@+id/Call_send"
                     android:layout_height="50dip"
                     android:layout_width="match_parent"
-                    android:background="@color/red"
+                    android:background="@drawable/red_button"
                     android:layout_marginTop="30dip"
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"

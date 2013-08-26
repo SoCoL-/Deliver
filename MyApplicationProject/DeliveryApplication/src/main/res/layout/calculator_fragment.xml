@@ -59,6 +59,16 @@
                     android:inputType="text"
                     android:textSize="20sp"/>
 
+            <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:textColor="@color/black"
+                    android:text="@string/Calculator_Auto3"
+                    android:textSize="20sp"/>
+
             <Spinner
                     android:id="@+id/Calc_Spin1"
                     android:layout_height="wrap_content"
@@ -75,6 +85,7 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:hint="@string/Calculator_EditHint1"
+                    android:lines="1"
                     android:inputType="number"
                     android:textSize="20sp"/>
 
@@ -86,6 +97,7 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:hint="@string/Calculator_EditHint2"
+                    android:lines="1"
                     android:inputType="number"
                     android:textSize="20sp"/>
 
@@ -97,6 +109,7 @@
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
                     android:hint="@string/Calculator_EditHint3"
+                    android:lines="1"
                     android:inputType="number"
                     android:textSize="20sp"/>
 
@@ -115,7 +128,7 @@
                     android:id="@+id/Calc_calculate"
                     android:layout_height="50dip"
                     android:layout_width="match_parent"
-                    android:background="@color/red"
+                    android:background="@drawable/red_button"
                     android:layout_marginTop="10dip"
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"

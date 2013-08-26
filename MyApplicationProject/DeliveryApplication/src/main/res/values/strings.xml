@@ -12,6 +12,9 @@
 
     <string name="Btn_Show">Показать</string>
 
+    <string name="Error_FillFields">Пожалуйста, заполните все поля формы.</string>
+    <string name="Error_NumberDeliver">Пожалуйста, введите номер заказа для поиска.</string>
+
     <string name="Delivery_Name">Отправления</string>
 
     <string name="DeliveryInfo_Name">Детали отправления</string>
@@ -44,7 +47,6 @@
 
     <string name="Offices_Name">Отделения</string>
     <string name="Offices_Info">Единая справочная служба 8&#8211;800&#8211;4783899</string>
-
 
     <string name="FavState_Cancel">Возврат клиенту</string>
     <string name="FavState_Done">Доставлено</string>

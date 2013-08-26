@@ -9,10 +9,9 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="50dip"
-            android:background="@color/gray"
+            android:background="@drawable/gradient"
             android:textColor="@color/white"
             android:gravity="center"
-            android:padding="5dip"
             android:textSize="35sp"
             android:textStyle="bold"
             android:text="@string/DeliveryInfo_Name"/>
