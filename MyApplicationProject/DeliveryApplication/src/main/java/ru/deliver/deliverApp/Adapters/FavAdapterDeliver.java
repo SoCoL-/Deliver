@@ -10,6 +10,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ru.deliver.deliverApp.R;
+import ru.deliver.deliverApp.Setup.Logs;
+import ru.deliver.deliverApp.Utils.Favourite;
 import ru.deliver.deliverApp.Utils.ItemFav;
 
 /**
@@ -27,7 +29,7 @@ public class FavAdapterDeliver extends BaseAdapter
 	//VARIABLES
 	//---------------------------------
 
-	private ArrayList<ItemFav> mItems;
+	private ArrayList<Favourite> mItems;
 
 	//---------------------------------
 	//SUPER
@@ -35,14 +37,14 @@ public class FavAdapterDeliver extends BaseAdapter
 
 	public FavAdapterDeliver()
 	{
-		mItems = new ArrayList<ItemFav>();
+		mItems = new ArrayList<Favourite>();
 	}
 
 	//---------------------------------
 	//METHODS
 	//---------------------------------
 
-	public void addItem(ItemFav item)
+	public void addItem(Favourite item)
 	{
 		if(mItems == null)
 			return;
@@ -51,7 +53,7 @@ public class FavAdapterDeliver extends BaseAdapter
 		notifyDataSetChanged();
 	}
 
-	public void addAllItems(ArrayList<ItemFav> items)
+	public void addAllItems(ArrayList<Favourite> items)
 	{
 		if(mItems == null)
 			return;
@@ -111,8 +113,16 @@ public class FavAdapterDeliver extends BaseAdapter
 			itemView = inflater.inflate(R.layout.fav_item, null);
 		}
 
-		((TextView)itemView.findViewById(R.id.FavItem_Number)).setText(mItems.get(position).getNumber());
-		((TextView)itemView.findViewById(R.id.FavItem_State)).setText(mItems.get(position).getState());
+        if(position < mItems.size())
+        {
+            if (itemView != null)
+            {
+                Logs.i(""+mItems.get(position).getNumber());
+                ((TextView) itemView.findViewById(R.id.FavItem_Number)).setText(""+mItems.get(position).getNumber());
+                int lastInfoItem = mItems.get(position).getFavItems().size()-1;
+                ((TextView)itemView.findViewById(R.id.FavItem_State)).setText(mItems.get(position).getFavItems().get(lastInfoItem).getDescription());
+            }
+        }
 
 		return itemView;
 	}

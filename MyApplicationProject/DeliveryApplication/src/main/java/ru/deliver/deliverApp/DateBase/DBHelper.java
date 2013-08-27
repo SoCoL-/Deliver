@@ -24,8 +24,8 @@ public class DBHelper extends SQLiteOpenHelper
 
     private static final String TABLE_FAVOURITE = "Favourite_Table";
     private static final String COLUMN_NUMBER   = "number";
-    private static final String COLUMN_FROM     = "from";
-    private static final String COLUMN_TO       = "to";
+    private static final String COLUMN_FROM     = "_from";
+    private static final String COLUMN_TO       = "_to";
 
     private static final String TABLE_FAVOURITE_INFOITEM    = "FavouriteInfoItem_Table";
     private static final String COLUMN_DATE_TIME            = "date_time";
@@ -53,6 +53,7 @@ public class DBHelper extends SQLiteOpenHelper
         String CREATE_FAV_INFOITEM_TABLE = "CREATE TABLE "
                 + TABLE_FAVOURITE_INFOITEM  +
                 "("
+                + COLUMN_NUMBER             + " INTEGER,"
                 + COLUMN_DATE_TIME          + " TEXT,"
                 + COLUMN_DESCRIPTION        + " TEXT,"
                 + "PRIMARY KEY (" + COLUMN_DATE_TIME + ") ,"
@@ -91,10 +92,11 @@ public class DBHelper extends SQLiteOpenHelper
         mDB.insert(TABLE_FAVOURITE, null, values);
     }
 
-    public void addFavInfo(InfoFavouriteItem ifi)
+    public void addFavInfo(int fav_number, InfoFavouriteItem ifi)
     {
         ContentValues values = new ContentValues();
         String date_time = ifi.getDate() + " " + ifi.getTime();
+        values.put(COLUMN_NUMBER, fav_number);
         values.put(COLUMN_DATE_TIME, date_time);
         values.put(COLUMN_DESCRIPTION, ifi.getDescription());
 
@@ -120,6 +122,9 @@ public class DBHelper extends SQLiteOpenHelper
                 f.setNumber(Integer.parseInt(c.getString(0)));
                 f.setFrom(c.getString(1));
                 f.setTo(c.getString(2));
+                ArrayList<InfoFavouriteItem> info = new ArrayList<InfoFavouriteItem>();
+                info = findFavInfo(f.getNumber());
+                f.setFavItems(info);
                 rez.add(f);
             }
             while (c.moveToNext());
@@ -129,10 +134,8 @@ public class DBHelper extends SQLiteOpenHelper
         return rez;
     }
 
-    public InfoFavouriteItem findFavInfo(int fav_number)
+    public ArrayList<InfoFavouriteItem> findFavInfo(int fav_number)
     {
-        InfoFavouriteItem rez = new InfoFavouriteItem();
-
         if(mDB == null)
             return null;
 
@@ -140,22 +143,50 @@ public class DBHelper extends SQLiteOpenHelper
         if(c == null)
             return null;
 
+        ArrayList<InfoFavouriteItem> rez = new ArrayList<InfoFavouriteItem>();
+
         if(c.moveToFirst())
         {
-            String date_time = c.getString(0);
-            String[] times = date_time.split(" ");
-            rez.setDate(times[0]);
-            rez.setTime(times[1]);
-            rez.setDescription(c.getString(1));
-
+            do
+            {
+                InfoFavouriteItem ifi = new InfoFavouriteItem();
+                String date_time = c.getString(1);
+                String[] times = date_time.split(" ");
+                ifi.setDate(times[0]);
+                ifi.setTime(times[1]);
+                ifi.setDescription(c.getString(2));
+                rez.add(ifi);
+            }
+            while (c.moveToNext());
             c.close();
         }
 
         return rez;
     }
 
-    public void deleteFav(int fav_number)
+    public boolean deleteFav(int fav_number)
     {
+        if(mDB == null)
+            return false;
 
+        int delCount = mDB.delete(TABLE_FAVOURITE_INFOITEM, COLUMN_NUMBER + " = " + fav_number, null);
+        int delFavCount = mDB.delete(TABLE_FAVOURITE, COLUMN_NUMBER + " = " + fav_number, null);
+
+        return true;
     }
+
+    /*public boolean updateFav(int fav_number, InfoFavouriteItem ifi)
+    {
+        if(mDB == null)
+            return false;
+
+        ContentValues values = new ContentValues();
+        String date_time = ifi.getDate() + " " + ifi.getTime();
+        values.put(COLUMN_DATE_TIME, date_time);
+        values.put(COLUMN_DESCRIPTION, ifi.getDescription());
+
+        int updCount = mDB.update(TABLE_FAVOURITE_INFOITEM, values, , null);
+
+        return true;
+    }*/
 }

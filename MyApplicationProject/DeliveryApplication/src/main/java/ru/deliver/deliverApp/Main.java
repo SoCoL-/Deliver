@@ -1,5 +1,6 @@
 package ru.deliver.deliverApp;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -14,8 +15,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ru.deliver.deliverApp.DateBase.DBHelper;
 import ru.deliver.deliverApp.Setup.Logs;
 import ru.deliver.deliverApp.Utils.Favourite;
+import ru.deliver.deliverApp.Utils.InfoFavouriteItem;
 import ru.deliver.deliverApp.Utils.MyFragmentTabHost;
 
 /**
@@ -71,7 +74,9 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
         mTabHost.setOnTabChangedListener(this);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.Main_real_tab);
 
+        //initDB();
         initTab();
+        initFav();
 	}
 
     @Override
@@ -138,6 +143,47 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 	//METHODS
 	//---------------------------------
 
+    /**
+     * Тестовая функция для заполнения БД
+     * */
+    private void initDB()
+    {
+        DBHelper helper = new DBHelper(this, null);
+        helper.openDB();
+
+        Favourite f = new Favourite();
+        f.setNumber(12212);
+        f.setFrom("Krasnoyarsk");
+        f.setTo("Moskva");
+        helper.addFav(f);
+
+        InfoFavouriteItem ifi = new InfoFavouriteItem();
+        ifi.setDate("12/05/2012");
+        ifi.setTime("11:44");
+        ifi.setDescription("Send");
+        helper.addFavInfo(12212, ifi);
+
+        ifi = new InfoFavouriteItem();
+        ifi.setDate("16/05/2012");
+        ifi.setTime("10:04");
+        ifi.setDescription("Cancel");
+        helper.addFavInfo(12212, ifi);
+
+        helper.closeDB();
+    }
+
+    /**
+     * Загрузка всех избранных из БД
+     * */
+    private void initFav()
+    {
+        DBSaver saver = new DBSaver();
+        saver.execute();
+    }
+
+    /**
+     * Создание закладок и их графическое представление
+     * */
 	private void initTab()
 	{
 		TabHost.TabSpec spec = mTabHost.newTabSpec(TAB1);
@@ -231,7 +277,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 
 	private void pushFragment(Fragment fragment)
 	{
-		Logs.i("Push fragment " + fragment.getClass().toString());
+		Logs.i("Push fragment " + fragment.getClass().getCanonicalName());
 		FragmentManager manager = getSupportFragmentManager();
 
 		if(manager.findFragmentByTag("Info") != null)
@@ -248,5 +294,41 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 
 	//---------------------------------
 	//INNER CLASSES
-	//---------------------------------        
+	//---------------------------------
+
+    class DBSaver extends AsyncTask<Void, Void, Void>
+    {
+        DBHelper helper;
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            helper = new DBHelper(Main.this, null);
+
+            helper.openDB();
+            Logs.i("Открыли БД");
+        }
+
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            Logs.i("Читаем БД");
+            mFavourites = helper.findAllFavourites();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result)
+        {
+            super.onPostExecute(result);
+            helper.closeDB();
+            Logs.i("Закрыли БД");
+            //TODO update adapter data
+            if(mTabHost.getCurrentTab() == 0)
+            {
+                mFragment1.mFavAdapter.addAllItems(mFavourites);
+            }
+        }
+    }
 }

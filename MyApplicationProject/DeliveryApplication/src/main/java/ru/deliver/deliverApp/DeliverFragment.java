@@ -2,22 +2,16 @@ package ru.deliver.deliverApp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import ru.deliver.deliverApp.Adapters.FavAdapterDeliver;
 import ru.deliver.deliverApp.Utils.EditWithDrawable;
-import ru.deliver.deliverApp.Utils.ItemFav;
 
 /**
  * Created by Evgenij on 20.08.13.
@@ -34,8 +28,11 @@ public class DeliverFragment extends Fragment
 	//VARIABLES
 	//---------------------------------
 
+
+    private ListView mListFavs;
+    public FavAdapterDeliver mFavAdapter;
 	//For test!!!!!!!!!!!
-	ArrayList<ItemFav> mFavsInfo;
+	//ArrayList<ItemFav> mFavsInfo;
 	//End for test
 
 	//---------------------------------
@@ -56,13 +53,13 @@ public class DeliverFragment extends Fragment
 
 		final EditWithDrawable mEdit	= (EditWithDrawable)view.findViewById(R.id.Deliver_number);
         Button mBtn 					= (Button)view.findViewById(R.id.Deliver_find);
-		ListView mListFavs 				= (ListView)view.findViewById(R.id.Deliver_List);
-		FavAdapterDeliver mFavAdapter 	= new FavAdapterDeliver();
+		mListFavs 				        = (ListView)view.findViewById(R.id.Deliver_List);
+		mFavAdapter 	                = new FavAdapterDeliver();
 
 		mListFavs.setAdapter(mFavAdapter);
 
 		//Only for test!!!!!!!!!!!!!!
-		mFavsInfo = new ArrayList<ItemFav>();
+		/*mFavsInfo = new ArrayList<ItemFav>();
 		mFavsInfo.add(new ItemFav("12-12345", getString(R.string.FavState_Done)));
 		mFavsInfo.add(new ItemFav("13-54321", getString(R.string.FavState_Send)));
 		mFavsInfo.add(new ItemFav("32-99999", getString(R.string.FavState_Cancel)));
@@ -72,7 +69,7 @@ public class DeliverFragment extends Fragment
 		mFavsInfo.add(new ItemFav("32-99999", getString(R.string.FavState_Cancel)));
 		mFavsInfo.add(new ItemFav("32-99999", getString(R.string.FavState_Cancel)));
 		mFavsInfo.add(new ItemFav("32-99999", getString(R.string.FavState_Cancel)));
-		mFavAdapter.addAllItems(mFavsInfo);
+		mFavAdapter.addAllItems(mFavsInfo);*/
 		//End for test
 
 		mListFavs.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -108,7 +105,20 @@ public class DeliverFragment extends Fragment
 		((Main)getActivity()).goToInfo(isnew);
     }
 
-	//---------------------------------
+    @Override
+    public void onResume()
+    {
+        if(((Main)getActivity()).mFavourites.size() > 0)
+        {
+            mListFavs.setVisibility(View.VISIBLE);
+            mFavAdapter.addAllItems(((Main)getActivity()).mFavourites);
+        }
+        else
+            mListFavs.setVisibility(View.GONE);
+
+        super.onResume();
+    }
+//---------------------------------
 	//GETTERS/SETTERS
 	//---------------------------------
 
