@@ -100,7 +100,8 @@ public class CallFragment extends Fragment
 		mFrom.setAdapter(adapter1);
 		mTo.setAdapter(adapter1);
 		String[] weights = getActivity().getResources().getStringArray(R.array.weights);
-		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, weights);
+		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, weights);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mWeight.setAdapter(adapter2);
 
 		mCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()

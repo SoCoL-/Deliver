@@ -62,7 +62,8 @@ public final class CalculatorFragment extends Fragment
 		String[] towns = getActivity().getResources().getStringArray(R.array.towns);
 		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, towns);
 		String[] weights = getActivity().getResources().getStringArray(R.array.weights);
-		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, weights);
+		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, weights);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mFrom.setAdapter(adapter1);
 		mTo.setAdapter(adapter1);
 		mWeight.setAdapter(adapter2);

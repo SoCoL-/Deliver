@@ -12,7 +12,10 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import ru.deliver.deliverApp.Setup.Logs;
+import ru.deliver.deliverApp.Utils.Favourite;
 import ru.deliver.deliverApp.Utils.MyFragmentTabHost;
 
 /**
@@ -44,6 +47,8 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 
 	private Fragment secondLevelFr;
 
+    public ArrayList<Favourite> mFavourites;
+
 	//---------------------------------
 	//SUPER
 	//---------------------------------
@@ -59,6 +64,8 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
         mFragment2 = new CalculatorFragment();
 		mFragment3 = new CallFragment();
 		mFragment4 = new OfficesFragment();
+
+        mFavourites = new ArrayList<Favourite>();
 
         mTabHost = (MyFragmentTabHost)findViewById(android.R.id.tabhost);
         mTabHost.setOnTabChangedListener(this);
