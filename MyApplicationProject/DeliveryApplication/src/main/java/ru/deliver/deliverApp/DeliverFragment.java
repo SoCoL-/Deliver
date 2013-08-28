@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import ru.deliver.deliverApp.Adapters.FavAdapterDeliver;
+import ru.deliver.deliverApp.Network.AnswerServer;
+import ru.deliver.deliverApp.Network.NetManager;
 import ru.deliver.deliverApp.Utils.EditWithDrawable;
 
 /**
@@ -18,7 +20,7 @@ import ru.deliver.deliverApp.Utils.EditWithDrawable;
  *
  * Отображение первого таба
  */
-public class DeliverFragment extends Fragment
+public class DeliverFragment extends Fragment implements AnswerServer
 {
 	//---------------------------------
 	//CONSTANTS
@@ -28,12 +30,9 @@ public class DeliverFragment extends Fragment
 	//VARIABLES
 	//---------------------------------
 
-
     private ListView mListFavs;
     public FavAdapterDeliver mFavAdapter;
-	//For test!!!!!!!!!!!
-	//ArrayList<ItemFav> mFavsInfo;
-	//End for test
+    private NetManager mNetManager;
 
 	//---------------------------------
 	//SUPER
@@ -58,26 +57,19 @@ public class DeliverFragment extends Fragment
 
 		mListFavs.setAdapter(mFavAdapter);
 
-		//Only for test!!!!!!!!!!!!!!
-		/*mFavsInfo = new ArrayList<ItemFav>();
-		mFavsInfo.add(new ItemFav("12-12345", getString(R.string.FavState_Done)));
-		mFavsInfo.add(new ItemFav("13-54321", getString(R.string.FavState_Send)));
-		mFavsInfo.add(new ItemFav("32-99999", getString(R.string.FavState_Cancel)));
-		mFavsInfo.add(new ItemFav("32-99999", getString(R.string.FavState_Cancel)));
-		mFavsInfo.add(new ItemFav("32-99999", getString(R.string.FavState_Cancel)));
-		mFavsInfo.add(new ItemFav("32-99999", getString(R.string.FavState_Cancel)));
-		mFavsInfo.add(new ItemFav("32-99999", getString(R.string.FavState_Cancel)));
-		mFavsInfo.add(new ItemFav("32-99999", getString(R.string.FavState_Cancel)));
-		mFavsInfo.add(new ItemFav("32-99999", getString(R.string.FavState_Cancel)));
-		mFavAdapter.addAllItems(mFavsInfo);*/
-		//End for test
+        mNetManager = new NetManager();
+        mNetManager.setInterface(this);
 
 		mListFavs.setOnItemClickListener(new AdapterView.OnItemClickListener()
 		{
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
 			{
-				pushFragment(false);
+                Bundle b = new Bundle();
+                b.putBoolean("IsNew", false);
+                b.putInt("Position", i);
+
+				pushFragment(b);
 				//TODO + выборка избранного из БД
 			}
 		});
@@ -89,20 +81,38 @@ public class DeliverFragment extends Fragment
 				if(mEdit.getText().length() <= 0)
 					Toast.makeText(getActivity(), R.string.Error_NumberDeliver, Toast.LENGTH_SHORT).show();
 				else
-					pushFragment(true);
+                {
+                    mEdit.setText("");
+                    Bundle b = new Bundle();
+                    b.putBoolean("IsNew", true);
+					pushFragment(b);
+                }
 				//TODO + Запрос на поиск на серваке данного заказа
 			}
 		});
 
 		return view;
 	}
-	//---------------------------------
+
+    @Override
+    public void ResponceOK(String TAG)
+    {
+
+    }
+
+    @Override
+    public void ResponceError(String TAG)
+    {
+
+    }
+
+    //---------------------------------
 	//METHODS
 	//---------------------------------
 
-    private void pushFragment(boolean isnew)
+    private void pushFragment(Bundle b)
     {
-		((Main)getActivity()).goToInfo(isnew);
+		((Main)getActivity()).goToInfo(b);
     }
 
     @Override
@@ -118,6 +128,7 @@ public class DeliverFragment extends Fragment
 
         super.onResume();
     }
+
 //---------------------------------
 	//GETTERS/SETTERS
 	//---------------------------------

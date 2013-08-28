@@ -14,12 +14,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import ru.deliver.deliverApp.Network.AnswerServer;
+import ru.deliver.deliverApp.Network.NetManager;
+
 /**
  * Created by 1 on 20.08.13.
  *
  * Окно расчета стоимости заказа
  */
-public final class CalculatorFragment extends Fragment
+public final class CalculatorFragment extends Fragment implements AnswerServer
 {
     //-------------------------------
     //CONSTANTS
@@ -35,6 +38,8 @@ public final class CalculatorFragment extends Fragment
 	private EditText mEditLength;
 	private AutoCompleteTextView mFrom;
 	private AutoCompleteTextView mTo;
+
+    private NetManager mNetManager;
 
     //-------------------------------
     //CONSTRUCTORS
@@ -56,7 +61,7 @@ public final class CalculatorFragment extends Fragment
 		mCheck				= (CheckBox)view.findViewById(R.id.Calc_Check);
 		mFrom 				= (AutoCompleteTextView)view.findViewById(R.id.Calc_Auto1);
 		mTo 				= (AutoCompleteTextView)view.findViewById(R.id.Calc_Auto2);
-		Spinner mWeight 	= (Spinner)view.findViewById(R.id.Calc_Spin1);
+		final Spinner mWeight 	= (Spinner)view.findViewById(R.id.Calc_Spin1);
 		Button mCalculate	= (Button)view.findViewById(R.id.Calc_calculate);
 
 		String[] towns = getActivity().getResources().getStringArray(R.array.towns);
@@ -67,6 +72,9 @@ public final class CalculatorFragment extends Fragment
 		mFrom.setAdapter(adapter1);
 		mTo.setAdapter(adapter1);
 		mWeight.setAdapter(adapter2);
+
+        mNetManager = new NetManager();
+        mNetManager.setInterface(this);
 
 		mCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
 		{
@@ -99,6 +107,7 @@ public final class CalculatorFragment extends Fragment
 					Toast.makeText(getActivity(), R.string.Error_FillFields, Toast.LENGTH_SHORT).show();
 
 				//TODO запрос на расчет суммы
+                mNetManager.sendCalcReq(mFrom.getText().toString(), mTo.getText().toString(), (String)mWeight.getSelectedItem(), "1", "", "", "");
 			}
 		});
 
@@ -132,6 +141,16 @@ public final class CalculatorFragment extends Fragment
 
 		return rez;
 	}
+
+    @Override
+    public void ResponceOK(String TAG) {
+
+    }
+
+    @Override
+    public void ResponceError(String TAG) {
+
+    }
 
     //-------------------------------
     //GETTERS/SETTERS

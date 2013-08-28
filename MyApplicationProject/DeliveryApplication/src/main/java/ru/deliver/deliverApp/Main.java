@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ru.deliver.deliverApp.DateBase.DBHelper;
+import ru.deliver.deliverApp.Network.NetManager;
 import ru.deliver.deliverApp.Setup.Logs;
 import ru.deliver.deliverApp.Utils.Favourite;
 import ru.deliver.deliverApp.Utils.InfoFavouriteItem;
@@ -43,7 +44,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 
     private MyFragmentTabHost mTabHost;
 
-    private DeliverFragment     mFragment1;
+    public  DeliverFragment     mFragment1;
     private CalculatorFragment  mFragment2;
 	private CallFragment		mFragment3;
 	private OfficesFragment		mFragment4;
@@ -84,7 +85,6 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
     {
         if(tabId.equals(TAB1))
 		{
-			//clearBackStack();
 			if(secondLevelFr == null)
 			{
 				Logs.i("InfoFragment == null");
@@ -168,6 +168,30 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
         ifi.setTime("10:04");
         ifi.setDescription("Cancel");
         helper.addFavInfo(12212, ifi);
+
+        f = new Favourite();
+        f.setNumber(328767);
+        f.setFrom("Omsk");
+        f.setTo("Tomsk");
+        helper.addFav(f);
+
+        ifi = new InfoFavouriteItem();
+        ifi.setDate("12/01/2013");
+        ifi.setTime("13:00");
+        ifi.setDescription("Send");
+        helper.addFavInfo(328767, ifi);
+
+        ifi = new InfoFavouriteItem();
+        ifi.setDate("16/02/2013");
+        ifi.setTime("10:04");
+        ifi.setDescription(getString(R.string.FavState_Done));
+        helper.addFavInfo(328767, ifi);
+
+        ifi = new InfoFavouriteItem();
+        ifi.setDate("16/03/2013");
+        ifi.setTime("12:04");
+        ifi.setDescription(getString(R.string.FavState_Cancel));
+        helper.addFavInfo(328767, ifi);
 
         helper.closeDB();
     }
@@ -262,14 +286,15 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 			Logs.i("fragment == null");
 	}
 
-	public void goToInfo(boolean isNew)
+	public void goToInfo(Bundle b)
 	{
 		Logs.i("Push fragment DeliverInfoFragment");
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		secondLevelFr = null;
-		DeliverInfoFragment next = new DeliverInfoFragment(isNew);
+		DeliverInfoFragment next = new DeliverInfoFragment();
 		secondLevelFr = next;
+        next.setArguments(b);
 		ft.replace(R.id.Main_real_tab, next);
 		ft.addToBackStack("Info");
 		ft.commit();
