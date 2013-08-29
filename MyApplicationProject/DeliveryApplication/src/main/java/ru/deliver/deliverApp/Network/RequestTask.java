@@ -11,9 +11,9 @@ import org.json.JSONObject;
 public final class RequestTask
 {
     public String mRquestTag;
-    public JSONArray mJSON;
+    public JSONObject mJSON;
 
-    public RequestTask(String tag, JSONArray object)
+    public RequestTask(String tag, JSONObject object)
     {
         this.mJSON = object;
         this.mRquestTag = tag;

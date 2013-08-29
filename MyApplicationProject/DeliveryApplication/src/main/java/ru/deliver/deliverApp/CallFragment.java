@@ -22,6 +22,9 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+import ru.deliver.deliverApp.DateBase.DBHelper;
+import ru.deliver.deliverApp.Network.AnswerServer;
+import ru.deliver.deliverApp.Network.NetManager;
 import ru.deliver.deliverApp.Setup.Logs;
 
 /**
@@ -29,7 +32,7 @@ import ru.deliver.deliverApp.Setup.Logs;
  *
  * Заказ доставки
  */
-public class CallFragment extends Fragment
+public class CallFragment extends Fragment implements AnswerServer
 {
 	//---------------------------------
 	//CONSTANTS
@@ -55,6 +58,8 @@ public class CallFragment extends Fragment
 	private TextView mCallTime;
 
 	private String mDate = "";
+
+    NetManager mNetManager;
 
 	//---------------------------------
 	//SUPER
@@ -89,11 +94,14 @@ public class CallFragment extends Fragment
 
 		mFrom 			= (AutoCompleteTextView)view.findViewById(R.id.Call_Auto1);
 		mTo 			= (AutoCompleteTextView)view.findViewById(R.id.Call_Auto2);
-		Spinner mWeight	= (Spinner)view.findViewById(R.id.Call_Spin1);
+		final Spinner mWeight	= (Spinner)view.findViewById(R.id.Call_Spin1);
 
 		Button mSend	= (Button)view.findViewById(R.id.Call_send);
 		Button mBtnDate	= (Button)view.findViewById(R.id.Call_Date);
 		Button mBtnTime	= (Button)view.findViewById(R.id.Call_Time);
+
+        mNetManager = new NetManager();
+        mNetManager.setInterface(this);
 
 		String[] towns = getActivity().getResources().getStringArray(R.array.towns);
 		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, towns);
@@ -183,6 +191,12 @@ public class CallFragment extends Fragment
 					Toast.makeText(getActivity(), R.string.Error_FillFields, Toast.LENGTH_SHORT).show();
 
 				//TODO Запрос на создание вызова курьера
+                String typeOf;
+                if(mCheck.isChecked())
+                    typeOf = "1";
+                else
+                    typeOf = "2";
+                mNetManager.sendCall(mCallDate.getText().toString(), mCallTime.getText().toString(), mFrom.getText().toString(), mTo.getText().toString(), typeOf, mCompanyName.getText().toString(), mAddress.getText().toString(), mPerson.getText().toString(), mPhone.getText().toString(), mEMail.getText().toString(), mComment.getText().toString(), mEditWidth.getText().toString(), mEditHeight.getText().toString(), mEditLength.getText().toString(), (String)mWeight.getSelectedItem());
 			}
 		});
 
@@ -221,7 +235,19 @@ public class CallFragment extends Fragment
 		return rez;
 	}
 
-	//---------------------------------
+    @Override
+    public void ResponceOK(String TAG)
+    {
+
+    }
+
+    @Override
+    public void ResponceError(String TAG)
+    {
+
+    }
+
+    //---------------------------------
 	//GETTERS/SETTERS
 	//---------------------------------
 
