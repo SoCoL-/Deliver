@@ -1,14 +1,18 @@
 package ru.deliver.deliverApp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import ru.deliver.deliverApp.Adapters.FavAdapterDeliver;
 import ru.deliver.deliverApp.Network.AnswerServer;
@@ -31,6 +35,8 @@ public class DeliverFragment extends Fragment implements AnswerServer
 	//---------------------------------
 
     private ListView mListFavs;
+    private EditWithDrawable mEdit;
+
     public FavAdapterDeliver mFavAdapter;
     private NetManager mNetManager;
 
@@ -50,14 +56,14 @@ public class DeliverFragment extends Fragment implements AnswerServer
 
 		View view = inflater.inflate(R.layout.deliver_fragment, container, false);
 
-		final EditWithDrawable mEdit	= (EditWithDrawable)view.findViewById(R.id.Deliver_number);
+		mEdit	= (EditWithDrawable)view.findViewById(R.id.Deliver_number);
         Button mBtn 					= (Button)view.findViewById(R.id.Deliver_find);
 		mListFavs 				        = (ListView)view.findViewById(R.id.Deliver_List);
 		mFavAdapter 	                = new FavAdapterDeliver();
 
 		mListFavs.setAdapter(mFavAdapter);
 
-        mNetManager = new NetManager();
+        mNetManager = new NetManager(getActivity());
         mNetManager.setInterface(this);
 
 		mListFavs.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -82,12 +88,13 @@ public class DeliverFragment extends Fragment implements AnswerServer
 					Toast.makeText(getActivity(), R.string.Error_NumberDeliver, Toast.LENGTH_SHORT).show();
 				else
                 {
-                    mEdit.setText("");
-                    Bundle b = new Bundle();
-                    b.putBoolean("IsNew", true);
-					pushFragment(b);
+                    ArrayList<String> items = new ArrayList<String>(1);
+                    items.add(mEdit.getText().toString());
+                    mNetManager.sendDeparture(items);
+
+                    InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mEdit.getWindowToken(), 0);
                 }
-				//TODO + Запрос на поиск на серваке данного заказа
 			}
 		});
 
@@ -95,15 +102,32 @@ public class DeliverFragment extends Fragment implements AnswerServer
 	}
 
     @Override
-    public void ResponceOK(String TAG)
+    public void ResponceOK(String TAG, final ArrayList<String> params)
     {
-
+        getActivity().runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mEdit.setText("");
+                Bundle b = new Bundle();
+                b.putBoolean("IsNew", true);
+                pushFragment(b);
+            }
+        });
     }
 
     @Override
-    public void ResponceError(String TAG)
+    public void ResponceError(String TAG, final String text)
     {
-
+        getActivity().runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //---------------------------------

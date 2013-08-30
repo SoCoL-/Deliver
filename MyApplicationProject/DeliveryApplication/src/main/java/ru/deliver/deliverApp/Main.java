@@ -16,7 +16,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ru.deliver.deliverApp.DateBase.DBHelper;
-import ru.deliver.deliverApp.Network.NetManager;
 import ru.deliver.deliverApp.Setup.Logs;
 import ru.deliver.deliverApp.Utils.Favourite;
 import ru.deliver.deliverApp.Utils.InfoFavouriteItem;
@@ -26,6 +25,17 @@ import ru.deliver.deliverApp.Utils.MyFragmentTabHost;
  * Created by Evgenij on 20.08.13.
  * Точка входа в приложение
  */
+
+/**
+ * Sanya (12:56:43 28/08/2013)
+ 24-0392597
+ Sanya (12:56:53 28/08/2013)
+ 24-0392595
+ Sanya (12:56:58 28/08/2013)
+ 24-0392592
+ Sanya (12:57:03 28/08/2013)
+ 24-0392590
+ * */
 
 public class Main extends FragmentActivity implements TabHost.OnTabChangeListener
 {
@@ -52,6 +62,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 	private Fragment secondLevelFr;
 
     public ArrayList<Favourite> mFavourites;
+    public Favourite mBufDeparture;            //Полученное от сервака Отправление
 
 	//---------------------------------
 	//SUPER
@@ -75,7 +86,6 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
         mTabHost.setOnTabChangedListener(this);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.Main_real_tab);
 
-        //initDB();
         initTab();
         initFav();
 	}
@@ -142,60 +152,6 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 	//---------------------------------
 	//METHODS
 	//---------------------------------
-
-    /**
-     * Тестовая функция для заполнения БД
-     * */
-    private void initDB()
-    {
-        DBHelper helper = new DBHelper(this, null);
-        helper.openDB();
-
-        Favourite f = new Favourite();
-        f.setNumber(12212);
-        f.setFrom("Krasnoyarsk");
-        f.setTo("Moskva");
-        helper.addFav(f);
-
-        InfoFavouriteItem ifi = new InfoFavouriteItem();
-        ifi.setDate("12/05/2012");
-        ifi.setTime("11:44");
-        ifi.setDescription("Send");
-        helper.addFavInfo(12212, ifi);
-
-        ifi = new InfoFavouriteItem();
-        ifi.setDate("16/05/2012");
-        ifi.setTime("10:04");
-        ifi.setDescription("Cancel");
-        helper.addFavInfo(12212, ifi);
-
-        f = new Favourite();
-        f.setNumber(328767);
-        f.setFrom("Omsk");
-        f.setTo("Tomsk");
-        helper.addFav(f);
-
-        ifi = new InfoFavouriteItem();
-        ifi.setDate("12/01/2013");
-        ifi.setTime("13:00");
-        ifi.setDescription("Send");
-        helper.addFavInfo(328767, ifi);
-
-        ifi = new InfoFavouriteItem();
-        ifi.setDate("16/02/2013");
-        ifi.setTime("10:04");
-        ifi.setDescription(getString(R.string.FavState_Done));
-        helper.addFavInfo(328767, ifi);
-
-        ifi = new InfoFavouriteItem();
-        ifi.setDate("16/03/2013");
-        ifi.setTime("12:04");
-        ifi.setDescription(getString(R.string.FavState_Cancel));
-        helper.addFavInfo(328767, ifi);
-
-        helper.closeDB();
-    }
-
     /**
      * Загрузка всех избранных из БД
      * */
@@ -349,7 +305,6 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
             super.onPostExecute(result);
             helper.closeDB();
             Logs.i("Закрыли БД");
-            //TODO update adapter data
             if(mTabHost.getCurrentTab() == 0)
             {
                 mFragment1.mFavAdapter.addAllItems(mFavourites);

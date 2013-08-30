@@ -12,10 +12,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import ru.deliver.deliverApp.Network.AnswerServer;
 import ru.deliver.deliverApp.Network.NetManager;
+import ru.deliver.deliverApp.Setup.Settings;
 
 /**
  * Created by 1 on 20.08.13.
@@ -38,6 +42,7 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
 	private EditText mEditLength;
 	private AutoCompleteTextView mFrom;
 	private AutoCompleteTextView mTo;
+    private TextView mSummaText;
 
     private NetManager mNetManager;
 
@@ -61,6 +66,7 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
 		mCheck				= (CheckBox)view.findViewById(R.id.Calc_Check);
 		mFrom 				= (AutoCompleteTextView)view.findViewById(R.id.Calc_Auto1);
 		mTo 				= (AutoCompleteTextView)view.findViewById(R.id.Calc_Auto2);
+        mSummaText          = (TextView)view.findViewById(R.id.Calc_Summa);
 		final Spinner mWeight 	= (Spinner)view.findViewById(R.id.Calc_Spin1);
 		Button mCalculate	= (Button)view.findViewById(R.id.Calc_calculate);
 
@@ -73,7 +79,7 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
 		mTo.setAdapter(adapter1);
 		mWeight.setAdapter(adapter2);
 
-        mNetManager = new NetManager();
+        mNetManager = new NetManager(getActivity());
         mNetManager.setInterface(this);
 
 		mCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
@@ -106,8 +112,13 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
 				if(!isFillAllFields())
 					Toast.makeText(getActivity(), R.string.Error_FillFields, Toast.LENGTH_SHORT).show();
 
-				//TODO запрос на расчет суммы
-                mNetManager.sendCalcReq(mFrom.getText().toString(), mTo.getText().toString(), (String)mWeight.getSelectedItem(), "1", "", "", "");
+                String type;
+                if(mCheck.isChecked())
+                    type = "1";
+                else
+                    type = "2";
+
+                mNetManager.sendCalcReq(mFrom.getText().toString(), mTo.getText().toString(), (String)mWeight.getSelectedItem(), type, mEditHeight.getText().toString(), mEditWidth.getText().toString(), mEditLength.getText().toString());
 			}
 		});
 
@@ -143,13 +154,34 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
 	}
 
     @Override
-    public void ResponceOK(String TAG) {
+    public void ResponceOK(String TAG, final ArrayList<String> params)
+    {
+        if(!TAG.equals(Settings.REQ_TAG_CALC))
+            return;
 
+        getActivity().runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mSummaText.setVisibility(View.VISIBLE);
+                mSummaText.setText(params.get(0) + getString(R.string.Info_Rubles));
+            }
+        });
     }
 
     @Override
-    public void ResponceError(String TAG) {
-
+    public void ResponceError(String TAG, final String text)
+    {
+        getActivity().runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mSummaText.setVisibility(View.GONE);
+                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //-------------------------------

@@ -44,16 +44,17 @@ public class DBHelper extends SQLiteOpenHelper
         String CREATE_FAVOURITE_TABLE = "CREATE TABLE "
                 + TABLE_FAVOURITE   +
                 "("
-                + COLUMN_NUMBER     + " INTEGER PRIMARY KEY,"
+                + COLUMN_NUMBER     + " TEXT,"
                 + COLUMN_FROM       + " TEXT,"
-                + COLUMN_TO         + " TEXT" +
+                + COLUMN_TO         + " TEXT,"
+                + "PRIMARY KEY (" + COLUMN_NUMBER + ")" +
                 ")";
         sqLiteDatabase.execSQL(CREATE_FAVOURITE_TABLE);
 
         String CREATE_FAV_INFOITEM_TABLE = "CREATE TABLE "
                 + TABLE_FAVOURITE_INFOITEM  +
                 "("
-                + COLUMN_NUMBER             + " INTEGER,"
+                + COLUMN_NUMBER             + " TEXT,"
                 + COLUMN_DATE_TIME          + " TEXT,"
                 + COLUMN_DESCRIPTION        + " TEXT,"
                 + "PRIMARY KEY (" + COLUMN_DATE_TIME + ") ,"
@@ -84,6 +85,7 @@ public class DBHelper extends SQLiteOpenHelper
 
     public void addFav(Favourite f)
     {
+        Logs.i("Add new FAV");
         ContentValues values = new ContentValues();
         values.put(COLUMN_NUMBER, f.getNumber());
         values.put(COLUMN_FROM, f.getFrom());
@@ -92,8 +94,9 @@ public class DBHelper extends SQLiteOpenHelper
         mDB.insert(TABLE_FAVOURITE, null, values);
     }
 
-    public void addFavInfo(int fav_number, InfoFavouriteItem ifi)
+    public void addFavInfo(String fav_number, InfoFavouriteItem ifi)
     {
+        Logs.i("Add new FAVINFO");
         ContentValues values = new ContentValues();
         String date_time = ifi.getDate() + " " + ifi.getTime();
         values.put(COLUMN_NUMBER, fav_number);
@@ -110,19 +113,23 @@ public class DBHelper extends SQLiteOpenHelper
         if(mDB == null)
             return null;
 
+        Logs.i("Find all FAVS");
         Cursor c = mDB.rawQuery("select * from Favourite_Table", null);
         if(c == null)
             return null;
+
+        Logs.i("cursor.getColumnCount() = " + c.getColumnCount());
+        Logs.i("cursor.getCount() = " + c.getCount());
 
         if(c.moveToFirst())
         {
             do
             {
                 Favourite f = new Favourite();
-                f.setNumber(Integer.parseInt(c.getString(0)));
+                f.setNumber(c.getString(0));
                 f.setFrom(c.getString(1));
                 f.setTo(c.getString(2));
-                ArrayList<InfoFavouriteItem> info = new ArrayList<InfoFavouriteItem>();
+                ArrayList<InfoFavouriteItem> info;
                 info = findFavInfo(f.getNumber());
                 f.setFavItems(info);
                 rez.add(f);
@@ -131,10 +138,12 @@ public class DBHelper extends SQLiteOpenHelper
             c.close();
         }
 
+        Logs.i("After adding: rez.length() = " + rez.size());
+
         return rez;
     }
 
-    public ArrayList<InfoFavouriteItem> findFavInfo(int fav_number)
+    public ArrayList<InfoFavouriteItem> findFavInfo(String fav_number)
     {
         if(mDB == null)
             return null;

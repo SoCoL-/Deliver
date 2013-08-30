@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import ru.deliver.deliverApp.DateBase.DBHelper;
@@ -56,6 +57,7 @@ public class CallFragment extends Fragment implements AnswerServer
 	private AutoCompleteTextView mTo;
 	private TextView mCallDate;
 	private TextView mCallTime;
+    private Spinner mWeight;
 
 	private String mDate = "";
 
@@ -86,21 +88,21 @@ public class CallFragment extends Fragment implements AnswerServer
 		mEditHeight		= (EditText)view.findViewById(R.id.Call_Height);
 		mEditLength		= (EditText)view.findViewById(R.id.Call_Length);
 		mCompanyName	= (EditText)view.findViewById(R.id.Call_NameCompany);
-		mAddress			= (EditText)view.findViewById(R.id.Call_Adress);
+		mAddress		= (EditText)view.findViewById(R.id.Call_Adress);
 		mPerson			= (EditText)view.findViewById(R.id.Call_Person);
 		mPhone			= (EditText)view.findViewById(R.id.Call_Phone);
 		mEMail			= (EditText)view.findViewById(R.id.Call_Email);
-		mComment			= (EditText)view.findViewById(R.id.Call_Comment);
+		mComment		= (EditText)view.findViewById(R.id.Call_Comment);
 
 		mFrom 			= (AutoCompleteTextView)view.findViewById(R.id.Call_Auto1);
 		mTo 			= (AutoCompleteTextView)view.findViewById(R.id.Call_Auto2);
-		final Spinner mWeight	= (Spinner)view.findViewById(R.id.Call_Spin1);
+		mWeight	        = (Spinner)view.findViewById(R.id.Call_Spin1);
 
 		Button mSend	= (Button)view.findViewById(R.id.Call_send);
 		Button mBtnDate	= (Button)view.findViewById(R.id.Call_Date);
 		Button mBtnTime	= (Button)view.findViewById(R.id.Call_Time);
 
-        mNetManager = new NetManager();
+        mNetManager = new NetManager(getActivity());
         mNetManager.setInterface(this);
 
 		String[] towns = getActivity().getResources().getStringArray(R.array.towns);
@@ -188,9 +190,11 @@ public class CallFragment extends Fragment implements AnswerServer
 			public void onClick(View view)
 			{
 				if(!isFillAllFields())
+                {
 					Toast.makeText(getActivity(), R.string.Error_FillFields, Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-				//TODO Запрос на создание вызова курьера
                 String typeOf;
                 if(mCheck.isChecked())
                     typeOf = "1";
@@ -235,16 +239,49 @@ public class CallFragment extends Fragment implements AnswerServer
 		return rez;
 	}
 
-    @Override
-    public void ResponceOK(String TAG)
+    private void clearFields()
     {
-
+        mFrom.setText("");
+        mTo.setText("");
+        mCallDate.setText("");
+        mCallTime.setText("");
+        mComment.setText("");
+        mCompanyName.setText("");
+        mAddress.setText("");
+        mPerson.setText("");
+        mPhone.setText("");
+        mEditHeight.setText("");
+        mEditLength.setText("");
+        mEditWidth.setText("");
+        mEMail.setText("");
+        mWeight.setSelection(0);
     }
 
     @Override
-    public void ResponceError(String TAG)
+    public void ResponceOK(String TAG, final ArrayList<String> params)
     {
+        getActivity().runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                clearFields();
+                Toast.makeText(getActivity(), params.get(0), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
+    @Override
+    public void ResponceError(String TAG, final String text)
+    {
+        getActivity().runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //---------------------------------

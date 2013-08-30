@@ -1,6 +1,6 @@
 package ru.deliver.deliverApp.Network;
 
-import org.json.JSONObject;
+import java.io.InputStream;
 
 /**
  * Created by Evgenij on 28.08.13.
@@ -11,12 +11,14 @@ public class ResponceTask
 {
     public String mResponceTag;
     public int mResponceCode;
-    public JSONObject mJSON;
+    public InputStream mJSON;
+    public String mErrorText;
 
-    public ResponceTask(int code, String tag, JSONObject object)
+    public ResponceTask(int code, String tag, InputStream object, String error)
     {
         this.mResponceCode = code;
         this.mResponceTag = tag;
         this.mJSON = object;
+        this.mErrorText = error;
     }
 }

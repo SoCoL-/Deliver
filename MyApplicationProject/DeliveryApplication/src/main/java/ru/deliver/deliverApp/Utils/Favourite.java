@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public final class Favourite
 {
-    private int mNumber;
+    private String mNumber;
     private String mFrom;
     private String mTo;
     private ArrayList<InfoFavouriteItem> mFavItems;
@@ -19,7 +19,7 @@ public final class Favourite
         this.mFavItems = new ArrayList<InfoFavouriteItem>();
     }
 
-    public Favourite(int num, String from, String to)
+    public Favourite(String num, String from, String to)
     {
         this.mFavItems = new ArrayList<InfoFavouriteItem>();
         this.mNumber = num;
@@ -27,12 +27,12 @@ public final class Favourite
         this.mTo = to;
     }
 
-    public int getNumber()
+    public String getNumber()
     {
         return mNumber;
     }
 
-    public void setNumber(int mNumber)
+    public void setNumber(String mNumber)
     {
         this.mNumber = mNumber;
     }

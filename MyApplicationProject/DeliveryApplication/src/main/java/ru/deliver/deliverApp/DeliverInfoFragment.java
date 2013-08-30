@@ -10,10 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import ru.deliver.deliverApp.DateBase.DBHelper;
-import ru.deliver.deliverApp.Setup.Logs;
 import ru.deliver.deliverApp.Utils.Favourite;
 import ru.deliver.deliverApp.Utils.InfoFavouriteItem;
 
@@ -36,9 +33,7 @@ public class DeliverInfoFragment extends Fragment
     private int mPosition;
 	private LinearLayout mContent;
 
-    //Only FOR TEST
-    Favourite f;
-    //End TEST
+    private Favourite f;
 
 	//---------------------------------
 	//SUPER
@@ -66,19 +61,11 @@ public class DeliverInfoFragment extends Fragment
 		if(isNew)
         {
 			mToFav.setVisibility(View.VISIBLE);
-            //TODO получение даных об информации по доставке из запроса
-
-            //Тестовое создание избранного и последующее сохранение его в БД
-            f = new Favourite(99999, "Minsk", "Oslo");
-            ArrayList<InfoFavouriteItem> mInfos = new ArrayList<InfoFavouriteItem>();
-            mInfos.add(new InfoFavouriteItem("01/01/2013", "10:00", "Send"));
-            mInfos.add(new InfoFavouriteItem("20/01/2013", "15:00", "To Amsterdam"));
-            mInfos.add(new InfoFavouriteItem("01/02/2013", "18:00", "Done"));
-            f.setFavItems(mInfos);
-
+            //Получаем из временного хранилища пришедшую информацию
+            f = ((Main)getActivity()).mBufDeparture;
             mFrom.setText(f.getFrom());
             mTo.setText(f.getTo());
-            mDeparture.setText(""+f.getNumber());
+            mDeparture.setText(f.getNumber());
 
             boolean isFirst = true;
             for(InfoFavouriteItem ifi : f.getFavItems())
@@ -97,7 +84,7 @@ public class DeliverInfoFragment extends Fragment
             Favourite fav = ((Main)getActivity()).mFavourites.get(mPosition);
             mFrom.setText(fav.getFrom());
             mTo.setText(fav.getTo());
-            mDeparture.setText(""+fav.getNumber());
+            mDeparture.setText(fav.getNumber());
 
             boolean isFirst = true;
             for(InfoFavouriteItem ifi : fav.getFavItems())
@@ -123,7 +110,6 @@ public class DeliverInfoFragment extends Fragment
                 helper.closeDB();
 
                 ((Main)getActivity()).mFavourites.add(f);
-                //((Main)getActivity()).mFragment1.mFavAdapter.addItem(f);
             }
         });
 

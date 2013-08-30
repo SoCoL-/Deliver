@@ -31,7 +31,7 @@
                 android:textSize="22sp"
                 android:lines="1"
                 android:imeOptions="actionDone"
-                android:inputType="number|text"/>
+                android:inputType="text"/>
 
         <Button
                 android:id="@+id/Deliver_find"

@@ -34,7 +34,8 @@ public final class Logs
 	 * */
 	public static void e(String TAG, String Message)
 	{
-		Log.e(TAG, Message);
+        if(Settings.IS_DEBUG)
+		    Log.e(TAG, Message);
 	}
 
 	/**
@@ -43,7 +44,8 @@ public final class Logs
 	 * */
 	public static void e(String Message)
 	{
-		Log.e(CURR_TAG, Message);
+        if(Settings.IS_DEBUG)
+		    Log.e(CURR_TAG, Message);
 	}
 
 	/**
@@ -53,7 +55,8 @@ public final class Logs
 	 * */
 	public static void i(String TAG, String Message)
 	{
-		Log.i(TAG, Message);
+        if(Settings.IS_DEBUG)
+		    Log.i(TAG, Message);
 	}
 
 	/**
@@ -62,7 +65,8 @@ public final class Logs
 	 * */
 	public static void i(String Message)
 	{
-		Log.i(CURR_TAG, Message);
+        if(Settings.IS_DEBUG)
+		    Log.i(CURR_TAG, Message);
 	}
 
 	//---------------------------------

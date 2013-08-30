@@ -6,15 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import ru.deliver.deliverApp.Adapters.TextPicAdapter;
+import ru.deliver.deliverApp.Network.AnswerServer;
+import ru.deliver.deliverApp.Network.NetManager;
 
 /**
  * Created by Evgenij on 21.08.13.
  *
  * Список отделений
  */
-public class OfficesFragment extends Fragment
+public class OfficesFragment extends Fragment implements AnswerServer
 {
 	//---------------------------------
 	//CONSTANTS
@@ -25,6 +30,7 @@ public class OfficesFragment extends Fragment
 	//---------------------------------
 
     private TextPicAdapter mAdapter;
+    private NetManager mNetManager;
 
 	//---------------------------------
 	//SUPER
@@ -46,6 +52,10 @@ public class OfficesFragment extends Fragment
         mAdapter = new TextPicAdapter();
         mList.setAdapter(mAdapter);
 
+        mNetManager = new NetManager(getActivity());
+        mNetManager.setInterface(this);
+        mNetManager.sendOffices();
+
         mAdapter.clear();
         mAdapter.addItem("Moscow");
         mAdapter.addItem("Krasnoyarsk");
@@ -54,7 +64,26 @@ public class OfficesFragment extends Fragment
 		return view;
 	}
 
-	//---------------------------------
+    @Override
+    public void ResponceOK(String TAG, final ArrayList<String> params)
+    {
+
+    }
+
+    @Override
+    public void ResponceError(String TAG, final String text)
+    {
+        getActivity().runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //---------------------------------
 	//METHODS
 	//---------------------------------
 

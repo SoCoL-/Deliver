@@ -12,8 +12,17 @@
 
     <string name="Btn_Show">Показать</string>
 
+    <string name="Error_Server">Ошибка сервера </string>
+    <string name="Error_Server_Wait">Превышение ожидания ответа. Возможно что-то произошло с сервером. Попробуйте позже отправить запрос.</string>
+    <string name="Error_Server_Weight">Объемный вес превышает 100 кг. Цены таких отправлений расчитываются по согласованию.</string>
+    <string name="Error_Server_Data">Извините, данных не найдено.</string>
+    <string name="Error_Server_City">Стоимость такого отправления уточняйте у менеджеров компании.</string>
     <string name="Error_FillFields">Пожалуйста, заполните все поля формы.</string>
     <string name="Error_NumberDeliver">Пожалуйста, введите номер заказа для поиска.</string>
+    <string name="Error_CallError">Произошла ошибка.</string>
+
+    <string name="Info_Rubles"> руб.</string>
+    <string name="Info_CallDone">Заявка успешно отправлена.</string>
 
     <string name="Delivery_Name">Отправления</string>
 
@@ -169,6 +178,8 @@
         <item>97</item>
         <item>98</item>
         <item>99</item>
+
+        <item>100</item>
     </string-array>
 
 </resources>
