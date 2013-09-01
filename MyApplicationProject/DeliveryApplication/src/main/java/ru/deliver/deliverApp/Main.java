@@ -1,6 +1,5 @@
 package ru.deliver.deliverApp;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -12,14 +11,16 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ru.deliver.deliverApp.DateBase.DBHelper;
+import ru.deliver.deliverApp.Network.AnswerServer;
+import ru.deliver.deliverApp.Network.NetManager;
 import ru.deliver.deliverApp.Setup.Logs;
 import ru.deliver.deliverApp.Utils.Favourite;
-import ru.deliver.deliverApp.Utils.InfoFavouriteItem;
 import ru.deliver.deliverApp.Utils.MyFragmentTabHost;
+import ru.deliver.deliverApp.Utils.Offices;
 
 /**
  * Created by Evgenij on 20.08.13.
@@ -37,7 +38,7 @@ import ru.deliver.deliverApp.Utils.MyFragmentTabHost;
  24-0392590
  * */
 
-public class Main extends FragmentActivity implements TabHost.OnTabChangeListener
+public class Main extends FragmentActivity implements TabHost.OnTabChangeListener, AnswerServer
 {
 	//---------------------------------
 	//CONSTANTS
@@ -61,8 +62,12 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 
 	private Fragment secondLevelFr;
 
-    public ArrayList<Favourite> mFavourites;
-    public Favourite mBufDeparture;            //Полученное от сервака Отправление
+    public ArrayList<Favourite> mFavourites;    //Список избранных отправлений из БД
+    public ArrayList<Favourite> mFavDepartures; //Список отправлений для отслеживания состояний их
+    public Favourite mBufDeparture;             //Полученное от сервака отправление по номеру
+    public ArrayList<Offices> mOffices;         //Список филиалов
+
+    private NetManager mNetManager;
 
 	//---------------------------------
 	//SUPER
@@ -81,13 +86,17 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 		mFragment4 = new OfficesFragment();
 
         mFavourites = new ArrayList<Favourite>();
+        mOffices = new ArrayList<Offices>();
 
         mTabHost = (MyFragmentTabHost)findViewById(android.R.id.tabhost);
         mTabHost.setOnTabChangedListener(this);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.Main_real_tab);
 
+        mNetManager = new NetManager(this);
+        mNetManager.setInterface(this);
+        mNetManager.sendOffices();
+
         initTab();
-        initFav();
 	}
 
     @Override
@@ -152,15 +161,6 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 	//---------------------------------
 	//METHODS
 	//---------------------------------
-    /**
-     * Загрузка всех избранных из БД
-     * */
-    private void initFav()
-    {
-        DBSaver saver = new DBSaver();
-        saver.execute();
-    }
-
     /**
      * Создание закладок и их графическое представление
      * */
@@ -269,7 +269,26 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 		ft.commit();
 	}
 
-	//---------------------------------
+    @Override
+    public void ResponceOK(String TAG, ArrayList<String> params)
+    {
+
+    }
+
+    @Override
+    public void ResponceError(String TAG, final String text)
+    {
+        runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                Toast.makeText(Main.this, text, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //---------------------------------
 	//GETTERS/SETTERS
 	//---------------------------------
 
@@ -277,38 +296,4 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 	//INNER CLASSES
 	//---------------------------------
 
-    class DBSaver extends AsyncTask<Void, Void, Void>
-    {
-        DBHelper helper;
-
-        @Override
-        protected void onPreExecute()
-        {
-            super.onPreExecute();
-            helper = new DBHelper(Main.this, null);
-
-            helper.openDB();
-            Logs.i("Открыли БД");
-        }
-
-        @Override
-        protected Void doInBackground(Void... params)
-        {
-            Logs.i("Читаем БД");
-            mFavourites = helper.findAllFavourites();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result)
-        {
-            super.onPostExecute(result);
-            helper.closeDB();
-            Logs.i("Закрыли БД");
-            if(mTabHost.getCurrentTab() == 0)
-            {
-                mFragment1.mFavAdapter.addAllItems(mFavourites);
-            }
-        }
-    }
 }

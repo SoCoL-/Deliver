@@ -16,6 +16,8 @@ import ru.deliver.deliverApp.Setup.Logs;
 import ru.deliver.deliverApp.Setup.Settings;
 import ru.deliver.deliverApp.Utils.Favourite;
 import ru.deliver.deliverApp.Utils.InfoFavouriteItem;
+import ru.deliver.deliverApp.Utils.Offices;
+import ru.deliver.deliverApp.Utils.OfficesAdd;
 
 /**
  * Created by Evgenij on 28.08.13.
@@ -129,7 +131,7 @@ public final class NetManager implements IProgress
     }
 
     @Override
-    public void GetResponce(ResponceTask task)
+    public void GetResponce(final ResponceTask task)
     {
         Logs.i("code = " + task.mResponceCode + ", tag = " + task.mResponceTag);
 
@@ -214,32 +216,44 @@ public final class NetManager implements IProgress
                         String text = Settings.convertStreamToString(task.mJSON);
                         Logs.i("text="+text);
                         text = text.trim();
-                        text = text.substring(1, text.length()-1);
                         Logs.i("text="+text);
-                        JSONObject json = new JSONObject(text);
-
-                        Favourite mDeparture = new Favourite();
-                        mDeparture.setNumber(json.getString("num"));
-                        mDeparture.setFrom(json.getString("from"));
-                        mDeparture.setTo(json.getString("to"));
-
-                        JSONArray items = json.getJSONArray("cp");
-                        if(items != null)
+                        JSONArray jsons = new JSONArray(text);
+                        ArrayList<Favourite> mDepartures = new ArrayList<Favourite>();
+                        if(jsons != null)
                         {
-                            ArrayList<InfoFavouriteItem> favItems = new ArrayList<InfoFavouriteItem>(items.length());
-                            for(int i = 0; i < items.length(); i++)
+                            for(int j = 0; j < jsons.length(); j++)
                             {
-                                InfoFavouriteItem ifi = new InfoFavouriteItem();
-                                JSONObject item = items.getJSONObject(i);
-                                ifi.setDate(item.getString("FORMATDATE"));
-                                ifi.setTime(item.getString("POINTTIME"));
-                                ifi.setDescription(item.getString("HEAP"));
-                                favItems.add(ifi);
+                                JSONObject json = jsons.getJSONObject(j);
+
+                                Favourite mDeparture = new Favourite();
+                                mDeparture.setNumber(json.getString("num"));
+                                mDeparture.setFrom(json.getString("from"));
+                                mDeparture.setTo(json.getString("to"));
+
+                                JSONArray items = json.getJSONArray("cp");
+                                if(items != null)
+                                {
+                                    ArrayList<InfoFavouriteItem> favItems = new ArrayList<InfoFavouriteItem>(items.length());
+                                    for(int i = 0; i < items.length(); i++)
+                                    {
+                                        InfoFavouriteItem ifi = new InfoFavouriteItem();
+                                        JSONObject item = items.getJSONObject(i);
+                                        ifi.setDate(item.getString("FORMATDATE"));
+                                        ifi.setTime(item.getString("POINTTIME"));
+                                        ifi.setDescription(item.getString("HEAP"));
+                                        favItems.add(ifi);
+                                    }
+                                    mDeparture.setFavItems(favItems);
+                                }
+                                mDepartures.add(mDeparture);
                             }
-                            mDeparture.setFavItems(favItems);
                         }
 
-                        ((Main)mActivity).mBufDeparture = mDeparture;
+                        if(mDepartures.size() == 1)
+                            ((Main)mActivity).mBufDeparture = mDepartures.get(0);
+                        else if(mDepartures.size() > 1)
+                            ((Main)mActivity).mFavourites = mDepartures;
+
                         mAnswer.ResponceOK(task.mResponceTag, null);
                     }
                     catch (IOException e)
@@ -251,9 +265,81 @@ public final class NetManager implements IProgress
                         Logs.e(e.toString());
                     }
                 }
+                else if(task.mResponceTag.equals(Settings.REQ_TAG_OFFI))
+                {
+                    new Thread(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            try
+                            {
+                                String text = Settings.convertStreamToString(task.mJSON);
+                                Logs.i("text="+text);
+                                text = text.trim();
+                                JSONArray jsons = new JSONArray(text);
+                                ArrayList<Offices> mOffices = new ArrayList<Offices>();
+                                Logs.i("jsons = " + jsons.toString());
+                                if(jsons != null)
+                                {
+                                    for(int i = 0; i < jsons.length(); i++)
+                                    {
+                                        JSONObject json = jsons.getJSONObject(i);
+                                        Offices office = new Offices();
+                                        office.setCity(json.getString("city"));
+
+                                        JSONArray infos = json.getJSONArray("contacts");
+                                        if(infos != null)
+                                        {
+                                            ArrayList<OfficesAdd> offInfo = new ArrayList<OfficesAdd>();
+                                            for(int j = 0; j < infos.length(); j++)
+                                            {
+                                                JSONObject info = infos.getJSONObject(j);
+                                                OfficesAdd oa = new OfficesAdd();
+                                                oa.setAddress(info.getString("address"));
+                                                oa.setEMail(info.getString("email"));
+                                                oa.setFax(getString(info, "key"));
+                                                oa.setName(info.getString("name"));
+                                                oa.setPhone(info.getString("phone"));
+                                                offInfo.add(oa);
+                                            }
+                                            office.setContacts(offInfo);
+                                        }
+                                        mOffices.add(office);
+                                    }
+
+                                    ((Main)mActivity).mOffices = mOffices;
+                                }
+                            }
+                            catch (IOException e)
+                            {
+                                Logs.e(e.toString());
+                            }
+                            catch (JSONException e)
+                            {
+                                Logs.e(e.toString());
+                            }
+                        }
+                    }).start();
+                }
             }
             else
                 mAnswer.ResponceError(task.mResponceTag, task.mErrorText);
         }
+    }
+
+    private String getString(JSONObject o, String key)
+    {
+        String rez;
+        try
+        {
+            rez = o.getString(key);
+        }
+        catch (JSONException e)
+        {
+            return "";
+        }
+
+        return rez;
     }
 }

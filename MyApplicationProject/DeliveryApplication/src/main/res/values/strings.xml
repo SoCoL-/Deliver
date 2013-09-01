@@ -11,6 +11,10 @@
     <string name="Tab4_Name">Отделения</string>
 
     <string name="Btn_Show">Показать</string>
+    <string name="Btn_Update">Обновить</string>
+
+    <string name="Menu_Title">Меню</string>
+    <string name="Menu_Delete">Удалить</string>
 
     <string name="Error_Server">Ошибка сервера </string>
     <string name="Error_Server_Wait">Превышение ожидания ответа. Возможно что-то произошло с сервером. Попробуйте позже отправить запрос.</string>
@@ -20,9 +24,12 @@
     <string name="Error_FillFields">Пожалуйста, заполните все поля формы.</string>
     <string name="Error_NumberDeliver">Пожалуйста, введите номер заказа для поиска.</string>
     <string name="Error_CallError">Произошла ошибка.</string>
+    <string name="Error_FavExist">Такой перевод уже находится в избранном.</string>
 
     <string name="Info_Rubles"> руб.</string>
     <string name="Info_CallDone">Заявка успешно отправлена.</string>
+    <string name="Info_FavAdd">Отправление добавлено в список избранных.</string>
+    <string name="Info_Loading">Получение данных...</string>
 
     <string name="Delivery_Name">Отправления</string>
 

@@ -33,11 +33,11 @@
                 <Button
                         android:id="@+id/DelivInfo_ToFav"
                         android:layout_width="120dip"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dip"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="10dip"
                         android:layout_marginRight="10dip"
-                        android:background="@color/red"
+                        android:background="@drawable/red_button"
                         android:text="@string/DeliveryInfo_Button"
                         android:textColor="@color/black"/>
             </RelativeLayout>

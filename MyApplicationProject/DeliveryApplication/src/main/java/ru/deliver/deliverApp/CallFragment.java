@@ -148,7 +148,7 @@ public class CallFragment extends Fragment implements AnswerServer
 					@Override
 					public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth)
 					{
-						mDate = dayOfMonth + "/" + monthOfYear + "/" + year;
+						mDate = dayOfMonth + "." + monthOfYear + "." + year;
 						Logs.i("setDate = " + mDate);
 						mCallDate.setText(getString(R.string.Call_DatePicker) + " \t " + mDate);
 					}

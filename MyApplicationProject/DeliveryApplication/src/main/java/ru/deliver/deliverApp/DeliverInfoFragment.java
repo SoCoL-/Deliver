@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import ru.deliver.deliverApp.DateBase.DBHelper;
 import ru.deliver.deliverApp.Utils.Favourite;
@@ -74,6 +77,17 @@ public class DeliverInfoFragment extends Fragment
                 if(isFirst)
                     isFirst = false;
             }
+
+            //проверка на существование такой записи
+            ArrayList<Favourite> mFavs = ((Main)getActivity()).mFavourites;
+            for(Favourite fav : mFavs)
+            {
+                if(fav.getNumber().equals(f.getNumber()))
+                {
+                    mToFav.setVisibility(View.GONE);
+                    break;
+                }
+            }
         }
 		else
         {
@@ -100,6 +114,7 @@ public class DeliverInfoFragment extends Fragment
             @Override
             public void onClick(View view)
             {
+                //добавим в избранное
                 DBHelper helper = new DBHelper(getActivity(), null);
                 helper.openDB();
 
@@ -110,6 +125,7 @@ public class DeliverInfoFragment extends Fragment
                 helper.closeDB();
 
                 ((Main)getActivity()).mFavourites.add(f);
+                Toast.makeText(getActivity(), R.string.Info_FavAdd, Toast.LENGTH_SHORT).show();
             }
         });
 

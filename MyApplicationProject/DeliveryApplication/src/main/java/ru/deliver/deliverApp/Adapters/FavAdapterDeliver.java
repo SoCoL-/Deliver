@@ -120,7 +120,8 @@ public class FavAdapterDeliver extends BaseAdapter
                 Logs.i(""+mItems.get(position).getNumber());
                 ((TextView) itemView.findViewById(R.id.FavItem_Number)).setText(""+mItems.get(position).getNumber());
                 int lastInfoItem = mItems.get(position).getFavItems().size()-1;
-                ((TextView)itemView.findViewById(R.id.FavItem_State)).setText(mItems.get(position).getFavItems().get(lastInfoItem).getDescription());
+                if(mItems.get(position).getFavItems() != null && mItems.get(position).getFavItems().size() > 0)
+                    ((TextView)itemView.findViewById(R.id.FavItem_State)).setText(mItems.get(position).getFavItems().get(lastInfoItem).getDescription());
             }
         }
 

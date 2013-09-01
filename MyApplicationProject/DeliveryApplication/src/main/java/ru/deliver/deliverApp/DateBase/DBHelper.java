@@ -173,13 +173,28 @@ public class DBHelper extends SQLiteOpenHelper
         return rez;
     }
 
-    public boolean deleteFav(int fav_number)
+    public boolean deleteFav(String fav_number)
     {
         if(mDB == null)
             return false;
 
-        int delCount = mDB.delete(TABLE_FAVOURITE_INFOITEM, COLUMN_NUMBER + " = " + fav_number, null);
-        int delFavCount = mDB.delete(TABLE_FAVOURITE, COLUMN_NUMBER + " = " + fav_number, null);
+        Logs.i("Delete favs fav_number = " + fav_number);
+
+        ArrayList<InfoFavouriteItem> buf = findFavInfo(fav_number);
+        Logs.i("buf.size() = " + buf.size());
+
+        /*for(InfoFavouriteItem ifi : buf)
+        {
+            //String datetime = ifi.getDate() + " " + ifi.getTime();
+            int delCount = mDB.delete(TABLE_FAVOURITE_INFOITEM, COLUMN_DESCRIPTION + "='" + ifi.getDescription()+"'", null);
+            Logs.i("Delete favs infos = " + delCount + " by description = " + ifi.getDescription());
+        }*/
+
+
+        int delCount = mDB.delete(TABLE_FAVOURITE_INFOITEM, COLUMN_NUMBER + "='" + fav_number+"'", null);
+        Logs.i("Delete favs infos = " + delCount);
+        int delFavCount = mDB.delete(TABLE_FAVOURITE, COLUMN_NUMBER + "='" + fav_number+"'", null);
+        Logs.i("Delete favs = " + delFavCount);
 
         return true;
     }

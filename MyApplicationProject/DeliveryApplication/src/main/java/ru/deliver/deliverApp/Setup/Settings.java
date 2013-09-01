@@ -68,7 +68,7 @@ public final class Settings
      * @param inputStream - поток данных
      * @return Строка из потока, либо null
      * */
-    static public String convertStreamToString(InputStream inputStream) throws IOException
+    static synchronized public String convertStreamToString(final InputStream inputStream) throws IOException
     {
         if (inputStream != null)
         {
@@ -100,5 +100,5 @@ public final class Settings
 
 	//---------------------------------
 	//INNER CLASSES
-	//---------------------------------        
+	//---------------------------------
 }

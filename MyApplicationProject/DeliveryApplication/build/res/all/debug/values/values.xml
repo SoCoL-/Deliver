@@ -109,6 +109,7 @@
         <item>97</item>
         <item>98</item>
         <item>99</item>
+        <item>100</item>
     </string-array>
     <!-- From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/values/color.xml -->
     <color name="aqua">#00FFFF</color>
@@ -133,6 +134,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <!-- From: file:/C:/Users/1/Documents/GitHub/Deliver/MyApplicationProject/DeliveryApplication/src/main/res/values/strings.xml -->
     <string name="Btn_Show">Показать</string>
+    <string name="Btn_Update">Обновить</string>
     <string name="Calculator_Auto1">Откуда</string>
     <string name="Calculator_Auto2">Куда</string>
     <string name="Calculator_Auto3">Вес</string>
@@ -159,11 +161,24 @@
     <string name="DeliveryInfo_Text2">Откуда</string>
     <string name="DeliveryInfo_Text3">Куда</string>
     <string name="Delivery_Name">Отправления</string>
+    <string name="Error_CallError">Произошла ошибка.</string>
+    <string name="Error_FavExist">Такой перевод уже находится в избранном.</string>
     <string name="Error_FillFields">Пожалуйста, заполните все поля формы.</string>
     <string name="Error_NumberDeliver">Пожалуйста, введите номер заказа для поиска.</string>
+    <string name="Error_Server">Ошибка сервера </string>
+    <string name="Error_Server_City">Стоимость такого отправления уточняйте у менеджеров компании.</string>
+    <string name="Error_Server_Data">Извините, данных не найдено.</string>
+    <string name="Error_Server_Wait">Превышение ожидания ответа. Возможно что-то произошло с сервером. Попробуйте позже отправить запрос.</string>
+    <string name="Error_Server_Weight">Объемный вес превышает 100 кг. Цены таких отправлений расчитываются по согласованию.</string>
     <string name="FavState_Cancel">Возврат клиенту</string>
     <string name="FavState_Done">Доставлено</string>
     <string name="FavState_Send">Отправлено</string>
+    <string name="Info_CallDone">Заявка успешно отправлена.</string>
+    <string name="Info_FavAdd">Отправление добавлено в список избранных.</string>
+    <string name="Info_Loading">Получение данных...</string>
+    <string name="Info_Rubles"> руб.</string>
+    <string name="Menu_Delete">Удалить</string>
+    <string name="Menu_Title">Меню</string>
     <string name="Offices_Info">Единая справочная служба 8–800–4783899</string>
     <string name="Offices_Name">Отделения</string>
     <string name="Tab1_Name">Отправления</string>
