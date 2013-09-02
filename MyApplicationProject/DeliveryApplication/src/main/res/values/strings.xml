@@ -18,9 +18,11 @@
 
     <string name="Error_Server">Ошибка сервера </string>
     <string name="Error_Server_Wait">Превышение ожидания ответа. Возможно что-то произошло с сервером. Попробуйте позже отправить запрос.</string>
+    <string name="Error_Server_NoInternet">У вас нет интернет соединения. Проверьте подключение и попробуйте заново.</string>
     <string name="Error_Server_Weight">Объемный вес превышает 100 кг. Цены таких отправлений расчитываются по согласованию.</string>
     <string name="Error_Server_Data">Извините, данных не найдено.</string>
     <string name="Error_Server_City">Стоимость такого отправления уточняйте у менеджеров компании.</string>
+    <string name="Error_Server_Departure">Не найдено отправление с номером </string>
     <string name="Error_FillFields">Пожалуйста, заполните все поля формы.</string>
     <string name="Error_NumberDeliver">Пожалуйста, введите номер заказа для поиска.</string>
     <string name="Error_CallError">Произошла ошибка.</string>
@@ -30,6 +32,10 @@
     <string name="Info_CallDone">Заявка успешно отправлена.</string>
     <string name="Info_FavAdd">Отправление добавлено в список избранных.</string>
     <string name="Info_Loading">Получение данных...</string>
+    <string name="Info_Exp_Phone">тел.: </string>
+    <string name="Info_Exp_Address">адрес: </string>
+    <string name="Info_Exp_Email">email: </string>
+    <string name="Info_Exp_Fax">факс: </string>
 
     <string name="Delivery_Name">Отправления</string>
 

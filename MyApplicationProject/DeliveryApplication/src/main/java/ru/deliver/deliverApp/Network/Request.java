@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -110,10 +111,15 @@ public final class Request extends AsyncTask<String, Integer, ResponceTask>
 
             return new ResponceTask(HTTP_OK, mReqTask.mRquestTag, responseEntity.getContent(), null);
         }
+        catch(UnknownHostException e)
+        {
+            Logs.e(e.toString());
+            return new ResponceTask(-1, mReqTask.mRquestTag, null, mActivity.getString(R.string.Error_Server_NoInternet));
+        }
         catch(Exception e)
         {
             Logs.e(e.toString());
-            return new ResponceTask(-1, mReqTask.mRquestTag, null, mActivity.getString(R.string.Error_Server_Wait));
+            return new ResponceTask(-2, mReqTask.mRquestTag, null, mActivity.getString(R.string.Error_Server_Wait));
         }
     }
 

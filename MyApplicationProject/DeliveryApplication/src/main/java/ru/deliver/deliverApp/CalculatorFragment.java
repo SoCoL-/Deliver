@@ -3,6 +3,7 @@ package ru.deliver.deliverApp;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -71,7 +72,7 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
 		Button mCalculate	= (Button)view.findViewById(R.id.Calc_calculate);
 
 		String[] towns = getActivity().getResources().getStringArray(R.array.towns);
-		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, towns);
+		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, towns);
 		String[] weights = getActivity().getResources().getStringArray(R.array.weights);
 		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, weights);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -81,6 +82,26 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
 
         mNetManager = new NetManager(getActivity());
         mNetManager.setInterface(this);
+
+        mFrom.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent)
+            {
+                mFrom.showDropDown();
+                return false;
+            }
+        });
+
+        mTo.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent)
+            {
+                mTo.showDropDown();
+                return false;
+            }
+        });
 
 		mCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
 		{

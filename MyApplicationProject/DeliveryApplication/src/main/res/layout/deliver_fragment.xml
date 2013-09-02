@@ -57,7 +57,8 @@
         android:text="@string/Btn_Update"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:textSize="22sp"/>
+        android:textSize="22sp"
+        android:visibility="gone"/>
 
     <ListView
             android:id="@+id/Deliver_List"

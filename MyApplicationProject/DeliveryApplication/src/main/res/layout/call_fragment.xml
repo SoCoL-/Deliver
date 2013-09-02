@@ -25,17 +25,6 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical">
 
-            <!--<TextView
-                    android:id="@+id/Call_Date"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="20dip"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:textColor="@color/black"
-                    android:hint="@string/Call_DatePicker"
-                    android:textSize="20sp"/>-->
-
             <Button
                     android:id="@+id/Call_Date"
                     android:layout_height="wrap_content"
@@ -162,7 +151,9 @@
                     android:layout_marginTop="10dip"
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
+                    android:imeOptions="actionNext"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:hint="@string/Calculator_Auto1"/>
 
             <AutoCompleteTextView
@@ -172,7 +163,9 @@
                     android:layout_marginTop="10dip"
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
+                    android:imeOptions="actionNext"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:hint="@string/Calculator_Auto2"/>
 
             <TextView

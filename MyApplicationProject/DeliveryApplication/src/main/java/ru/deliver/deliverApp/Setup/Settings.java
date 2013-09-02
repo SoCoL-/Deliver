@@ -1,5 +1,10 @@
 package ru.deliver.deliverApp.Setup;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v4.app.FragmentActivity;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,6 +52,7 @@ public final class Settings
     public static final String CITY_ERROR = "CITY_ERROR";
     public static final String WEIGHT_ERROR = "WEIGHT_ERROR";
     public static final String DATA_ERROR = "DATA_ERROR";
+    public static final String DEPARTURE_ERROR = "ERROR_DEPARTURE";
 
     //Текст сообщений
     public static final String INFO_RUBLES = " руб.";
@@ -91,6 +97,33 @@ public final class Settings
         else
         {
             return "";
+        }
+    }
+
+    public static boolean isInternet(FragmentActivity a)
+    {
+        try
+        {
+            /*ConnectivityManager nInfo = (ConnectivityManager) a.getSystemService(Context.CONNECTIVITY_SERVICE);
+            nInfo.getActiveNetworkInfo().isConnectedOrConnecting();*/
+
+            ConnectivityManager cm = (ConnectivityManager) a.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnectedOrConnecting())
+            {
+                Logs.i("Internet is ON");
+                return true;
+            }
+            else
+            {
+                Logs.i("Internet is OFF");
+                return false;
+            }
+        }
+        catch (Exception e)
+        {
+            Logs.e("Error: Internet is OFF");
+            return false;
         }
     }
 

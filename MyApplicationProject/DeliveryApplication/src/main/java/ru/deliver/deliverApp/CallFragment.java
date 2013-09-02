@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -23,7 +24,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import ru.deliver.deliverApp.DateBase.DBHelper;
 import ru.deliver.deliverApp.Network.AnswerServer;
 import ru.deliver.deliverApp.Network.NetManager;
 import ru.deliver.deliverApp.Setup.Logs;
@@ -113,6 +113,26 @@ public class CallFragment extends Fragment implements AnswerServer
 		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, weights);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mWeight.setAdapter(adapter2);
+
+        mFrom.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent)
+            {
+                mFrom.showDropDown();
+                return false;
+            }
+        });
+
+        mTo.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent)
+            {
+                mTo.showDropDown();
+                return false;
+            }
+        });
 
 		mCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
 		{

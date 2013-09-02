@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import ru.deliver.deliverApp.Setup.Logs;
 import ru.deliver.deliverApp.Utils.Favourite;
 import ru.deliver.deliverApp.Utils.InfoFavouriteItem;
+import ru.deliver.deliverApp.Utils.Offices;
+import ru.deliver.deliverApp.Utils.OfficesAdd;
 
 /**
  * Created by Evgenij on 27.08.13.
@@ -30,6 +32,17 @@ public class DBHelper extends SQLiteOpenHelper
     private static final String TABLE_FAVOURITE_INFOITEM    = "FavouriteInfoItem_Table";
     private static final String COLUMN_DATE_TIME            = "date_time";
     private static final String COLUMN_DESCRIPTION          = "description";
+
+    private static final String TABLE_CONTACTS          = "Contacts_Table";
+    private static final String COLUMN_CITY             = "_city";
+
+    private static final String TABLE_CONTACTS_INFO     = "ContactsInfo_Table";
+    private static final String COLUMN_NAME             = "_name";
+    private static final String COLUMN_PHONE            = "_phone";
+    private static final String COLUMN_ADDRESS          = "_address";
+    private static final String COLUMN_EMAIL            = "_email";
+    private static final String COLUMN_FAX              = "_fax";
+
 
     private SQLiteDatabase mDB;
 
@@ -62,6 +75,27 @@ public class DBHelper extends SQLiteOpenHelper
                 + "REFERENCES " + TABLE_FAVOURITE + " (" + COLUMN_NUMBER + " )" +
                 ")";
         sqLiteDatabase.execSQL(CREATE_FAV_INFOITEM_TABLE);
+
+        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS +
+                "("
+                + COLUMN_CITY + " TEXT,"
+                + "PRIMARY KEY (" + COLUMN_CITY + ")" +
+                ")";
+        sqLiteDatabase.execSQL(CREATE_CONTACTS_TABLE);
+
+        String CREATE_CONTACTS_INFO_TABLE = "CREATE TABLE " + TABLE_CONTACTS_INFO +
+                "("
+                + COLUMN_CITY + " TEXT,"
+                + COLUMN_NAME + " TEXT,"
+                + COLUMN_ADDRESS + " TEXT,"
+                + COLUMN_PHONE + " TEXT,"
+                + COLUMN_EMAIL + " TEXT,"
+                + COLUMN_FAX + " TEXT,"
+                + "PRIMARY KEY (" + COLUMN_ADDRESS + ") ,"
+                + "FOREIGN KEY (" + COLUMN_CITY + " )"
+                + "REFERENCES " + TABLE_CONTACTS + " (" + COLUMN_CITY + " )" +
+                ")";
+        sqLiteDatabase.execSQL(CREATE_CONTACTS_INFO_TABLE);
     }
 
     @Override
@@ -69,6 +103,8 @@ public class DBHelper extends SQLiteOpenHelper
     {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVOURITE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVOURITE_INFOITEM);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS_INFO);
         onCreate(sqLiteDatabase);
     }
 
@@ -83,6 +119,18 @@ public class DBHelper extends SQLiteOpenHelper
             mDB.close();
     }
 
+    /**
+     * Для перезаписи филиалов базу надо очистить
+     * */
+    public void deleteContacts()
+    {
+        mDB.delete(TABLE_CONTACTS, null, null);
+        mDB.delete(TABLE_CONTACTS_INFO, null, null);
+    }
+
+    /**
+     * Добавляем избранное в БД
+     * */
     public void addFav(Favourite f)
     {
         Logs.i("Add new FAV");
@@ -94,6 +142,9 @@ public class DBHelper extends SQLiteOpenHelper
         mDB.insert(TABLE_FAVOURITE, null, values);
     }
 
+    /**
+     * Добавляем информацию избранного в БД
+     * */
     public void addFavInfo(String fav_number, InfoFavouriteItem ifi)
     {
         Logs.i("Add new FAVINFO");
@@ -106,20 +157,49 @@ public class DBHelper extends SQLiteOpenHelper
         mDB.insert(TABLE_FAVOURITE_INFOITEM, null, values);
     }
 
+    /**
+     * Добавляем филиал в БД
+     * */
+    public void addContact(Offices o)
+    {
+        Logs.i("Add new OFFICES");
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_CITY, o.getCity());
+
+        mDB.insert(TABLE_CONTACTS, null, values);
+    }
+
+    /**
+     * Добавляем информацию филиала в БД
+     * */
+    public void addContactInfo(String city, OfficesAdd oa)
+    {
+        Logs.i("Add new OFFICES_ADD");
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_CITY, city);
+        values.put(COLUMN_NAME, oa.getName());
+        values.put(COLUMN_ADDRESS, oa.getAddress());
+        values.put(COLUMN_PHONE, oa.getPhone());
+        values.put(COLUMN_EMAIL, oa.getEMail());
+        values.put(COLUMN_FAX, oa.getFax());
+
+        mDB.insert(TABLE_CONTACTS_INFO, null, values);
+    }
+
+    /**
+     * Поиск всех избранных в БД
+     * */
     public ArrayList<Favourite> findAllFavourites()
     {
         ArrayList<Favourite> rez = new ArrayList<Favourite>();
 
         if(mDB == null)
-            return null;
+            return rez;
 
         Logs.i("Find all FAVS");
         Cursor c = mDB.rawQuery("select * from Favourite_Table", null);
         if(c == null)
-            return null;
-
-        Logs.i("cursor.getColumnCount() = " + c.getColumnCount());
-        Logs.i("cursor.getCount() = " + c.getCount());
+            return rez;
 
         if(c.moveToFirst())
         {
@@ -143,16 +223,51 @@ public class DBHelper extends SQLiteOpenHelper
         return rez;
     }
 
+    /**
+     * Поиск всех филиалов в БД, если отсутствует интернет
+     * */
+    public ArrayList<Offices> findAllContacts()
+    {
+        ArrayList<Offices> contacts = new ArrayList<Offices>();
+        if(mDB == null)
+            return contacts;
+
+        Logs.i("Find all Contacts");
+        Cursor c = mDB.rawQuery("select * from Contacts_Table", null);
+        if(c == null)
+            return contacts;
+
+        if(c.moveToFirst())
+        {
+            do
+            {
+                Offices o = new Offices();
+                o.setCity(c.getString(0));
+                o.setContacts(findAllContactInfo(c.getString(0)));
+                contacts.add(o);
+            }
+            while (c.moveToNext());
+            c.close();
+        }
+
+        Logs.i("After find Contacts: contacts.length() = " + contacts.size());
+
+        return contacts;
+    }
+
+    /**
+     * Поиск информации избранного в БД
+     * */
     public ArrayList<InfoFavouriteItem> findFavInfo(String fav_number)
     {
+        ArrayList<InfoFavouriteItem> rez = new ArrayList<InfoFavouriteItem>();
+
         if(mDB == null)
-            return null;
+            return rez;
 
         Cursor c = mDB.rawQuery("select * from FavouriteInfoItem_Table where number like '" + fav_number + "' ", null);
         if(c == null)
-            return null;
-
-        ArrayList<InfoFavouriteItem> rez = new ArrayList<InfoFavouriteItem>();
+            return rez;
 
         if(c.moveToFirst())
         {
@@ -173,6 +288,45 @@ public class DBHelper extends SQLiteOpenHelper
         return rez;
     }
 
+    /**
+     * Поиск информации о филиале
+     * */
+    public ArrayList<OfficesAdd> findAllContactInfo(String city)
+    {
+        ArrayList<OfficesAdd> contactInfo = new ArrayList<OfficesAdd>();
+
+        if(mDB == null)
+            return contactInfo;
+
+        Logs.i("city = " + city);
+        Cursor c = mDB.rawQuery("select * from ContactsInfo_Table where _city like '" + city + "' ", null);
+        if(c == null)
+            return contactInfo;
+
+        if(c.moveToFirst())
+        {
+            do
+            {
+                OfficesAdd oa = new OfficesAdd();
+                oa.setName(c.getString(1));
+                oa.setAddress(c.getString(2));
+                oa.setPhone(c.getString(3));
+                oa.setEMail(c.getString(4));
+                oa.setFax(c.getString(5));
+                contactInfo.add(oa);
+            }
+            while (c.moveToNext());
+            c.close();
+        }
+
+        Logs.i("After find ContactsInfo: contactInfo.length() = " + contactInfo.size());
+
+        return contactInfo;
+    }
+
+    /**
+     * Удаление избранного из БД
+     * */
     public boolean deleteFav(String fav_number)
     {
         if(mDB == null)
@@ -183,14 +337,6 @@ public class DBHelper extends SQLiteOpenHelper
         ArrayList<InfoFavouriteItem> buf = findFavInfo(fav_number);
         Logs.i("buf.size() = " + buf.size());
 
-        /*for(InfoFavouriteItem ifi : buf)
-        {
-            //String datetime = ifi.getDate() + " " + ifi.getTime();
-            int delCount = mDB.delete(TABLE_FAVOURITE_INFOITEM, COLUMN_DESCRIPTION + "='" + ifi.getDescription()+"'", null);
-            Logs.i("Delete favs infos = " + delCount + " by description = " + ifi.getDescription());
-        }*/
-
-
         int delCount = mDB.delete(TABLE_FAVOURITE_INFOITEM, COLUMN_NUMBER + "='" + fav_number+"'", null);
         Logs.i("Delete favs infos = " + delCount);
         int delFavCount = mDB.delete(TABLE_FAVOURITE, COLUMN_NUMBER + "='" + fav_number+"'", null);
@@ -198,19 +344,4 @@ public class DBHelper extends SQLiteOpenHelper
 
         return true;
     }
-
-    /*public boolean updateFav(int fav_number, InfoFavouriteItem ifi)
-    {
-        if(mDB == null)
-            return false;
-
-        ContentValues values = new ContentValues();
-        String date_time = ifi.getDate() + " " + ifi.getTime();
-        values.put(COLUMN_DATE_TIME, date_time);
-        values.put(COLUMN_DESCRIPTION, ifi.getDescription());
-
-        int updCount = mDB.update(TABLE_FAVOURITE_INFOITEM, values, , null);
-
-        return true;
-    }*/
 }

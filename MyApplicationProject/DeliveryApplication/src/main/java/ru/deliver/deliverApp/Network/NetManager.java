@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ru.deliver.deliverApp.DateBase.DBHelper;
 import ru.deliver.deliverApp.Main;
 import ru.deliver.deliverApp.R;
 import ru.deliver.deliverApp.Setup.Logs;
@@ -117,17 +118,37 @@ public final class NetManager implements IProgress
 
     public void sendOffices()
     {
-        HashMap<String, String> items = new HashMap<String, String>();
-        items.put("get", "1"); // <----- ????????
+        if(((Main)mActivity).isInternet)  //Если есть интернет, то запросим список филиалов у сервака
+        {
+            HashMap<String, String> items = new HashMap<String, String>();
+            items.put("get", "1"); // <----- ????????
 
-        JSONObject object = new JSONObject(items);
-        Logs.i("json = " + object.toString());
+            JSONObject object = new JSONObject(items);
+            Logs.i("json = " + object.toString());
 
-        Logs.i("Start task");
-        Request request = new Request(new RequestTask(Settings.REQ_TAG_OFFI, object), mActivity);
-        request.setInterface(this);
-        Logs.i("execute");
-        request.execute();
+            Logs.i("Start task");
+            Request request = new Request(new RequestTask(Settings.REQ_TAG_OFFI, object), mActivity);
+            request.setInterface(this);
+            Logs.i("execute");
+            request.execute();
+        }
+        else        //Если нет инета, то запросим список филиалов у БД
+        {
+            new Thread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    DBHelper helper = new DBHelper(mActivity, null);
+                    helper.openDB();
+
+                    ((Main)mActivity).mOffices = helper.findAllContacts();
+
+                    helper.closeDB();
+
+                }
+            }).start();
+        }
     }
 
     @Override
@@ -216,6 +237,11 @@ public final class NetManager implements IProgress
                         String text = Settings.convertStreamToString(task.mJSON);
                         Logs.i("text="+text);
                         text = text.trim();
+                        if(text.equals(Settings.DEPARTURE_ERROR))
+                        {
+                            Logs.i("Settings.DEPARTURE_ERROR");
+                            mAnswer.ResponceError(task.mResponceTag, mActivity.getString(R.string.Error_Server_Departure));
+                        }
                         Logs.i("text="+text);
                         JSONArray jsons = new JSONArray(text);
                         ArrayList<Favourite> mDepartures = new ArrayList<Favourite>();
@@ -298,7 +324,7 @@ public final class NetManager implements IProgress
                                                 OfficesAdd oa = new OfficesAdd();
                                                 oa.setAddress(info.getString("address"));
                                                 oa.setEMail(info.getString("email"));
-                                                oa.setFax(getString(info, "key"));
+                                                oa.setFax(getString(info, "fax"));
                                                 oa.setName(info.getString("name"));
                                                 oa.setPhone(info.getString("phone"));
                                                 offInfo.add(oa);
@@ -309,6 +335,28 @@ public final class NetManager implements IProgress
                                     }
 
                                     ((Main)mActivity).mOffices = mOffices;
+
+                                    if(((Main)mActivity).isInternet)
+                                    {
+                                        Logs.i("Save CONTACTS to BD");
+                                        DBHelper helper = new DBHelper(mActivity, null);
+                                        helper.openDB();
+                                        helper.deleteContacts();
+
+                                        //Сохраним автоматически все филиалы в БД
+                                        for(Offices o : mOffices)
+                                        {
+                                            Logs.i("Save contact");
+                                            helper.addContact(o);
+                                            for(OfficesAdd oa : o.getContacts())
+                                            {
+                                                Logs.i("Save contactInfo");
+                                                helper.addContactInfo(o.getCity(), oa);
+                                            }
+                                        }
+
+                                        helper.closeDB();
+                                    }
                                 }
                             }
                             catch (IOException e)
@@ -324,7 +372,11 @@ public final class NetManager implements IProgress
                 }
             }
             else
+            {
+                if(task.mResponceCode == -1)
+                    ((Main)mActivity).isInternet = false;
                 mAnswer.ResponceError(task.mResponceTag, task.mErrorText);
+            }
         }
     }
 

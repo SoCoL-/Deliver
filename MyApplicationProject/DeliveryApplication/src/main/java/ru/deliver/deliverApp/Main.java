@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import ru.deliver.deliverApp.Network.AnswerServer;
 import ru.deliver.deliverApp.Network.NetManager;
 import ru.deliver.deliverApp.Setup.Logs;
+import ru.deliver.deliverApp.Setup.Settings;
 import ru.deliver.deliverApp.Utils.Favourite;
 import ru.deliver.deliverApp.Utils.MyFragmentTabHost;
 import ru.deliver.deliverApp.Utils.Offices;
@@ -63,11 +64,11 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 	private Fragment secondLevelFr;
 
     public ArrayList<Favourite> mFavourites;    //Список избранных отправлений из БД
-    public ArrayList<Favourite> mFavDepartures; //Список отправлений для отслеживания состояний их
     public Favourite mBufDeparture;             //Полученное от сервака отправление по номеру
     public ArrayList<Offices> mOffices;         //Список филиалов
 
     private NetManager mNetManager;
+    public boolean isInternet = true;           //Флаг наличия интернета на телефоне
 
 	//---------------------------------
 	//SUPER
@@ -79,6 +80,8 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 		super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
+
+        isInternet = Settings.isInternet(this);
 
         mFragment1 = new DeliverFragment();
         mFragment2 = new CalculatorFragment();
@@ -270,10 +273,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 	}
 
     @Override
-    public void ResponceOK(String TAG, ArrayList<String> params)
-    {
-
-    }
+    public void ResponceOK(final String TAG, final ArrayList<String> params)   {  }
 
     @Override
     public void ResponceError(String TAG, final String text)

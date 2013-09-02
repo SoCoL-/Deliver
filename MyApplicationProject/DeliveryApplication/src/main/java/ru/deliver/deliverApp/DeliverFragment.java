@@ -23,6 +23,7 @@ import ru.deliver.deliverApp.DateBase.DBHelper;
 import ru.deliver.deliverApp.Network.AnswerServer;
 import ru.deliver.deliverApp.Network.NetManager;
 import ru.deliver.deliverApp.Setup.Logs;
+import ru.deliver.deliverApp.Setup.Settings;
 import ru.deliver.deliverApp.Utils.EditWithDrawable;
 import ru.deliver.deliverApp.Utils.Favourite;
 import ru.deliver.deliverApp.Utils.InfoFavouriteItem;
@@ -50,6 +51,7 @@ public class DeliverFragment extends Fragment implements AnswerServer
     private NetManager mNetManager;
     private ProgressDialog mPD;
     private boolean isUpdate;
+    private String bufNumber;
 
 	//---------------------------------
 	//SUPER
@@ -118,6 +120,7 @@ public class DeliverFragment extends Fragment implements AnswerServer
                     isUpdate = false;
                     ArrayList<String> items = new ArrayList<String>(1);
                     items.add(mEdit.getText().toString());
+                    bufNumber = mEdit.getText().toString();
                     mNetManager.sendDeparture(items);
 
                     InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -172,15 +175,18 @@ public class DeliverFragment extends Fragment implements AnswerServer
     }
 
     @Override
-    public void ResponceError(String TAG, final String text)
+    public void ResponceError(final String TAG, final String text)
     {
         getActivity().runOnUiThread(new Runnable()
         {
             @Override
             public void run()
             {
-                mPD.dismiss();
-                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+                if(TAG.equals(Settings.REQ_TAG_DEPA))
+                {
+                    mPD.dismiss();
+                    Toast.makeText(getActivity(), text + " " + bufNumber, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

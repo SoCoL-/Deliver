@@ -47,6 +47,7 @@
                     android:imeOptions="actionNext"
                     android:hint="@string/Calculator_Auto1"
                     android:inputType="text"
+                    android:textColor="@color/black"
                     android:textSize="20sp"/>
 
             <AutoCompleteTextView
@@ -59,6 +60,7 @@
                     android:imeOptions="actionDone"
                     android:hint="@string/Calculator_Auto2"
                     android:inputType="text"
+                    android:textColor="@color/black"
                     android:textSize="20sp"/>
 
             <TextView

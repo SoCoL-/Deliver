@@ -1,5 +1,6 @@
 package ru.deliver.deliverApp.Adapters;
 
+import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +23,14 @@ public class ExpandAdapter extends BaseExpandableListAdapter
     private ArrayList<ArrayList<OfficesAdd>> mItems;
     private ArrayList<String> mNames;
     private LayoutInflater mInflater;
+    private Context mContext;
 
     public ExpandAdapter(FragmentActivity fa)
     {
         mItems = new ArrayList<ArrayList<OfficesAdd>>();
         mNames = new ArrayList<String>();
         mInflater = LayoutInflater.from(fa);
+        mContext = fa;
     }
 
     public void addItems(ArrayList<ArrayList<OfficesAdd>> items, ArrayList<String> names)
@@ -114,23 +117,23 @@ public class ExpandAdapter extends BaseExpandableListAdapter
         if(mItems.get(groupPosition).get(childPosition).getName() != null && mItems.get(groupPosition).get(childPosition).getName().length() > 0)
             ((TextView)convertView.findViewById(R.id.child_name)).setText(mItems.get(groupPosition).get(childPosition).getName());
         else
-            ((TextView)convertView.findViewById(R.id.child_name)).setVisibility(View.GONE);
+            ((TextView)convertView.findViewById(R.id.child_name)).setText("");
         if(mItems.get(groupPosition).get(childPosition).getPhone() != null && mItems.get(groupPosition).get(childPosition).getPhone().length() > 0)
-            ((TextView)convertView.findViewById(R.id.child_phone)).setText(mItems.get(groupPosition).get(childPosition).getPhone());
+            ((TextView)convertView.findViewById(R.id.child_phone)).setText(mContext.getString(R.string.Info_Exp_Phone) + mItems.get(groupPosition).get(childPosition).getPhone());
         else
-            ((TextView)convertView.findViewById(R.id.child_phone)).setVisibility(View.GONE);
+            ((TextView)convertView.findViewById(R.id.child_phone)).setText(mContext.getString(R.string.Info_Exp_Phone) + " - ");
         if(mItems.get(groupPosition).get(childPosition).getAddress() != null && mItems.get(groupPosition).get(childPosition).getAddress().length() > 0)
-            ((TextView)convertView.findViewById(R.id.child_address)).setText(mItems.get(groupPosition).get(childPosition).getAddress());
+            ((TextView)convertView.findViewById(R.id.child_address)).setText(mContext.getString(R.string.Info_Exp_Address) + mItems.get(groupPosition).get(childPosition).getAddress());
         else
-            ((TextView)convertView.findViewById(R.id.child_address)).setVisibility(View.GONE);
+            ((TextView)convertView.findViewById(R.id.child_address)).setText(mContext.getString(R.string.Info_Exp_Address) + " - ");
         if(mItems.get(groupPosition).get(childPosition).getEMail() != null && mItems.get(groupPosition).get(childPosition).getEMail().length() > 0)
-            ((TextView)convertView.findViewById(R.id.child_email)).setText(mItems.get(groupPosition).get(childPosition).getEMail());
+            ((TextView)convertView.findViewById(R.id.child_email)).setText(mContext.getString(R.string.Info_Exp_Email) + mItems.get(groupPosition).get(childPosition).getEMail());
         else
-            ((TextView)convertView.findViewById(R.id.child_email)).setVisibility(View.GONE);
+            ((TextView)convertView.findViewById(R.id.child_email)).setText(mContext.getString(R.string.Info_Exp_Email) + " - ");
         if(mItems.get(groupPosition).get(childPosition).getFax() != null && mItems.get(groupPosition).get(childPosition).getFax().length() > 0)
-            ((TextView)convertView.findViewById(R.id.child_fax)).setText(mItems.get(groupPosition).get(childPosition).getFax());
+            ((TextView)convertView.findViewById(R.id.child_fax)).setText(mContext.getString(R.string.Info_Exp_Fax) + mItems.get(groupPosition).get(childPosition).getFax());
         else
-            ((TextView)convertView.findViewById(R.id.child_fax)).setVisibility(View.GONE);
+            ((TextView)convertView.findViewById(R.id.child_fax)).setText(mContext.getString(R.string.Info_Exp_Fax) + " - ");
 
         return convertView;
     }
