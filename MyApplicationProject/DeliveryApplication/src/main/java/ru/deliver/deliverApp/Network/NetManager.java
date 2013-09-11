@@ -169,7 +169,12 @@ public final class NetManager implements IProgress
                         text = text.trim();
                         Logs.i("length = "+text.length());
                         Logs.i("CITY_ERROR length = "+Settings.CITY_ERROR.length());
-                        if(text.equals(Settings.CITY_ERROR))
+                        if(text.equals(""))
+                        {
+                            Logs.i("Nothing");
+                            mAnswer.ResponceError(task.mResponceTag, "Error");
+                        }
+                        else if(text.equals(Settings.CITY_ERROR))
                         {
                             Logs.i("Settings.CITY_ERROR");
                             mAnswer.ResponceError(task.mResponceTag, mActivity.getString(R.string.Error_Server_City));

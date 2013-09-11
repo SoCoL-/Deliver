@@ -2,6 +2,7 @@ package ru.deliver.deliverApp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 import ru.deliver.deliverApp.Network.AnswerServer;
 import ru.deliver.deliverApp.Network.NetManager;
+import ru.deliver.deliverApp.Setup.Logs;
 import ru.deliver.deliverApp.Setup.Settings;
 
 /**
@@ -194,6 +196,7 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
     @Override
     public void ResponceError(String TAG, final String text)
     {
+        Logs.e("Error in send; text = " + text);
         getActivity().runOnUiThread(new Runnable()
         {
             @Override

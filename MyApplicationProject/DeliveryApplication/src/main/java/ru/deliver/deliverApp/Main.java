@@ -190,7 +190,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 				return findViewById(android.R.id.tabcontent);
 			}
 		});
-		spec.setIndicator(createTabView(getString(R.string.Tab2_Name), R.drawable.ic_launcher));
+		spec.setIndicator(createTabView(getString(R.string.Tab2_Name), R.drawable.ic_menu_calc));
 		mTabHost.addTab(spec, CalculatorFragment.class, null);
 
 		spec = mTabHost.newTabSpec(TAB3);
@@ -223,6 +223,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 		View view = LayoutInflater.from(this).inflate(R.layout.tab, null);
 		ImageView iv = (ImageView)view.findViewById(R.id.tab_icon);
 		iv.setImageDrawable(getResources().getDrawable(resID));
+        ((TextView)view.findViewById(R.id.tab_text)).setTextSize(10);
 		((TextView)view.findViewById(R.id.tab_text)).setText(text);
 		return view;
 	}

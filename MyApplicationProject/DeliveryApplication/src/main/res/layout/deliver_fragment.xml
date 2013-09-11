@@ -4,7 +4,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-        android:background="@color/yellow">
+              android:background="@color/gray_blue">
 
     <TextView
             android:layout_width="match_parent"
@@ -16,36 +16,28 @@
             android:textStyle="bold"
             android:text="@string/Delivery_Name"/>
 
-    <RelativeLayout
-            android:layout_height="wrap_content"
+    <ru.deliver.deliverApp.Utils.EditWithDrawable
+            android:id="@+id/Deliver_number"
             android:layout_width="match_parent"
-            android:layout_gravity="center">
+            android:layout_height="50dip"
+            android:layout_margin="10dip"
+            android:drawableRight="@android:drawable/ic_delete"
+            android:hint="@string/Delivery_Hint"
+            android:textSize="22sp"
+            android:lines="1"
+            android:imeOptions="actionDone"
+            android:inputType="text|number"/>
 
-        <ru.deliver.deliverApp.Utils.EditWithDrawable
-                android:id="@+id/Deliver_number"
-                android:layout_width="match_parent"
-                android:layout_height="50dip"
-                android:layout_toLeftOf="@+id/Deliver_find"
-                android:layout_margin="10dip"
-                android:drawableRight="@android:drawable/ic_delete"
-                android:textSize="22sp"
-                android:lines="1"
-                android:imeOptions="actionDone"
-                android:inputType="text|number"/>
-
-        <Button
-                android:id="@+id/Deliver_find"
-                android:layout_height="50dip"
-                android:layout_width="120dip"
-                android:layout_alignParentRight="true"
-                android:layout_margin="10dip"
-                android:background="@drawable/red_button"
-                android:text="@string/Btn_Show"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="22sp"/>
-
-    </RelativeLayout>
+    <Button
+            android:id="@+id/Deliver_find"
+            android:layout_height="50dip"
+            android:layout_width="match_parent"
+            android:layout_margin="10dip"
+            android:background="@drawable/red_button"
+            android:text="@string/Btn_Show"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="22sp"/>
 
     <Button
         android:id="@+id/Deliver_update"

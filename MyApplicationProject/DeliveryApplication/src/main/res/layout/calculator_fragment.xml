@@ -4,7 +4,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-        android:background="@color/yellow">
+        android:background="@color/gray_blue">
 
     <TextView
             android:layout_width="match_parent"
@@ -139,6 +139,7 @@
                     android:layout_marginTop="10dip"
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
+                    android:layout_marginBottom="10dip"
                     android:textSize="26sp"
                     android:textColor="@color/white"
                     android:text="@string/Calculator_Button"/>
