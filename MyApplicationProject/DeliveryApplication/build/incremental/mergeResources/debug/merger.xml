@@ -4,9 +4,29 @@
     <dataSet config="main" >
         <source path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res" >
             <file
+                name="gradient"
+                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\drawable\gradient.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="red_button"
+                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\drawable\red_button.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
                 name="tab_style"
                 path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\drawable\tab_style.xml"
                 qualifiers=""
+                type="drawable" />
+            <file
+                name="text_background"
+                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\drawable\text_background.xml"
+                qualifiers=""
+                type="drawable" />
+            <file
+                name="arrow"
+                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\drawable-hdpi\arrow.png"
+                qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
@@ -14,9 +34,19 @@
                 qualifiers="hdpi"
                 type="drawable" />
             <file
+                name="arrow"
+                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\drawable-mdpi\arrow.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
                 name="ic_launcher"
                 path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\drawable-mdpi\ic_launcher.png"
                 qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="arrow"
+                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\drawable-xhdpi\arrow.png"
+                qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
@@ -49,6 +79,16 @@
                 qualifiers=""
                 type="layout" />
             <file
+                name="deliv_info_content"
+                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\layout\deliv_info_content.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="fav_item"
+                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\layout\fav_item.xml"
+                qualifiers=""
+                type="layout" />
+            <file
                 name="main"
                 path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\layout\main.xml"
                 qualifiers=""
@@ -64,8 +104,15 @@
                 qualifiers=""
                 type="layout" />
             <file
+                name="text_pic_adapter"
+                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\layout\text_pic_adapter.xml"
+                qualifiers=""
+                type="layout" />
+            <file
                 path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\values\color.xml"
                 qualifiers="" >
+                <color name="dark_red" >#7F0000
+                </color>
                 <color name="lime" >#00FF00
                 </color>
                 <color name="silver" >#C0C0C0
@@ -86,11 +133,11 @@
                 </color>
                 <color name="yellow" >#FFFF00
                 </color>
-                <color name="fuchsia" >#FF00FF
+                <color name="maroon" >#800000
                 </color>
                 <color name="olive" >#808000
                 </color>
-                <color name="maroon" >#800000
+                <color name="fuchsia" >#FF00FF
                 </color>
                 <color name="white" >#FFFFFF
                 </color>
@@ -112,31 +159,40 @@
                 qualifiers="" >
                 <string name="Calculator_Button" >Расчитать
                 </string>
-                <string name="Btn_Show" >Показать
+                <string name="Calculator_Auto1" >Откуда
                 </string>
-                <string name="DeliveryInfo_Text1" >№ отправления
+                <string name="Calculator_Auto3" >Вес
                 </string>
-                <string name="DeliveryInfo_Text3" >Куда
+                <string name="DeliveryInfo_Button" >В избранное
                 </string>
-                <string name="Calculator_Spinner2" >Куда
+                <string name="Calculator_Auto2" >Куда
                 </string>
-                <string name="DeliveryInfo_Text2" >Откуда
-                </string>
-                <string name="Calculator_Spinner3" >Вес
-                </string>
-                <string name="Call_Name" >Вызов курьера
-                </string>
+
+                <string-array name="towns" >
+                    <item>
+Красноярск
+                    </item>
+                    <item>
+Новосибирск
+                    </item>
+                    <item>
+Москва
+                    </item>
+                    <item>
+Санкт-Петербург
+                    </item>
+                    <item>
+Кемерово
+                    </item>
+                </string-array>
+
                 <string name="Offices_Name" >Отделения
                 </string>
-                <string name="Calculator_Spinner1" >Откуда
-                </string>
-                <string name="Calculator_EditHint3" >Высота
-                </string>
-                <string name="Calculator_EditHint2" >Ширина
+                <string name="Btn_Update" >Обновить
                 </string>
                 <string name="Delivery_Name" >Отправления
                 </string>
-                <string name="Calculator_EditHint1" >Длина
+                <string name="Error_Server_Weight" >Объемный вес превышает 100 кг. Цены таких отправлений расчитываются по согласованию.
                 </string>
                 <string name="Call_DatePicker" >Дата прибытия
                 </string>
@@ -146,66 +202,392 @@
                 </string>
                 <string name="Call_TimePicker" >Время прибытия
                 </string>
-                <string name="Call_EditPhone" >Контактный телефон
-                </string>
-                <string name="Call_EditComment" >Комментарий
-                </string>
                 <string name="Tab2_Name" >Калькулятор
-                </string>
-                <string name="hello_world" >Hello world!
-                </string>
-                <string name="Call_EditEmail" >E-Mail
-                </string>
-                <string name="FavState_Send" >Отправлено
-                </string>
-                <string name="Tab1_Name" >Отправления
-                </string>
-                <string name="Calculator_CheckParcel" >Посылка
                 </string>
                 <string name="Call_Button" >Отправить
                 </string>
                 <string name="Tab3_Name" >Вызов курьера
                 </string>
-                <string name="Calculator_CheckLetter" >Письмо
-                </string>
-                <string name="DeliveryInfo_Name" >Детали отправления
-                </string>
                 <string name="Call_EditAdress" >Адрес
                 </string>
                 <string name="Offices_Info" >Единая справочная служба 8–800–4783899
                 </string>
-                <string name="app_name" >DeliveryCompany
-                </string>
-                <string name="FavState_Cancel" >Возврат клиенту
+                <string name="Menu_Delete" >Удалить
                 </string>
                 <string name="Tab4_Name" >Отделения
                 </string>
                 <string name="Calculator_Name" >Калькулятор
                 </string>
+                <string name="Info_FavAdd" >Отправление добавлено в список избранных.
+                </string>
+                <string name="Btn_Show" >Показать
+                </string>
+                <string name="Error_Server_City" >Стоимость такого отправления уточняйте у менеджеров компании.
+                </string>
+                <string name="DeliveryInfo_Text1" >№ отправления
+                </string>
+                <string name="Error_Server" >Ошибка сервера 
+                </string>
+                <string name="DeliveryInfo_Text3" >Куда
+                </string>
+                <string name="DeliveryInfo_Text2" >Откуда
+                </string>
+                <string name="Error_Server_Wait" >Превышение ожидания ответа. Возможно что-то произошло с сервером. Попробуйте позже отправить запрос.
+                </string>
+                <string name="Call_Name" >Вызов курьера
+                </string>
+                <string name="Calculator_EditHint3" >Высота
+                </string>
+                <string name="Menu_Title" >Меню
+                </string>
+                <string name="Calculator_EditHint2" >Ширина
+                </string>
+                <string name="Calculator_EditHint1" >Длина
+                </string>
+                <string name="Error_FavExist" >Такой перевод уже находится в избранном.
+                </string>
+                <string name="Call_EditPhone" >Контактный телефон
+                </string>
+                <string name="Call_EditComment" >Комментарий
+                </string>
+                <string name="hello_world" >Hello world!
+                </string>
+                <string name="Error_FillFields" >Пожалуйста, заполните все поля формы.
+                </string>
+                <string name="Error_Server_Data" >Извините, данных не найдено.
+                </string>
+                <string name="Call_EditEmail" >E-Mail
+                </string>
+
+                <string-array name="weights" >
+                    <item>
+1
+                    </item>
+                    <item>
+2
+                    </item>
+                    <item>
+3
+                    </item>
+                    <item>
+4
+                    </item>
+                    <item>
+5
+                    </item>
+                    <item>
+6
+                    </item>
+                    <item>
+7
+                    </item>
+                    <item>
+8
+                    </item>
+                    <item>
+9
+                    </item>
+                    <item>
+10
+                    </item>
+                    <item>
+11
+                    </item>
+                    <item>
+12
+                    </item>
+                    <item>
+13
+                    </item>
+                    <item>
+14
+                    </item>
+                    <item>
+15
+                    </item>
+                    <item>
+16
+                    </item>
+                    <item>
+17
+                    </item>
+                    <item>
+18
+                    </item>
+                    <item>
+19
+                    </item>
+                    <item>
+20
+                    </item>
+                    <item>
+21
+                    </item>
+                    <item>
+22
+                    </item>
+                    <item>
+23
+                    </item>
+                    <item>
+24
+                    </item>
+                    <item>
+25
+                    </item>
+                    <item>
+26
+                    </item>
+                    <item>
+27
+                    </item>
+                    <item>
+28
+                    </item>
+                    <item>
+29
+                    </item>
+                    <item>
+30
+                    </item>
+                    <item>
+31
+                    </item>
+                    <item>
+32
+                    </item>
+                    <item>
+33
+                    </item>
+                    <item>
+34
+                    </item>
+                    <item>
+35
+                    </item>
+                    <item>
+36
+                    </item>
+                    <item>
+37
+                    </item>
+                    <item>
+38
+                    </item>
+                    <item>
+39
+                    </item>
+                    <item>
+40
+                    </item>
+                    <item>
+41
+                    </item>
+                    <item>
+42
+                    </item>
+                    <item>
+43
+                    </item>
+                    <item>
+44
+                    </item>
+                    <item>
+45
+                    </item>
+                    <item>
+46
+                    </item>
+                    <item>
+47
+                    </item>
+                    <item>
+48
+                    </item>
+                    <item>
+49
+                    </item>
+                    <item>
+50
+                    </item>
+                    <item>
+51
+                    </item>
+                    <item>
+52
+                    </item>
+                    <item>
+53
+                    </item>
+                    <item>
+54
+                    </item>
+                    <item>
+55
+                    </item>
+                    <item>
+56
+                    </item>
+                    <item>
+57
+                    </item>
+                    <item>
+58
+                    </item>
+                    <item>
+59
+                    </item>
+                    <item>
+60
+                    </item>
+                    <item>
+61
+                    </item>
+                    <item>
+62
+                    </item>
+                    <item>
+63
+                    </item>
+                    <item>
+64
+                    </item>
+                    <item>
+65
+                    </item>
+                    <item>
+66
+                    </item>
+                    <item>
+67
+                    </item>
+                    <item>
+68
+                    </item>
+                    <item>
+69
+                    </item>
+                    <item>
+70
+                    </item>
+                    <item>
+71
+                    </item>
+                    <item>
+72
+                    </item>
+                    <item>
+73
+                    </item>
+                    <item>
+74
+                    </item>
+                    <item>
+75
+                    </item>
+                    <item>
+76
+                    </item>
+                    <item>
+77
+                    </item>
+                    <item>
+78
+                    </item>
+                    <item>
+79
+                    </item>
+                    <item>
+80
+                    </item>
+                    <item>
+81
+                    </item>
+                    <item>
+82
+                    </item>
+                    <item>
+83
+                    </item>
+                    <item>
+84
+                    </item>
+                    <item>
+85
+                    </item>
+                    <item>
+86
+                    </item>
+                    <item>
+87
+                    </item>
+                    <item>
+88
+                    </item>
+                    <item>
+89
+                    </item>
+                    <item>
+90
+                    </item>
+                    <item>
+91
+                    </item>
+                    <item>
+92
+                    </item>
+                    <item>
+93
+                    </item>
+                    <item>
+94
+                    </item>
+                    <item>
+95
+                    </item>
+                    <item>
+96
+                    </item>
+                    <item>
+97
+                    </item>
+                    <item>
+98
+                    </item>
+                    <item>
+99
+                    </item>
+                    <item>
+100
+                    </item>
+                </string-array>
+
+                <string name="FavState_Send" >Отправлено
+                </string>
+                <string name="Info_Rubles" > руб.
+                </string>
+                <string name="Tab1_Name" >Отправления
+                </string>
+                <string name="Error_CallError" >Произошла ошибка.
+                </string>
+                <string name="Error_NumberDeliver" >Пожалуйста, введите номер заказа для поиска.
+                </string>
+                <string name="Calculator_CheckParcel" >Посылка
+                </string>
+                <string name="Info_CallDone" >Заявка успешно отправлена.
+                </string>
+                <string name="Calculator_CheckLetter" >Письмо
+                </string>
+                <string name="DeliveryInfo_Name" >Детали отправления
+                </string>
+                <string name="Info_Loading" >Получение данных...
+                </string>
+                <string name="app_name" >DeliveryCompany
+                </string>
+                <string name="FavState_Cancel" >Возврат клиенту
+                </string>
                 <string name="Call_EditPerson" >Контактное лицо
                 </string>
-            </file>
-            <file
-                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\values\styles.xml"
-                qualifiers="" >
-
-                <style
-                    name="AppBaseTheme"
-                    parent="android:Theme.Light" >
-
-                    <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-                    -->
-                </style>
-
-                <style
-                    name="AppTheme"
-                    parent="AppBaseTheme" >
-
-                    <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-                </style>
             </file>
             <file
                 path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\values-sw720dp-land\dimens.xml"
@@ -214,47 +596,20 @@
                 </dimen>
             </file>
             <file
-                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\values-v11\styles.xml"
-                qualifiers="v11" >
-
-                <style
-                    name="AppBaseTheme"
-                    parent="android:Theme.Holo.Light" >
-
-                    <!-- API 11 theme customizations can go here. -->
-                </style>
-            </file>
+                name="context_menu"
+                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\menu\context_menu.xml"
+                qualifiers=""
+                type="menu" />
             <file
-                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\values-v14\styles.xml"
-                qualifiers="v14" >
-
-                <style
-                    name="AppBaseTheme"
-                    parent="android:Theme.Holo.Light.DarkActionBar" >
-
-                    <!-- API 14 theme customizations can go here. -->
-                </style>
-            </file>
-            <file
-                name="fav_item"
-                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\layout\fav_item.xml"
+                name="group_view"
+                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\layout\group_view.xml"
                 qualifiers=""
                 type="layout" />
             <file
-                name="text_background"
-                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\drawable\text_background.xml"
-                qualifiers=""
-                type="drawable" />
-            <file
-                name="text_pic_adapter"
-                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\layout\text_pic_adapter.xml"
+                name="child_view"
+                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\layout\child_view.xml"
                 qualifiers=""
                 type="layout" />
-            <file
-                name="gradient"
-                path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\src\main\res\drawable\gradient.xml"
-                qualifiers=""
-                type="drawable" />
         </source>
         <source path="C:\Users\1\Documents\GitHub\Deliver\MyApplicationProject\DeliveryApplication\build\res\rs\debug" />
     </dataSet>
