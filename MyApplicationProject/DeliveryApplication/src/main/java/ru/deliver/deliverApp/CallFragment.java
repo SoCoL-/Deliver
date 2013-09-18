@@ -134,6 +134,13 @@ public class CallFragment extends Fragment implements AnswerServer
             }
         });
 
+        //Default values
+        mCheck.setChecked(true);
+        mCheck.setText(R.string.Calculator_CheckLetter);
+        mEditHeight.setVisibility(View.GONE);
+        mEditWidth.setVisibility(View.GONE);
+        mEditLength.setVisibility(View.GONE);
+        //end
 		mCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
 		{
 			@Override

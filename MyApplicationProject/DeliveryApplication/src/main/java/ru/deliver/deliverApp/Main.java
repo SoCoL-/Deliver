@@ -178,7 +178,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 				return findViewById(android.R.id.tabcontent);
 			}
 		});
-		spec.setIndicator(createTabView(getString(R.string.Tab1_Name), R.drawable.ic_launcher));
+		spec.setIndicator(createTabView(getString(R.string.Tab1_Name), R.drawable.ic_tab_departure));
 		mTabHost.addTab(spec, DeliverFragment.class, null);
 
 		spec = mTabHost.newTabSpec(TAB2);
@@ -190,7 +190,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 				return findViewById(android.R.id.tabcontent);
 			}
 		});
-		spec.setIndicator(createTabView(getString(R.string.Tab2_Name), R.drawable.ic_menu_calc));
+		spec.setIndicator(createTabView(getString(R.string.Tab2_Name), R.drawable.ic_tab_calculator));
 		mTabHost.addTab(spec, CalculatorFragment.class, null);
 
 		spec = mTabHost.newTabSpec(TAB3);
@@ -202,7 +202,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 				return findViewById(android.R.id.tabcontent);
 			}
 		});
-		spec.setIndicator(createTabView(getString(R.string.Tab3_Name), R.drawable.ic_launcher));
+		spec.setIndicator(createTabView(getString(R.string.Tab3_Name), R.drawable.ic_tab_delivery));
 		mTabHost.addTab(spec, CallFragment.class, null);
 
 		spec = mTabHost.newTabSpec(TAB4);
@@ -214,7 +214,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 				return findViewById(android.R.id.tabcontent);
 			}
 		});
-		spec.setIndicator(createTabView(getString(R.string.Tab4_Name), R.drawable.ic_launcher));
+		spec.setIndicator(createTabView(getString(R.string.Tab4_Name), R.drawable.ic_tab_contact));
 		mTabHost.addTab(spec, OfficesFragment.class, null);
 	}
 

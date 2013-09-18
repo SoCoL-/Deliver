@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">DeliveryCompany</string>
+    <string name="app_name">ExMail</string>
 
     <string name="hello_world">Hello world!</string>
 
-    <string name="Tab1_Name">Отслеживания</string>
+    <string name="Tab1_Name">Отслеживание</string>
     <string name="Tab2_Name">Калькулятор</string>
     <string name="Tab3_Name">Вызвать курьера</string>
     <string name="Tab4_Name">Отделения</string>
@@ -37,7 +37,7 @@
     <string name="Info_Exp_Email">email: </string>
     <string name="Info_Exp_Fax">факс: </string>
 
-    <string name="Delivery_Name">Отслеживания</string>
+    <string name="Delivery_Name">Отслеживание</string>
     <string name="Delivery_Hint">Номер отправления</string>
 
     <string name="DeliveryInfo_Name">Детали отправления</string>
