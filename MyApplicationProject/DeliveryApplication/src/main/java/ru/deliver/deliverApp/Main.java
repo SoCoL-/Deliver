@@ -69,6 +69,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 
     private NetManager mNetManager;
     public boolean isInternet = true;           //Флаг наличия интернета на телефоне
+    private String mCurrentTab;
 
 	//---------------------------------
 	//SUPER
@@ -107,6 +108,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
     {
         if(tabId.equals(TAB1))
 		{
+            mCurrentTab = TAB1;
 			if(secondLevelFr == null)
 			{
 				Logs.i("InfoFragment == null");
@@ -119,16 +121,19 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 		}
         else if(tabId.equals(TAB2))
 		{
+            mCurrentTab = TAB2;
 			clearBackStack();
             pushFragment(mFragment2);
 		}
 		else if(tabId.equals(TAB3))
 		{
+            mCurrentTab = TAB3;
 			clearBackStack();
 			pushFragment(mFragment3);
 		}
 		else if(tabId.equals(TAB4))
 		{
+            mCurrentTab = TAB4;
 			clearBackStack();
 			pushFragment(mFragment4);
 		}
@@ -151,7 +156,22 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 		super.onPause();
 	}
 
-	FragmentManager.OnBackStackChangedListener backStackListener = new FragmentManager.OnBackStackChangedListener()
+    @Override
+    public void onBackPressed()
+    {
+        if(!mCurrentTab.equals(TAB4))
+        {
+            Logs.i("Not TAB4");
+            super.onBackPressed();
+        }
+        else if(mCurrentTab.equals(TAB4) && !mFragment4.onBackPress())
+        {
+            Logs.i("TAB4 onBackPress return false");
+            super.onBackPressed();
+        }
+    }
+
+    FragmentManager.OnBackStackChangedListener backStackListener = new FragmentManager.OnBackStackChangedListener()
 	{
 	@Override
 		public void onBackStackChanged()

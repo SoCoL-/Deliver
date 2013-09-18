@@ -1,6 +1,7 @@
 package ru.deliver.deliverApp;
 
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ru.deliver.deliverApp.Adapters.OfficesInfoAdapter;
 import ru.deliver.deliverApp.Network.AnswerServer;
 import ru.deliver.deliverApp.Network.NetManager;
+import ru.deliver.deliverApp.Setup.Logs;
 import ru.deliver.deliverApp.Utils.Offices;
 import ru.deliver.deliverApp.Utils.OfficesAdd;
 
@@ -40,7 +43,7 @@ public class OfficesFragment extends Fragment implements AnswerServer
     private ArrayAdapter<String> mFirstLayerAdapter;
     private NetManager mNetManager;
 
-    private boolean isSecondLayer = false;
+    private boolean isSecondLayer;
 
 
 	//---------------------------------
@@ -76,9 +79,12 @@ public class OfficesFragment extends Fragment implements AnswerServer
                 if(!isSecondLayer)
                 {
                     isSecondLayer = true;
-                    mTitle.setText((String)mList.getSelectedItem());
-
-
+                    Logs.i("onItemClick: isSecondLayer = " + isSecondLayer);
+                    mTitle.setText(((Main)getActivity()).mOffices.get(i).getCity());
+                    OfficesInfoAdapter mSecondAdapter = new OfficesInfoAdapter();
+                    ArrayList<OfficesAdd> mOfficesInfo = ((Main)getActivity()).mOffices.get(i).getContacts();
+                    mSecondAdapter.addItems(mOfficesInfo);
+                    mList.setAdapter(mSecondAdapter);
                 }
             }
         });
@@ -116,6 +122,8 @@ public class OfficesFragment extends Fragment implements AnswerServer
     public void onResume()
     {
         super.onResume();
+        isSecondLayer = false;
+        Logs.i("onResume: isSecondLayer = " + isSecondLayer);
         setAdapters();
     }
 
@@ -136,27 +144,36 @@ public class OfficesFragment extends Fragment implements AnswerServer
                 names.add(o.getCity());
             }
 
-            mFirstLayerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_2, names);
+            mFirstLayerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, names);
             mList.setAdapter(mFirstLayerAdapter);
         }
-
-
-
-        /*ArrayList<ArrayList<OfficesAdd>> infos = new ArrayList<ArrayList<OfficesAdd>>();
-        for(Offices o : mOffices)
-        {
-            ArrayList<OfficesAdd> info = new ArrayList<OfficesAdd>();
-            for(OfficesAdd oa : o.getContacts())
-            {
-                info.add(oa);
-            }
-            infos.add(info);
-        }*/
-
-        //mAdapter.addItems(infos, names);
     }
 
-	//---------------------------------
+    public boolean onBackPress()
+    {
+        Logs.i("isSecondLayer = " + isSecondLayer);
+        if(!mTitle.getText().equals(R.string.Offices_Name))
+        {
+            this.isSecondLayer = false;
+            mTitle.setText(R.string.Offices_Name);
+            ArrayList<Offices> mOffices = ((Main)getActivity()).mOffices;
+            ArrayList<String> names = new ArrayList<String>();
+            for(Offices o : mOffices)
+            {
+                names.add(o.getCity());
+            }
+
+            mFirstLayerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, names);
+            mList.setAdapter(mFirstLayerAdapter);
+            Logs.i("return true");
+            return true;
+        }
+
+        Logs.i("return false");
+        return false;
+    }
+
+//---------------------------------
 	//GETTERS/SETTERS
 	//---------------------------------
 
