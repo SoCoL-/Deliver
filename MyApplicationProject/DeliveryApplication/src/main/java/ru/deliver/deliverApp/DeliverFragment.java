@@ -247,7 +247,7 @@ public class DeliverFragment extends Fragment implements AnswerServer
      * */
     private void pushFragment(Bundle b)
     {
-		((Main)getActivity()).goToInfo(b);
+		((Main)getActivity()).goToInfo(b, Main.FRAGMENT_DELIVERY_INFO);
     }
 
     @Override

@@ -50,16 +50,19 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
     final String TAB3 = "tab3";
     final String TAB4 = "tab4";
 
+    public static final int FRAGMENT_DELIVERY_INFO = 0;
+    public static final int FRAGMENT_OFFICES_INFO = 1;
+
 	//---------------------------------
 	//VARIABLES
 	//---------------------------------
 
     private MyFragmentTabHost mTabHost;
 
-    public  DeliverFragment     mFragment1;
+    /*public  DeliverFragment     mFragment1;
     private CalculatorFragment  mFragment2;
 	private CallFragment		mFragment3;
-	private OfficesFragment		mFragment4;
+	private OfficesFragment		mFragment4;*/
 
 	private Fragment secondLevelFr;
 
@@ -67,9 +70,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
     public Favourite mBufDeparture;             //Полученное от сервака отправление по номеру
     public ArrayList<Offices> mOffices;         //Список филиалов
 
-    private NetManager mNetManager;
     public boolean isInternet = true;           //Флаг наличия интернета на телефоне
-    private String mCurrentTab;
 
 	//---------------------------------
 	//SUPER
@@ -84,10 +85,10 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 
         isInternet = Settings.isInternet(this);
 
-        mFragment1 = new DeliverFragment();
+        /*mFragment1 = new DeliverFragment();
         mFragment2 = new CalculatorFragment();
 		mFragment3 = new CallFragment();
-		mFragment4 = new OfficesFragment();
+		mFragment4 = new OfficesFragment();*/
 
         mFavourites = new ArrayList<Favourite>();
         mOffices = new ArrayList<Offices>();
@@ -96,7 +97,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
         mTabHost.setOnTabChangedListener(this);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.Main_real_tab);
 
-        mNetManager = new NetManager(this);
+        NetManager mNetManager = new NetManager(this);
         mNetManager.setInterface(this);
         mNetManager.sendOffices();
 
@@ -108,34 +109,31 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
     {
         if(tabId.equals(TAB1))
 		{
-            mCurrentTab = TAB1;
 			if(secondLevelFr == null)
 			{
 				Logs.i("InfoFragment == null");
-            	pushFragment(mFragment1);
+            	//pushFragment(mFragment1);
 			}
 			else
 			{
 				Logs.i("InfoFragment != null");
 			}
+            clearBackStack();
 		}
         else if(tabId.equals(TAB2))
 		{
-            mCurrentTab = TAB2;
 			clearBackStack();
-            pushFragment(mFragment2);
+            //pushFragment(mFragment2);
 		}
 		else if(tabId.equals(TAB3))
 		{
-            mCurrentTab = TAB3;
 			clearBackStack();
-			pushFragment(mFragment3);
+			//pushFragment(mFragment3);
 		}
 		else if(tabId.equals(TAB4))
 		{
-            mCurrentTab = TAB4;
 			clearBackStack();
-			pushFragment(mFragment4);
+			//pushFragment(mFragment4);
 		}
     }
 
@@ -159,16 +157,7 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
     @Override
     public void onBackPressed()
     {
-        if(!mCurrentTab.equals(TAB4))
-        {
-            Logs.i("Not TAB4");
-            super.onBackPressed();
-        }
-        else if(mCurrentTab.equals(TAB4) && !mFragment4.onBackPress())
-        {
-            Logs.i("TAB4 onBackPress return false");
-            super.onBackPressed();
-        }
+        super.onBackPressed();
     }
 
     FragmentManager.OnBackStackChangedListener backStackListener = new FragmentManager.OnBackStackChangedListener()
@@ -252,13 +241,13 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 	{
 		Logs.i("try to clearBackStack");
 		FragmentManager manager = getSupportFragmentManager();
-		FragmentTransaction ft = manager.beginTransaction();
+		//FragmentTransaction ft = manager.beginTransaction();
 		Logs.i("try to find fragment");
 		if(secondLevelFr != null)
 		{
 			Logs.i("fragment != null");
-			ft.remove(secondLevelFr);
-			ft.commit();
+			//ft.remove(secondLevelFr);
+			//ft.commit();
 			manager.popBackStack();
 			secondLevelFr = null;
 		}
@@ -266,32 +255,45 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 			Logs.i("fragment == null");
 	}
 
-	public void goToInfo(Bundle b)
+	public void goToInfo(Bundle b, int fragmentID)
 	{
 		Logs.i("Push fragment DeliverInfoFragment");
 		FragmentManager manager = getSupportFragmentManager();
 		FragmentTransaction ft = manager.beginTransaction();
 		secondLevelFr = null;
-		DeliverInfoFragment next = new DeliverInfoFragment();
-		secondLevelFr = next;
-        next.setArguments(b);
-		ft.replace(R.id.Main_real_tab, next);
-		ft.addToBackStack("Info");
+        if(fragmentID == FRAGMENT_DELIVERY_INFO)
+        {
+            DeliverInfoFragment next = new DeliverInfoFragment();
+            secondLevelFr = next;
+            next.setArguments(b);
+            ft.hide(manager.findFragmentByTag(mTabHost.getCurrentTabTag()));
+            ft.add(R.id.Main_real_tab, next);
+            ft.addToBackStack("Info");
+        }
+        else if(fragmentID == FRAGMENT_OFFICES_INFO)
+        {
+            OfficesInfoFragment oif = new OfficesInfoFragment();
+            oif.setArguments(b);
+            secondLevelFr = oif;
+            ft.hide(manager.findFragmentByTag(mTabHost.getCurrentTabTag()));
+            ft.add(R.id.Main_real_tab, oif);
+            ft.addToBackStack("offices_info");
+        }
 		ft.commit();
 	}
 
-	private void pushFragment(Fragment fragment)
-	{
-		Logs.i("Push fragment " + fragment.getClass().getCanonicalName());
-		FragmentManager manager = getSupportFragmentManager();
-
-		if(manager.findFragmentByTag("Info") != null)
-			Logs.i("InfoFragment is on back stack");
-
-		FragmentTransaction ft = manager.beginTransaction();
-		ft.replace(android.R.id.tabcontent, fragment);
-		ft.commit();
-	}
+	//private void pushFragment(Fragment fragment)
+	//{
+//		Logs.i("Push fragment " + fragment.getClass().getCanonicalName());
+//		FragmentManager manager = getSupportFragmentManager();
+//
+//		if(manager.findFragmentByTag("Info") != null)
+//			Logs.i("InfoFragment is on back stack");
+//
+//		FragmentTransaction ft = manager.beginTransaction();
+//		ft.replace(android.R.id.tabcontent, fragment);
+//		ft.commit();
+	//}
 
     @Override
     public void ResponceOK(final String TAG, final ArrayList<String> params)   {  }
