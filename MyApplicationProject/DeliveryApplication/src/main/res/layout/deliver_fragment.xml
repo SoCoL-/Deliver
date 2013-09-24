@@ -56,13 +56,11 @@
             android:id="@+id/Deliver_List"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:background="@color/white"
-            android:cacheColorHint="@color/white"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
             android:layout_marginBottom="10dip"
             android:layout_marginTop="10dip"
-            android:divider="@color/black"
+            android:divider="@color/gray_blue"
             android:dividerHeight="1dip"/>
 
 </LinearLayout>

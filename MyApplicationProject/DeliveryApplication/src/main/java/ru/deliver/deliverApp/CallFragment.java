@@ -1,5 +1,6 @@
 package ru.deliver.deliverApp;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -12,10 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -43,7 +43,7 @@ public class CallFragment extends Fragment implements AnswerServer
 	//VARIABLES
 	//---------------------------------
 
-	private CheckBox mCheck;
+	private RadioGroup mCheck;
 	private EditText mEditWidth;
 	private EditText mEditHeight;
 	private EditText mEditLength;
@@ -58,8 +58,10 @@ public class CallFragment extends Fragment implements AnswerServer
 	private TextView mCallDate;
 	private TextView mCallTime;
     private Spinner mWeight;
+    private Button mBtnDate, mBtnTime;
 
 	private String mDate = "";
+    private String mType;
 
     NetManager mNetManager;
 
@@ -82,7 +84,7 @@ public class CallFragment extends Fragment implements AnswerServer
 		mCallDate 		= (TextView)view.findViewById(R.id.Call_DateText);
 		mCallTime 		= (TextView)view.findViewById(R.id.Call_TimeText);
 
-		mCheck			= (CheckBox)view.findViewById(R.id.Call_Check);
+		mCheck			= (RadioGroup)view.findViewById(R.id.Call_RGroup);
 
 		mEditWidth		= (EditText)view.findViewById(R.id.Call_Width);
 		mEditHeight		= (EditText)view.findViewById(R.id.Call_Height);
@@ -99,8 +101,8 @@ public class CallFragment extends Fragment implements AnswerServer
 		mWeight	        = (Spinner)view.findViewById(R.id.Call_Spin1);
 
 		Button mSend	= (Button)view.findViewById(R.id.Call_send);
-		Button mBtnDate	= (Button)view.findViewById(R.id.Call_Date);
-		Button mBtnTime	= (Button)view.findViewById(R.id.Call_Time);
+		mBtnDate    	= (Button)view.findViewById(R.id.Call_Date);
+		mBtnTime    	= (Button)view.findViewById(R.id.Call_Time);
 
         mNetManager = new NetManager(getActivity());
         mNetManager.setInterface(this);
@@ -135,33 +137,35 @@ public class CallFragment extends Fragment implements AnswerServer
         });
 
         //Default values
-        mCheck.setChecked(true);
-        mCheck.setText(R.string.Calculator_CheckLetter);
+        mCheck.check(R.id.Call_Radio1);
         mEditHeight.setVisibility(View.GONE);
         mEditWidth.setVisibility(View.GONE);
         mEditLength.setVisibility(View.GONE);
+        mType = "1";
         //end
-		mCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-		{
-			@Override
-			public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-			{
-				if(b)
-				{
-					mCheck.setText(R.string.Calculator_CheckLetter);
-					mEditHeight.setVisibility(View.GONE);
-					mEditWidth.setVisibility(View.GONE);
-					mEditLength.setVisibility(View.GONE);
-				}
-				else
-				{
-					mCheck.setText(R.string.Calculator_CheckParcel);
-					mEditHeight.setVisibility(View.VISIBLE);
-					mEditWidth.setVisibility(View.VISIBLE);
-					mEditLength.setVisibility(View.VISIBLE);
-				}
-			}
-		});
+
+        mCheck.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i)
+            {
+                switch (i)
+                {
+                    case R.id.Call_Radio1:
+                        mEditHeight.setVisibility(View.GONE);
+                        mEditWidth.setVisibility(View.GONE);
+                        mEditLength.setVisibility(View.GONE);
+                        mType = "1";
+                        break;
+                    case R.id.Call_Radio2:
+                        mEditHeight.setVisibility(View.VISIBLE);
+                        mEditWidth.setVisibility(View.VISIBLE);
+                        mEditLength.setVisibility(View.VISIBLE);
+                        mType = "2";
+                        break;
+                }
+            }
+        });
 
 		mBtnDate.setOnClickListener(new View.OnClickListener()
 		{
@@ -175,9 +179,14 @@ public class CallFragment extends Fragment implements AnswerServer
 					@Override
 					public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth)
 					{
-						mDate = dayOfMonth + "." + monthOfYear + "." + year;
+                        String month = "" + monthOfYear;
+                        if(month.length() == 1)
+                            month = "0" + month;
+
+						mDate = dayOfMonth + "." + month + "." + year;
 						Logs.i("setDate = " + mDate);
-						mCallDate.setText(getString(R.string.Call_DatePicker) + " \t " + mDate);
+						//mCallDate.setText(getString(R.string.Call_DatePicker) + " \t " + mDate);
+                        mBtnDate.setText(getActivity().getString(R.string.Call_DatePicker) + " " + mDate);
 					}
 				}, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
 				dpd.show();
@@ -204,7 +213,8 @@ public class CallFragment extends Fragment implements AnswerServer
 
 						Logs.i("setTime = " + mTime);
 
-						mCallTime.setText(getString(R.string.Call_TimePicker) + " \t " + mTime);
+						//mCallTime.setText(getString(R.string.Call_TimePicker) + " \t " + mTime);
+                        mBtnTime.setText(getActivity().getString(R.string.Call_TimePicker) + " " + mTime);
 					}
 				}, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), DateFormat.is24HourFormat(getActivity()));
 				tpd.show();
@@ -222,12 +232,7 @@ public class CallFragment extends Fragment implements AnswerServer
                     return;
                 }
 
-                String typeOf;
-                if(mCheck.isChecked())
-                    typeOf = "1";
-                else
-                    typeOf = "2";
-                mNetManager.sendCall(mCallDate.getText().toString(), mCallTime.getText().toString(), mFrom.getText().toString(), mTo.getText().toString(), typeOf, mCompanyName.getText().toString(), mAddress.getText().toString(), mPerson.getText().toString(), mPhone.getText().toString(), mEMail.getText().toString(), mComment.getText().toString(), mEditWidth.getText().toString(), mEditHeight.getText().toString(), mEditLength.getText().toString(), (String)mWeight.getSelectedItem());
+                mNetManager.sendCall(mCallDate.getText().toString(), mCallTime.getText().toString(), mFrom.getText().toString(), mTo.getText().toString(), mType, mCompanyName.getText().toString(), mAddress.getText().toString(), mPerson.getText().toString(), mPhone.getText().toString(), mEMail.getText().toString(), mComment.getText().toString(), mEditWidth.getText().toString(), mEditHeight.getText().toString(), mEditLength.getText().toString(), (String)mWeight.getSelectedItem());
 			}
 		});
 
@@ -244,7 +249,6 @@ public class CallFragment extends Fragment implements AnswerServer
 	private boolean isFillAllFields()
 	{
 		boolean rez = true;
-		boolean isMail = mCheck.isChecked();
 
 		if(mFrom.getText().length() <= 0 || mTo.getText().length() <= 0)//Проверка полей откуда и куда
 			rez = false;
@@ -257,7 +261,7 @@ public class CallFragment extends Fragment implements AnswerServer
 				mPhone.getText().length() <= 0 || mEMail.getText().length() <= 0 || mComment.getText().length() <= 0)
 			rez = false;
 
-		if(!isMail) //Если посылка, то проверим габариты
+		if(mType.equals("2")) //Если посылка, то проверим габариты
 		{
 			if(mEditWidth.getText().length() <= 0 || mEditHeight.getText().length() <= 0 || mEditLength.getText().length() <= 0)
 				rez = false;
@@ -282,6 +286,8 @@ public class CallFragment extends Fragment implements AnswerServer
         mEditWidth.setText("");
         mEMail.setText("");
         mWeight.setSelection(0);
+        mBtnDate.setText(R.string.Call_DatePicker);
+        mBtnTime.setText(R.string.Call_TimePicker);
     }
 
     @Override
@@ -293,7 +299,11 @@ public class CallFragment extends Fragment implements AnswerServer
             public void run()
             {
                 clearFields();
-                Toast.makeText(getActivity(), params.get(0), Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                dialog.setTitle("");
+                dialog.setMessage(params.get(0));
+                dialog.setPositiveButton(R.string.Btn_OK, null);
+                dialog.show();
             }
         });
     }

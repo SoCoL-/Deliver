@@ -10,6 +10,7 @@
     <string name="Tab3_Name">Вызвать курьера</string>
     <string name="Tab4_Name">Отделения</string>
 
+    <string name="Btn_OK">Ок</string>
     <string name="Btn_Show">Показать</string>
     <string name="Btn_Update">Обновить</string>
 
@@ -51,13 +52,13 @@
     <string name="Calculator_CheckParcel">Посылка</string>
     <string name="Calculator_Auto1">Откуда</string>
     <string name="Calculator_Auto2">Куда</string>
-    <string name="Calculator_Auto3">Вес</string>
+    <string name="Calculator_Auto3">Вес (кг)</string>
     <string name="Calculator_EditHint1">Длина</string>
     <string name="Calculator_EditHint2">Ширина</string>
     <string name="Calculator_EditHint3">Высота</string>
     <string name="Calculator_Button">Расчитать</string>
 
-    <string name="Call_Name">Вызов курьера</string>
+    <string name="Call_Name">Вызвать курьера</string>
     <string name="Call_DatePicker">Дата прибытия</string>
     <string name="Call_TimePicker">Время прибытия</string>
     <string name="Call_EditNameCompany">Название организации</string>

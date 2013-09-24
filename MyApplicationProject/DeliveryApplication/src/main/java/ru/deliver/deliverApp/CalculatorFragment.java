@@ -2,7 +2,6 @@ package ru.deliver.deliverApp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,15 +37,18 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
     //VARIABLES
     //-------------------------------
 
-	private CheckBox mCheck;
+	//private CheckBox mCheck;
+    private RadioGroup mCheck;
 	private EditText mEditWidth;
 	private EditText mEditHeight;
 	private EditText mEditLength;
 	private AutoCompleteTextView mFrom;
 	private AutoCompleteTextView mTo;
     private TextView mSummaText;
+    private Spinner mWeight;
 
     private NetManager mNetManager;
+    private String mType;
 
     //-------------------------------
     //CONSTRUCTORS
@@ -66,11 +67,11 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
 		mEditWidth 			= (EditText)view.findViewById(R.id.Calc_Width);
 		mEditHeight 		= (EditText)view.findViewById(R.id.Calc_Height);
 		mEditLength 		= (EditText)view.findViewById(R.id.Calc_Length);
-		mCheck				= (CheckBox)view.findViewById(R.id.Calc_Check);
+        mCheck				= (RadioGroup)view.findViewById(R.id.Calc_RGroup);
 		mFrom 				= (AutoCompleteTextView)view.findViewById(R.id.Calc_Auto1);
 		mTo 				= (AutoCompleteTextView)view.findViewById(R.id.Calc_Auto2);
         mSummaText          = (TextView)view.findViewById(R.id.Calc_Summa);
-		final Spinner mWeight 	= (Spinner)view.findViewById(R.id.Calc_Spin1);
+		mWeight 	= (Spinner)view.findViewById(R.id.Calc_Spin1);
 		Button mCalculate	= (Button)view.findViewById(R.id.Calc_calculate);
 
 		String[] towns = getActivity().getResources().getStringArray(R.array.towns);
@@ -106,34 +107,31 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
         });
 
         //Default values
-        mCheck.setChecked(true);
-        mCheck.setText(R.string.Calculator_CheckLetter);
-        mEditHeight.setVisibility(View.GONE);
-        mEditWidth.setVisibility(View.GONE);
-        mEditLength.setVisibility(View.GONE);
+        setDefaultValues();
         //end
 
-		mCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-		{
-			@Override
-			public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-			{
-				if(b)//Письмо
-				{
-					mCheck.setText(R.string.Calculator_CheckLetter);
-					mEditHeight.setVisibility(View.GONE);
-					mEditWidth.setVisibility(View.GONE);
-					mEditLength.setVisibility(View.GONE);
-				}
-				else//Посылка
-				{
-					mCheck.setText(R.string.Calculator_CheckParcel);
-					mEditHeight.setVisibility(View.VISIBLE);
-					mEditWidth.setVisibility(View.VISIBLE);
-					mEditLength.setVisibility(View.VISIBLE);
-				}
-			}
-		});
+        mCheck.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i)
+            {
+                switch (i)
+                {
+                    case R.id.Calc_Radio1:
+                        mEditHeight.setVisibility(View.GONE);
+                        mEditWidth.setVisibility(View.GONE);
+                        mEditLength.setVisibility(View.GONE);
+                        mType = "1";
+                        break;
+                    case R.id.Calc_Radio2:
+                        mEditHeight.setVisibility(View.VISIBLE);
+                        mEditWidth.setVisibility(View.VISIBLE);
+                        mEditLength.setVisibility(View.VISIBLE);
+                        mType = "2";
+                        break;
+                }
+            }
+        });
 
 		mCalculate.setOnClickListener(new View.OnClickListener()
 		{
@@ -143,13 +141,7 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
 				if(!isFillAllFields())
 					Toast.makeText(getActivity(), R.string.Error_FillFields, Toast.LENGTH_SHORT).show();
 
-                String type;
-                if(mCheck.isChecked())
-                    type = "1";
-                else
-                    type = "2";
-
-                mNetManager.sendCalcReq(mFrom.getText().toString(), mTo.getText().toString(), (String)mWeight.getSelectedItem(), type, mEditHeight.getText().toString(), mEditWidth.getText().toString(), mEditLength.getText().toString());
+                mNetManager.sendCalcReq(mFrom.getText().toString(), mTo.getText().toString(), (String)mWeight.getSelectedItem(), mType, mEditHeight.getText().toString(), mEditWidth.getText().toString(), mEditLength.getText().toString());
 			}
 		});
 
@@ -163,6 +155,22 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
     //METHODS
     //-------------------------------
 
+    private void setDefaultValues()
+    {
+        mCheck.check(R.id.Calc_Radio1);
+        mEditHeight.setVisibility(View.GONE);
+        mEditWidth.setVisibility(View.GONE);
+        mEditLength.setVisibility(View.GONE);
+        mType = "1";
+        mWeight.setSelection(0);
+        mEditHeight.setText("");
+        mEditLength.setText("");
+        mEditWidth.setText("");
+        mFrom.setText("");
+        mTo.setText("");
+        //TODO
+    }
+
 	/**
 	 * Заполнены ли все поля на форме окна
 	 * @return true - если заполнены, false - если нет
@@ -170,12 +178,11 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
 	private boolean isFillAllFields()
 	{
 		boolean rez = true;
-		Boolean isMail = mCheck.isChecked();
 
-		if(mFrom.getText().length() <= 0 || mTo.getText().length() <= 0)
+		if(mFrom.getText().toString().length() <= 0 || mTo.getText().length() <= 0)
 			rez = false;
 
-		if(!isMail) // Если посылка, то проверим габариты
+		if(mType.equals("2")) // Если посылка, то проверим габариты
 		{
 			if(mEditWidth.getText().length() <= 0 || mEditHeight.getText().length() <= 0 || mEditLength.getText().length() <= 0)
 				rez = false;
@@ -196,7 +203,8 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
             public void run()
             {
                 mSummaText.setVisibility(View.VISIBLE);
-                mSummaText.setText(params.get(0) + getString(R.string.Info_Rubles));
+                mSummaText.setText(params.get(0) + " " + getString(R.string.Info_Rubles));
+                setDefaultValues();
             }
         });
     }
@@ -212,6 +220,7 @@ public final class CalculatorFragment extends Fragment implements AnswerServer
             {
                 mSummaText.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+                //setDefaultValues();
             }
         });
     }

@@ -115,7 +115,8 @@ public class OfficesFragment extends Fragment implements AnswerServer
         {
             names.add(o.getCity());
         }
-        ArrayAdapter<String> mFirstLayerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_listitem_1, names);
+        //ArrayAdapter<String> mFirstLayerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_listitem_1, names);
+        ArrayAdapter<String> mFirstLayerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, names);
         mList.setAdapter(mFirstLayerAdapter);
     }
 
