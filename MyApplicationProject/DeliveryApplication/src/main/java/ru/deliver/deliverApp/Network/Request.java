@@ -39,6 +39,7 @@ import ru.deliver.deliverApp.Setup.Settings;
 public final class Request extends AsyncTask<String, Integer, ResponceTask>
 {
     private static final String ADDRESS = "http://exmail.ws/mobile/mac.php";
+    //private static final String ADDRESS = "http://exmail.ws/mobile/uagent.php";
 
     private static final int HTTP_OK = 200;
     private static final String TYPE = "TYPE";

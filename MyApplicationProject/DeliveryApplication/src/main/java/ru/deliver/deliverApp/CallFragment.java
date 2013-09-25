@@ -60,7 +60,7 @@ public class CallFragment extends Fragment implements AnswerServer
     private Spinner mWeight;
     private Button mBtnDate, mBtnTime;
 
-	private String mDate = "";
+	private String mDate = "", mTime;
     private String mType;
 
     NetManager mNetManager;
@@ -108,7 +108,7 @@ public class CallFragment extends Fragment implements AnswerServer
         mNetManager.setInterface(this);
 
 		String[] towns = getActivity().getResources().getStringArray(R.array.towns);
-		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, towns);
+		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, towns);
 		mFrom.setAdapter(adapter1);
 		mTo.setAdapter(adapter1);
 		String[] weights = getActivity().getResources().getStringArray(R.array.weights);
@@ -209,7 +209,7 @@ public class CallFragment extends Fragment implements AnswerServer
 						if(m.length() == 1)
 							m = "0" + m;
 
-						String mTime = hourOfDay + ":" + m;
+						mTime = hourOfDay + ":" + m;
 
 						Logs.i("setTime = " + mTime);
 
@@ -232,7 +232,7 @@ public class CallFragment extends Fragment implements AnswerServer
                     return;
                 }
 
-                mNetManager.sendCall(mCallDate.getText().toString(), mCallTime.getText().toString(), mFrom.getText().toString(), mTo.getText().toString(), mType, mCompanyName.getText().toString(), mAddress.getText().toString(), mPerson.getText().toString(), mPhone.getText().toString(), mEMail.getText().toString(), mComment.getText().toString(), mEditWidth.getText().toString(), mEditHeight.getText().toString(), mEditLength.getText().toString(), (String)mWeight.getSelectedItem());
+                mNetManager.sendCall(mDate, mTime, mFrom.getText().toString(), mTo.getText().toString(), mType, mCompanyName.getText().toString(), mAddress.getText().toString(), mPerson.getText().toString(), mPhone.getText().toString(), mEMail.getText().toString(), mComment.getText().toString(), mEditWidth.getText().toString(), mEditHeight.getText().toString(), mEditLength.getText().toString(), (String)mWeight.getSelectedItem());
 			}
 		});
 
@@ -253,7 +253,7 @@ public class CallFragment extends Fragment implements AnswerServer
 		if(mFrom.getText().length() <= 0 || mTo.getText().length() <= 0)//Проверка полей откуда и куда
 			rez = false;
 
-		if(mCallDate.getText().length() <= 0 || mCallTime.getText().length() <= 0)//Проверка даты и времени
+		if(mDate.length() <= 0 || mTime.length() <= 0)//Проверка даты и времени
 			rez = false;
 
 		//Проверка основныъх данных о заказчике

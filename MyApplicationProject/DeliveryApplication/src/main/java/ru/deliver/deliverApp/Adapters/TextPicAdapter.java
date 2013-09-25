@@ -106,17 +106,15 @@ public class TextPicAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        View view = convertView;
-
-        if(view == null)
+        if(convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.text_pic_adapter, null);
+            convertView = inflater.inflate(R.layout.text_pic_adapter, parent, false);
         }
 
-        ((TextView)view.findViewById(R.id.TPAdapter_Name)).setText(mItems.get(position));
+        ((TextView)convertView.findViewById(R.id.TPAdapter_Name)).setText(mItems.get(position));
 
-        return view;
+        return convertView;
     }
 
     //-------------------------------

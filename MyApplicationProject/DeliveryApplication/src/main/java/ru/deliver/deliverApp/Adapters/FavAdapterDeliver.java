@@ -30,14 +30,16 @@ public class FavAdapterDeliver extends BaseAdapter
 	//---------------------------------
 
 	private ArrayList<Favourite> mItems;
+    private final Context mContext;
 
 	//---------------------------------
 	//SUPER
 	//---------------------------------
 
-	public FavAdapterDeliver()
+	public FavAdapterDeliver(Context c)
 	{
 		mItems = new ArrayList<Favourite>();
+        this.mContext = c;
 	}
 
 	//---------------------------------
@@ -105,27 +107,25 @@ public class FavAdapterDeliver extends BaseAdapter
 	@Override
 	public View getView(int position, View view, ViewGroup viewGroup)
 	{
-		View itemView = view;
-
 		if(view == null)
 		{
-			LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			itemView = inflater.inflate(R.layout.fav_item, null);
+			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = inflater.inflate(R.layout.fav_item, viewGroup, false);
 		}
 
         if(position < mItems.size())
         {
-            if (itemView != null)
+            if (view != null)
             {
                 Logs.i(""+mItems.get(position).getNumber());
-                ((TextView) itemView.findViewById(R.id.FavItem_Number)).setText(""+mItems.get(position).getNumber());
+                ((TextView) view.findViewById(R.id.FavItem_Number)).setText(""+mItems.get(position).getNumber());
                 int lastInfoItem = mItems.get(position).getFavItems().size()-1;
                 if(mItems.get(position).getFavItems() != null && mItems.get(position).getFavItems().size() > 0)
-                    ((TextView)itemView.findViewById(R.id.FavItem_State)).setText(mItems.get(position).getFavItems().get(lastInfoItem).getDescription());
+                    ((TextView)view.findViewById(R.id.FavItem_State)).setText(mItems.get(position).getFavItems().get(lastInfoItem).getDescription());
             }
         }
 
-		return itemView;
+		return view;
 	}
 
 	//---------------------------------

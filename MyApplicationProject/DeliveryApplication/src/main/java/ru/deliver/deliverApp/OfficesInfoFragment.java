@@ -56,6 +56,8 @@ public class OfficesInfoFragment extends Fragment
         View view = inflater.inflate(R.layout.offices_fragment, container, false);
         TextView mTitle = (TextView)view.findViewById(R.id.Offices_Title);
         ListView mList = (ListView)view.findViewById(R.id.Offices_List);
+        mList.setDivider(null);
+        mList.setDividerHeight(0);
 
         int mPosition = getArguments().getInt("position");
         String mTitleName = getArguments().getString("title");

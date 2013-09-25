@@ -83,29 +83,35 @@ public class OfficesInfoAdapter extends BaseAdapter
         if(view == null)
         {
             LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.child_view, null);
+            view = inflater.inflate(R.layout.child_view, viewGroup, false);
         }
 
         if(mInfos.get(i).getName() != null && mInfos.get(i).getName().length() > 0)
             ((TextView)view.findViewById(R.id.child_name)).setText(mInfos.get(i).getName());
         else
-            ((TextView)view.findViewById(R.id.child_name)).setText("");
+            ((TextView)view.findViewById(R.id.child_name)).setVisibility(View.GONE);
+            //((TextView)view.findViewById(R.id.child_name)).setText("");
+
         if(mInfos.get(i).getPhone() != null && mInfos.get(i).getPhone().length() > 0)
             ((TextView)view.findViewById(R.id.child_phone)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Phone) + mInfos.get(i).getPhone());
         else
-            ((TextView)view.findViewById(R.id.child_phone)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Phone) + " - ");
+            ((TextView)view.findViewById(R.id.child_phone)).setVisibility(View.GONE);
+            //((TextView)view.findViewById(R.id.child_phone)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Phone) + " - ");
         if(mInfos.get(i).getAddress() != null && mInfos.get(i).getAddress().length() > 0)
             ((TextView)view.findViewById(R.id.child_address)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Address) + mInfos.get(i).getAddress());
         else
-            ((TextView)view.findViewById(R.id.child_address)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Address) + " - ");
+            ((TextView)view.findViewById(R.id.child_address)).setVisibility(View.GONE);
+            //((TextView)view.findViewById(R.id.child_address)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Address) + " - ");
         if(mInfos.get(i).getEMail() != null && mInfos.get(i).getEMail().length() > 0)
             ((TextView)view.findViewById(R.id.child_email)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Email) + mInfos.get(i).getEMail());
         else
-            ((TextView)view.findViewById(R.id.child_email)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Email) + " - ");
+            ((TextView)view.findViewById(R.id.child_email)).setVisibility(View.GONE);
+            //((TextView)view.findViewById(R.id.child_email)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Email) + " - ");
         if(mInfos.get(i).getFax() != null && mInfos.get(i).getFax().length() > 0)
             ((TextView)view.findViewById(R.id.child_fax)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Fax) + mInfos.get(i).getFax());
         else
-            ((TextView)view.findViewById(R.id.child_fax)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Fax) + " - ");
+            ((TextView)view.findViewById(R.id.child_fax)).setVisibility(View.GONE);
+            //((TextView)view.findViewById(R.id.child_fax)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Fax) + " - ");
 
         return view;
     }

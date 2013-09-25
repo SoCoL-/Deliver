@@ -73,7 +73,7 @@ public class DeliverFragment extends Fragment implements AnswerServer
         Button mBtn     = (Button)view.findViewById(R.id.Deliver_find);
         mUpd            = (Button)view.findViewById(R.id.Deliver_update);
 		mListFavs       = (ListView)view.findViewById(R.id.Deliver_List);
-		mFavAdapter     = new FavAdapterDeliver();
+		mFavAdapter     = new FavAdapterDeliver(getActivity());
 
 		mListFavs.setAdapter(mFavAdapter);
         registerForContextMenu(mListFavs);

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ru.deliver.deliverApp.Adapters.TextPicAdapter;
 import ru.deliver.deliverApp.Network.AnswerServer;
 import ru.deliver.deliverApp.Network.NetManager;
 import ru.deliver.deliverApp.Utils.Offices;
@@ -116,8 +117,11 @@ public class OfficesFragment extends Fragment implements AnswerServer
             names.add(o.getCity());
         }
         //ArrayAdapter<String> mFirstLayerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_listitem_1, names);
-        ArrayAdapter<String> mFirstLayerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, names);
-        mList.setAdapter(mFirstLayerAdapter);
+        //ArrayAdapter<String> mFirstLayerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, names);
+        TextPicAdapter mAdapter = new TextPicAdapter();
+        mAdapter.addAllItems(names);
+        mList.setAdapter(mAdapter);
+        //mList.setAdapter(mFirstLayerAdapter);
     }
 
     private void pushFragment(Bundle b)
