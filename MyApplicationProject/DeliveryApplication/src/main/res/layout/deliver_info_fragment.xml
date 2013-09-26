@@ -31,14 +31,17 @@
 
                 <Button
                         android:id="@+id/DelivInfo_ToFav"
-                        android:layout_width="120dip"
+                        android:layout_width="match_parent"
                         android:layout_height="50dip"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="5dip"
                         android:layout_marginRight="10dip"
+                        android:layout_marginLeft="10dip"
                         android:background="@drawable/red_button"
                         android:text="@string/DeliveryInfo_Button"
-                        android:textColor="@color/black"/>
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
             </RelativeLayout>
 
             <LinearLayout

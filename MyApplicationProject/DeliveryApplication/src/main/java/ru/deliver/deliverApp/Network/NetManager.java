@@ -340,6 +340,8 @@ public final class NetManager implements IProgress
                                     }
 
                                     ((Main)mActivity).mOffices = mOffices;
+                                    Logs.i("!!!!!!!!!!!!Receive offices!!!!!!!!!!!");
+                                    mAnswer.ResponceOK(task.mResponceTag, null);
 
                                     if(((Main)mActivity).isInternet)
                                     {

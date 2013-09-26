@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import ru.deliver.deliverApp.Adapters.TextPicAdapter;
 import ru.deliver.deliverApp.Network.AnswerServer;
 import ru.deliver.deliverApp.Network.NetManager;
+import ru.deliver.deliverApp.Setup.Logs;
+import ru.deliver.deliverApp.Setup.Settings;
 import ru.deliver.deliverApp.Utils.Offices;
 
 /**
@@ -48,6 +50,8 @@ public class OfficesFragment extends Fragment implements AnswerServer
 		if (container == null)
 			return null;
 
+        Logs.i("Create OfficesFragment Activity");
+
 		View view = inflater.inflate(R.layout.offices_fragment, container, false);
         mList = (ListView)view.findViewById(R.id.Offices_List);
 
@@ -72,14 +76,18 @@ public class OfficesFragment extends Fragment implements AnswerServer
 	}
 
     @Override
-    public void ResponceOK(String TAG, final ArrayList<String> params)
+    public void ResponceOK(final String TAG, final ArrayList<String> params)
     {
         getActivity().runOnUiThread(new Runnable()
         {
             @Override
             public void run()
             {
-                setAdapters();
+                if(TAG.equals(Settings.REQ_TAG_OFFI))
+                {
+                    Logs.i("Get answer from NetManager. Update Adapter");
+                    setAdapters();
+                }
             }
         });
     }
@@ -107,7 +115,7 @@ public class OfficesFragment extends Fragment implements AnswerServer
 	//METHODS
 	//---------------------------------
 
-    private void setAdapters()
+    public void setAdapters()
     {
         ArrayList<Offices> mOffices = ((Main)getActivity()).mOffices;
 

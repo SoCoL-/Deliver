@@ -17,15 +17,22 @@
         android:theme="@android:style/Theme.Light"
         android:label="@string/app_name">
         <activity
-            android:name="ru.deliver.deliverApp.Main"
+            android:name=".MenuActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="orientation|screenSize"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="ru.deliver.deliverApp.Main"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name" >
         </activity>
     </application>
 

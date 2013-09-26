@@ -85,11 +85,6 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 
         isInternet = Settings.isInternet(this);
 
-        /*mFragment1 = new DeliverFragment();
-        mFragment2 = new CalculatorFragment();
-		mFragment3 = new CallFragment();
-		mFragment4 = new OfficesFragment();*/
-
         mFavourites = new ArrayList<Favourite>();
         mOffices = new ArrayList<Offices>();
 
@@ -225,6 +220,11 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 		});
 		spec.setIndicator(createTabView(getString(R.string.Tab4_Name), R.drawable.ic_tab_contact));
 		mTabHost.addTab(spec, OfficesFragment.class, null);
+
+        String mTAG = getIntent().getExtras().getString("TAB");
+        if(mTAG == null || mTAG.equals(""))
+            mTAG = TAB1;
+        mTabHost.setCurrentTabByTag(mTAG);
 	}
 
 	private View createTabView(final String text, final int resID)
@@ -282,21 +282,26 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 		ft.commit();
 	}
 
-	//private void pushFragment(Fragment fragment)
-	//{
-//		Logs.i("Push fragment " + fragment.getClass().getCanonicalName());
-//		FragmentManager manager = getSupportFragmentManager();
-//
-//		if(manager.findFragmentByTag("Info") != null)
-//			Logs.i("InfoFragment is on back stack");
-//
-//		FragmentTransaction ft = manager.beginTransaction();
-//		ft.replace(android.R.id.tabcontent, fragment);
-//		ft.commit();
-	//}
-
     @Override
-    public void ResponceOK(final String TAG, final ArrayList<String> params)   {  }
+    public void ResponceOK(final String TAG, final ArrayList<String> params)
+    {
+        if(TAG.equals(Settings.REQ_TAG_OFFI))
+        {
+            Logs.i("Get answer from NetManager. Update Adapter in OfficesFragment");
+            if(mTabHost.getCurrentTabTag().equals(TAB4))
+            {
+                runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        FragmentManager manager = getSupportFragmentManager();
+                        ((OfficesFragment)manager.findFragmentByTag(mTabHost.getCurrentTabTag())).setAdapters();
+                    }
+                });
+            }
+        }
+    }
 
     @Override
     public void ResponceError(String TAG, final String text)
