@@ -237,64 +237,78 @@ public final class NetManager implements IProgress
                 }
                 else if(task.mResponceTag.equals(Settings.REQ_TAG_DEPA))
                 {
-                    try
+                    new Thread(new Runnable()
                     {
-                        String text = Settings.convertStreamToString(task.mJSON);
-                        Logs.i("text="+text);
-                        text = text.trim();
-                        if(text.equals(Settings.DEPARTURE_ERROR))
+                        @Override
+                        public void run()
                         {
-                            Logs.i("Settings.DEPARTURE_ERROR");
-                            mAnswer.ResponceError(task.mResponceTag, mActivity.getString(R.string.Error_Server_Departure));
-                        }
-                        Logs.i("text="+text);
-                        JSONArray jsons = new JSONArray(text);
-                        ArrayList<Favourite> mDepartures = new ArrayList<Favourite>();
-                        if(jsons != null)
-                        {
-                            for(int j = 0; j < jsons.length(); j++)
+                            try
                             {
-                                JSONObject json = jsons.getJSONObject(j);
-
-                                Favourite mDeparture = new Favourite();
-                                mDeparture.setNumber(json.getString("num"));
-                                mDeparture.setFrom(json.getString("from"));
-                                mDeparture.setTo(json.getString("to"));
-
-                                JSONArray items = json.getJSONArray("cp");
-                                if(items != null)
+                                String text = Settings.convertStreamToString(task.mJSON);
+                                Logs.i("text="+text);
+                                text = text.trim();
+                                if(text.equals(Settings.DEPARTURE_ERROR))
                                 {
-                                    ArrayList<InfoFavouriteItem> favItems = new ArrayList<InfoFavouriteItem>(items.length());
-                                    for(int i = 0; i < items.length(); i++)
-                                    {
-                                        InfoFavouriteItem ifi = new InfoFavouriteItem();
-                                        JSONObject item = items.getJSONObject(i);
-                                        ifi.setDate(item.getString("FORMATDATE"));
-                                        ifi.setTime(item.getString("POINTTIME"));
-                                        ifi.setDescription(item.getString("HEAP"));
-                                        favItems.add(ifi);
-                                    }
-                                    mDeparture.setFavItems(favItems);
+                                    Logs.i("Settings.DEPARTURE_ERROR");
+                                    mAnswer.ResponceError(task.mResponceTag, mActivity.getString(R.string.Error_Server_Departure));
                                 }
-                                mDepartures.add(mDeparture);
+                                Logs.i("text="+text);
+                                JSONArray jsons = new JSONArray(text);
+                                ArrayList<Favourite> mDepartures = new ArrayList<Favourite>();
+                                if(jsons != null)
+                                {
+                                    for(int j = 0; j < jsons.length(); j++)
+                                    {
+                                        JSONObject json = jsons.getJSONObject(j);
+
+                                        Favourite mDeparture = new Favourite();
+                                        mDeparture.setNumber(json.getString("num"));
+                                        mDeparture.setFrom(json.getString("from"));
+                                        mDeparture.setTo(json.getString("to"));
+
+                                        JSONArray items = json.getJSONArray("cp");
+                                        if(items != null)
+                                        {
+                                            ArrayList<InfoFavouriteItem> favItems = new ArrayList<InfoFavouriteItem>(items.length());
+                                            for(int i = 0; i < items.length(); i++)
+                                            {
+                                                InfoFavouriteItem ifi = new InfoFavouriteItem();
+                                                JSONObject item = items.getJSONObject(i);
+                                                ifi.setDate(item.getString("FORMATDATE"));
+                                                ifi.setTime(item.getString("POINTTIME"));
+                                                ifi.setDescription(item.getString("HEAP"));
+                                                favItems.add(ifi);
+                                            }
+                                            mDeparture.setFavItems(favItems);
+                                        }
+                                        mDepartures.add(mDeparture);
+                                    }
+                                }
+
+                                Logs.i("mDepartures.size() = " + mDepartures.size());
+                                if(mDepartures.size() == 1)
+                                {
+                                    Logs.i("Add to mBufDeparture");
+                                    ((Main)mActivity).mBufDeparture = mDepartures.get(0);
+                                }
+                                else if(mDepartures.size() > 1)
+                                {
+                                    Logs.i("Add all to mFavourites");
+                                    ((Main)mActivity).mFavourites = mDepartures;
+                                }
+
+                                mAnswer.ResponceOK(task.mResponceTag, null);
+                            }
+                            catch (IOException e)
+                            {
+                                Logs.e(e.toString());
+                            }
+                            catch (JSONException e)
+                            {
+                                Logs.e(e.toString());
                             }
                         }
-
-                        if(mDepartures.size() == 1)
-                            ((Main)mActivity).mBufDeparture = mDepartures.get(0);
-                        else if(mDepartures.size() > 1)
-                            ((Main)mActivity).mFavourites = mDepartures;
-
-                        mAnswer.ResponceOK(task.mResponceTag, null);
-                    }
-                    catch (IOException e)
-                    {
-                        Logs.e(e.toString());
-                    }
-                    catch (JSONException e)
-                    {
-                        Logs.e(e.toString());
-                    }
+                    }).start();
                 }
                 else if(task.mResponceTag.equals(Settings.REQ_TAG_OFFI))
                 {
@@ -332,6 +346,7 @@ public final class NetManager implements IProgress
                                                 oa.setFax(getString(info, "fax"));
                                                 oa.setName(info.getString("name"));
                                                 oa.setPhone(info.getString("phone"));
+                                                oa.setTime(getString(info,"time"));
                                                 offInfo.add(oa);
                                             }
                                             office.setContacts(offInfo);

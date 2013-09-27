@@ -42,6 +42,7 @@ public class DBHelper extends SQLiteOpenHelper
     private static final String COLUMN_ADDRESS          = "_address";
     private static final String COLUMN_EMAIL            = "_email";
     private static final String COLUMN_FAX              = "_fax";
+    private static final String COLUMN_TIME              = "_time";
 
 
     private SQLiteDatabase mDB;
@@ -91,6 +92,7 @@ public class DBHelper extends SQLiteOpenHelper
                 + COLUMN_PHONE + " TEXT,"
                 + COLUMN_EMAIL + " TEXT,"
                 + COLUMN_FAX + " TEXT,"
+                + COLUMN_TIME + " TEXT,"
                 + "PRIMARY KEY (" + COLUMN_ADDRESS + ") ,"
                 + "FOREIGN KEY (" + COLUMN_CITY + " )"
                 + "REFERENCES " + TABLE_CONTACTS + " (" + COLUMN_CITY + " )" +
@@ -182,6 +184,7 @@ public class DBHelper extends SQLiteOpenHelper
         values.put(COLUMN_PHONE, oa.getPhone());
         values.put(COLUMN_EMAIL, oa.getEMail());
         values.put(COLUMN_FAX, oa.getFax());
+        values.put(COLUMN_TIME, oa.getTime());
 
         mDB.insert(TABLE_CONTACTS_INFO, null, values);
     }
@@ -313,6 +316,7 @@ public class DBHelper extends SQLiteOpenHelper
                 oa.setPhone(c.getString(3));
                 oa.setEMail(c.getString(4));
                 oa.setFax(c.getString(5));
+                oa.setTime(c.getString(6));
                 contactInfo.add(oa);
             }
             while (c.moveToNext());

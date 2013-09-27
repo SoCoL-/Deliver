@@ -12,6 +12,7 @@ public final class OfficesAdd
     private String Phone;
     private String Name;
     private String Fax;
+    private String Time;
 
     public OfficesAdd()
     {}
@@ -65,5 +66,15 @@ public final class OfficesAdd
     public void setFax(String fax)
     {
         Fax = fax;
+    }
+
+    public String getTime()
+    {
+        return Time;
+    }
+
+    public void setTime(String time)
+    {
+        Time = time;
     }
 }

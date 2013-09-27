@@ -5,20 +5,20 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ru.deliver.deliverApp.Adapters.FavAdapterDeliver;
 import ru.deliver.deliverApp.DateBase.DBHelper;
 import ru.deliver.deliverApp.Network.AnswerServer;
 import ru.deliver.deliverApp.Network.NetManager;
@@ -43,15 +43,15 @@ public class DeliverFragment extends Fragment implements AnswerServer
 	//VARIABLES
 	//---------------------------------
 
-    private ListView mListFavs;
+    private LinearLayout mContent;
     private EditWithDrawable mEdit;
     private Button mUpd;
 
-    public FavAdapterDeliver mFavAdapter;
     private NetManager mNetManager;
     private ProgressDialog mPD;
     private boolean isUpdate;
     private String bufNumber;
+    private int mGlobalPosition;
 
 	//---------------------------------
 	//SUPER
@@ -72,30 +72,15 @@ public class DeliverFragment extends Fragment implements AnswerServer
 		mEdit           = (EditWithDrawable)view.findViewById(R.id.Deliver_number);
         Button mBtn     = (Button)view.findViewById(R.id.Deliver_find);
         mUpd            = (Button)view.findViewById(R.id.Deliver_update);
-		mListFavs       = (ListView)view.findViewById(R.id.Deliver_List);
-		mFavAdapter     = new FavAdapterDeliver(getActivity());
+        mContent        = (LinearLayout)view.findViewById(R.id.Deliver_List);
 
-		mListFavs.setAdapter(mFavAdapter);
-        registerForContextMenu(mListFavs);
+        registerForContextMenu(mContent);
 
         mNetManager = new NetManager(getActivity());
         mNetManager.setInterface(this);
 
         mPD = new ProgressDialog(getActivity());
         mPD.setMessage(getString(R.string.Info_Loading));
-
-		mListFavs.setOnItemClickListener(new AdapterView.OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-			{
-                Bundle b = new Bundle();
-                b.putBoolean("IsNew", false);
-                b.putInt("Position", i);
-
-				pushFragment(b);
-			}
-		});
 
         mUpd.setOnClickListener(new View.OnClickListener()
         {
@@ -108,11 +93,12 @@ public class DeliverFragment extends Fragment implements AnswerServer
             }
         });
 
-        mBtn.setOnClickListener(new View.OnClickListener() {
+        mBtn.setOnClickListener(new View.OnClickListener()
+        {
 			@Override
 			public void onClick(View v)
 			{
-				if(mEdit.getText().length() <= 0)
+				if(mEdit.getText() != null && mEdit.getText().length() <= 0)
 					Toast.makeText(getActivity(), R.string.Error_NumberDeliver, Toast.LENGTH_SHORT).show();
 				else
                 {
@@ -152,10 +138,10 @@ public class DeliverFragment extends Fragment implements AnswerServer
                 else
                 {
                     Logs.i("Update All Favs");
-                    mFavAdapter.clear();
-                    mFavAdapter.addAllItems(((Main)getActivity()).mFavourites);
+                    fillContent();
 
                     ArrayList<Favourite> mFavs = new ArrayList<Favourite>();
+                    mFavs.addAll(((Main)getActivity()).mFavourites);
 
                     //добавим в избранное
                     DBHelper helper = new DBHelper(getActivity(), null);
@@ -206,11 +192,10 @@ public class DeliverFragment extends Fragment implements AnswerServer
     public boolean onContextItemSelected(MenuItem item)
     {
         Logs.i("ContextInfoSelected");
-        final AdapterView.AdapterContextMenuInfo adapInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        final Favourite selected = ((Main)getActivity()).mFavourites.get((int) adapInfo.id);
+        final Favourite selected = ((Main)getActivity()).mFavourites.get(mGlobalPosition);
 
         Logs.i("Selected = " + selected.getNumber() + ", " + selected.getFrom());
-        Logs.i("id = " + adapInfo.id);
+        Logs.i("id = " + mGlobalPosition);
 
         switch (item.getItemId())
         {
@@ -219,10 +204,10 @@ public class DeliverFragment extends Fragment implements AnswerServer
                 helper.openDB();
                 helper.deleteFav(selected.getNumber());
                 helper.closeDB();
-                ((Main)getActivity()).mFavourites.remove((int) adapInfo.id);
+                ((Main)getActivity()).mFavourites.remove(mGlobalPosition);
                 Logs.i("mFavourites.size() = " + ((Main)getActivity()).mFavourites.size());
-                mFavAdapter.clear();
-                mFavAdapter.addAllItems(((Main)getActivity()).mFavourites);
+                mContent.removeAllViews();
+                fillContent();
                 return true;
         }
         return false;
@@ -235,7 +220,7 @@ public class DeliverFragment extends Fragment implements AnswerServer
     /**
      * Загрузка всех избранных из БД
      * */
-    private void initFav()
+    public void initFav()
     {
         Logs.i("Load favs");
         DBSaver saver = new DBSaver();
@@ -274,6 +259,57 @@ public class DeliverFragment extends Fragment implements AnswerServer
         mNetManager.sendDeparture(mFavNumbers);
     }
 
+    private void fillContent()
+    {
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        ArrayList<Favourite> mFavs = ((Main)getActivity()).mFavourites;
+
+        int i = 0;
+        for(Favourite f : mFavs)
+        {
+            final int position = i;
+            final LinearLayout mContentItem = (LinearLayout)inflater.inflate(R.layout.fav_item, null);
+            if(mContentItem == null)
+                return;
+
+            LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getActivity().getResources().getDisplayMetrics()));
+            llp.leftMargin = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getActivity().getResources().getDisplayMetrics());
+            llp.rightMargin = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getActivity().getResources().getDisplayMetrics());
+            mContentItem.setLayoutParams(llp);
+
+            mContentItem.setOnLongClickListener(new View.OnLongClickListener()
+            {
+                @Override
+                public boolean onLongClick(View view)
+                {
+                    mGlobalPosition = position;
+                    return false;
+                }
+            });
+
+            mContentItem.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    Bundle b = new Bundle();
+                    b.putBoolean("IsNew", false);
+                    b.putInt("Position", position);
+
+                    pushFragment(b);
+                }
+            });
+
+            if(i == 0)
+                (mContentItem.findViewById(R.id.FavItem_Devider)).setVisibility(View.GONE);
+            ((TextView)mContentItem.findViewById(R.id.FavItem_Number)).setText(f.getNumber());
+            ((TextView)mContentItem.findViewById(R.id.FavItem_State)).setText(f.getFavItems().get(f.getFavItems().size() - 1).getDescription());
+
+            mContent.addView(mContentItem);
+            i++;
+        }
+    }
+
     //---------------------------------
 	//GETTERS/SETTERS
 	//---------------------------------
@@ -293,14 +329,15 @@ public class DeliverFragment extends Fragment implements AnswerServer
             helper = new DBHelper(getActivity(), null);
 
             helper.openDB();
-            Logs.i("Открыли БД");
+            Logs.i("Open DB");
         }
 
         @Override
         protected Void doInBackground(Void... params)
         {
-            Logs.i("Читаем БД");
+            Logs.i("Read DB");
             ((Main)getActivity()).mFavourites = helper.findAllFavourites();
+            Logs.i("mFavourites.size() = " + ((Main)getActivity()).mFavourites.size());
             return null;
         }
 
@@ -311,21 +348,21 @@ public class DeliverFragment extends Fragment implements AnswerServer
             helper.closeDB();
             Logs.i("Close DB");
             Logs.i("Change UI in Fragment1");
-            mFavAdapter.clear();
+            Logs.i("mFavourites.size() = " + ((Main)getActivity()).mFavourites.size());
 
-            if(((Main) getActivity()).mFavourites != null)
-                    mFavAdapter.addAllItems(((Main) getActivity()).mFavourites);
+            mContent.removeAllViews();
+            fillContent();
 
             if(((Main)getActivity()).mFavourites.size() > 0)
             {
                 Logs.i("DeliveryFragment: mFavourites.size() > 0");
-                mListFavs.setVisibility(View.VISIBLE);
+                mContent.setVisibility(View.VISIBLE);
                 mUpd.setVisibility(View.VISIBLE);
             }
             else
             {
                 Logs.i("DeliveryFragment: mFavourites.size() <= 0");
-                mListFavs.setVisibility(View.GONE);
+                mContent.setVisibility(View.GONE);
                 mUpd.setVisibility(View.GONE);
             }
         }

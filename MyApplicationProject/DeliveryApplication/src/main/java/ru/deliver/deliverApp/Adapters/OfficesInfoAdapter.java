@@ -89,29 +89,28 @@ public class OfficesInfoAdapter extends BaseAdapter
         if(mInfos.get(i).getName() != null && mInfos.get(i).getName().length() > 0)
             ((TextView)view.findViewById(R.id.child_name)).setText(mInfos.get(i).getName());
         else
-            ((TextView)view.findViewById(R.id.child_name)).setVisibility(View.GONE);
-            //((TextView)view.findViewById(R.id.child_name)).setText("");
+            view.findViewById(R.id.child_name).setVisibility(View.GONE);
 
-        if(mInfos.get(i).getPhone() != null && mInfos.get(i).getPhone().length() > 0)
-            ((TextView)view.findViewById(R.id.child_phone)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Phone) + mInfos.get(i).getPhone());
-        else
-            ((TextView)view.findViewById(R.id.child_phone)).setVisibility(View.GONE);
-            //((TextView)view.findViewById(R.id.child_phone)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Phone) + " - ");
         if(mInfos.get(i).getAddress() != null && mInfos.get(i).getAddress().length() > 0)
-            ((TextView)view.findViewById(R.id.child_address)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Address) + mInfos.get(i).getAddress());
+            ((TextView)view.findViewById(R.id.child_address)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Address) + " " + mInfos.get(i).getAddress());
         else
-            ((TextView)view.findViewById(R.id.child_address)).setVisibility(View.GONE);
-            //((TextView)view.findViewById(R.id.child_address)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Address) + " - ");
+            view.findViewById(R.id.child_address).setVisibility(View.GONE);
+        if(mInfos.get(i).getPhone() != null && mInfos.get(i).getPhone().length() > 0)
+            ((TextView)view.findViewById(R.id.child_phone)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Phone) + " " + mInfos.get(i).getPhone());
+        else
+            view.findViewById(R.id.child_phone).setVisibility(View.GONE);
         if(mInfos.get(i).getEMail() != null && mInfos.get(i).getEMail().length() > 0)
-            ((TextView)view.findViewById(R.id.child_email)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Email) + mInfos.get(i).getEMail());
+            ((TextView)view.findViewById(R.id.child_email)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Email) + " " + mInfos.get(i).getEMail());
         else
-            ((TextView)view.findViewById(R.id.child_email)).setVisibility(View.GONE);
-            //((TextView)view.findViewById(R.id.child_email)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Email) + " - ");
+            view.findViewById(R.id.child_email).setVisibility(View.GONE);
+        if(mInfos.get(i).getTime() != null && mInfos.get(i).getTime().length() > 0)
+            ((TextView)view.findViewById(R.id.child_time)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Time) + " " + mInfos.get(i).getTime());
+        else
+            view.findViewById(R.id.child_time).setVisibility(View.GONE);
         if(mInfos.get(i).getFax() != null && mInfos.get(i).getFax().length() > 0)
-            ((TextView)view.findViewById(R.id.child_fax)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Fax) + mInfos.get(i).getFax());
+            ((TextView)view.findViewById(R.id.child_fax)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Fax) + " " + mInfos.get(i).getFax());
         else
-            ((TextView)view.findViewById(R.id.child_fax)).setVisibility(View.GONE);
-            //((TextView)view.findViewById(R.id.child_fax)).setText(viewGroup.getContext().getString(R.string.Info_Exp_Fax) + " - ");
+            view.findViewById(R.id.child_fax).setVisibility(View.GONE);
 
         return view;
     }

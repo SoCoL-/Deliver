@@ -22,7 +22,7 @@ public final class Settings
 	//---------------------------------
 
     //Переменная включает логи
-	public static final boolean IS_DEBUG = true;
+	public static final boolean IS_DEBUG = false;
 
     //Названия методов
     public static final String REQ_TAG_CALC = "CALC";

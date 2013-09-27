@@ -282,6 +282,19 @@ public class Main extends FragmentActivity implements TabHost.OnTabChangeListene
 		ft.commit();
 	}
 
+    public void updateFavourites()
+    {
+        runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                FragmentManager manager = getSupportFragmentManager();
+                ((DeliverFragment)manager.findFragmentByTag(mTabHost.getCurrentTabTag())).initFav();
+            }
+        });
+    }
+
     @Override
     public void ResponceOK(final String TAG, final ArrayList<String> params)
     {

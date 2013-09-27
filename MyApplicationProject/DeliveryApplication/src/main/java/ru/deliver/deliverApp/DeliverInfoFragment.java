@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ru.deliver.deliverApp.DateBase.DBHelper;
+import ru.deliver.deliverApp.Setup.Logs;
 import ru.deliver.deliverApp.Utils.Favourite;
 import ru.deliver.deliverApp.Utils.InfoFavouriteItem;
 
@@ -118,14 +119,24 @@ public class DeliverInfoFragment extends Fragment
                 DBHelper helper = new DBHelper(getActivity(), null);
                 helper.openDB();
 
+                try
+                {
                 helper.addFav(f);
                 for(InfoFavouriteItem ifi : f.getFavItems())
                     helper.addFavInfo(f.getNumber(), ifi);
+                }
+                catch (Exception e)
+                {
+                    Logs.e(e.toString());
+                }
+                finally
+                {
+                    helper.closeDB();
+                    ((Main)getActivity()).mFavourites.add(f);
+                    ((Main)getActivity()).updateFavourites();
+                    Toast.makeText(getActivity(), R.string.Info_FavAdd, Toast.LENGTH_SHORT).show();
 
-                helper.closeDB();
-
-                ((Main)getActivity()).mFavourites.add(f);
-                Toast.makeText(getActivity(), R.string.Info_FavAdd, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

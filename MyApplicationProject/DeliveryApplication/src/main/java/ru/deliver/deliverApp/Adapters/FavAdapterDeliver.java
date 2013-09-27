@@ -113,17 +113,27 @@ public class FavAdapterDeliver extends BaseAdapter
 			view = inflater.inflate(R.layout.fav_item, viewGroup, false);
 		}
 
-        if(position < mItems.size())
+        Logs.i("position = " + position);
+        Logs.i("mItems.size() = " + mItems.size());
+        /*if(position < mItems.size())
         {
             if (view != null)
-            {
-                Logs.i(""+mItems.get(position).getNumber());
+            {*/
+                Logs.i("mItems.get(position).getNumber() = "+mItems.get(position).getNumber());
                 ((TextView) view.findViewById(R.id.FavItem_Number)).setText(""+mItems.get(position).getNumber());
                 int lastInfoItem = mItems.get(position).getFavItems().size()-1;
                 if(mItems.get(position).getFavItems() != null && mItems.get(position).getFavItems().size() > 0)
                     ((TextView)view.findViewById(R.id.FavItem_State)).setText(mItems.get(position).getFavItems().get(lastInfoItem).getDescription());
+           /* }
+            else
+            {
+                Logs.i("view == null");
             }
         }
+        else
+        {
+            Logs.i("position >= mItems.size()");
+        }*/
 
 		return view;
 	}
